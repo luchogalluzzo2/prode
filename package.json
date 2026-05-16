@@ -1,0 +1,15 @@
+{
+  "name": "prode-mundial-2026",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "world-cup",
+    "prode",
+    "mundial-2026"
+  ]
+}
