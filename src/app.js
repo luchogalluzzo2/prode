@@ -24,14 +24,7 @@ const FEATURED_ASSETS = {
     title: "New York New Jersey Stadium",
     subtitle: "Sede de la final",
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/MetLife_Stadium_Exterior.jpg"
-  },
-  players: [
-    { name: "Lamine Yamal", team: "ESP", image: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Lamine_Yamal_in_2025.jpg" },
-    { name: "Kylian Mbappe", team: "FRA", image: "./src/assets/mbappe.png" },
-    { name: "Lionel Messi", team: "ARG", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lionel-Messi-Argentina-2022-FIFA-World-Cup.jpg" },
-    { name: "Harry Kane", team: "ENG", image: "./src/assets/kane.png" },
-    { name: "Vinicius Junior", team: "BRA", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Vinicius%20Junior%20WC2022.jpg" }
-  ]
+  }
 };
 
 function loadState() {
@@ -333,13 +326,6 @@ function renderHeroMedia() {
       <article class="stadiumCard">
         <img src="${FEATURED_ASSETS.stadium.image}" alt="MetLife Stadium en New Jersey" />
       </article>
-      <div class="playerStrip">
-        ${FEATURED_ASSETS.players.map(player => `
-          <article class="playerCard">
-            <img src="${player.image}" alt="${player.name}" />
-          </article>
-        `).join("")}
-      </div>
     </div>
   `;
 }
