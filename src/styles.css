@@ -427,6 +427,53 @@ small {
   font-weight: 900;
 }
 
+.winnerPicker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.winnerChoice {
+  display: grid;
+  grid-template-columns: 2.35rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  font-weight: 900;
+}
+
+.winnerChoice:last-child {
+  grid-template-columns: 2.35rem minmax(0, 1fr);
+}
+
+.winnerChoice.selected {
+  border-color: rgba(32, 201, 90, 0.7);
+  background: #f2fff4;
+}
+
+.choiceMark {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--teal);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.winnerChoice.selected .choiceMark {
+  border-color: var(--teal);
+}
+
 .scoreInput {
   appearance: textfield;
   -moz-appearance: textfield;
@@ -623,6 +670,16 @@ small {
 .knockout .scoreLine {
   grid-template-columns: 1fr;
   gap: 0.25rem;
+}
+
+.knockout .winnerPicker {
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+}
+
+.knockout .winnerPicker .vs {
+  justify-self: center;
+  font-size: 0.75rem;
 }
 
 .knockout .scoreLine label,

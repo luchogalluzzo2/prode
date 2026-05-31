@@ -492,15 +492,10 @@ function renderRound(title, matches, predictions, projection, extraClass = "", r
 }
 
 function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
-  const score = predictions[scoreKey(match.id)] || {};
   const home = resolveSlot(match.homeSlot, projection);
   const away = resolveSlot(match.awaySlot, projection);
   const scoreControls = home && away ? `
-    <div class="scoreLine">
-      <label>${teamBadge(home)}${renderScoreInput("match", match.id, "home", score.home, readOnly)}</label>
-      <span class="vs">vs</span>
-      <label>${renderScoreInput("match", match.id, "away", score.away, readOnly)}${teamBadge(away)}</label>
-    </div>
+    ${renderWinnerPicker(match, predictions, home, away, readOnly)}
   ` : `
     <div class="pendingLine">
       <span>${teamBadge(home)}</span>
@@ -515,6 +510,25 @@ function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
       ${scoreControls}
       <small>Origen: ${match.homeSlot} vs ${match.awaySlot}</small>
     </article>
+  `;
+}
+
+function renderWinnerPicker(match, predictions, home, away, readOnly = false, real = false) {
+  const winner = selectedWinner(match, predictions, home, away);
+  const attr = real ? "data-real-winner" : "data-winner";
+  const disabled = readOnly ? "disabled" : "";
+  return `
+    <div class="winnerPicker">
+      <button type="button" class="winnerChoice ${winner === home ? "selected" : ""}" ${attr}="${match.id}" data-team="${home}" ${disabled}>
+        <span class="choiceMark">${winner === home ? "X" : ""}</span>
+        ${teamBadge(home)}
+      </button>
+      <span class="vs">vs</span>
+      <button type="button" class="winnerChoice ${winner === away ? "selected" : ""}" ${attr}="${match.id}" data-team="${away}" ${disabled}>
+        <span class="choiceMark">${winner === away ? "X" : ""}</span>
+        ${teamBadge(away)}
+      </button>
+    </div>
   `;
 }
 
@@ -604,8 +618,8 @@ function renderReadonlyGroups(predictions, projection) {
 
 function renderInfo() {
   const rows = [
-    ["Resultado exacto", SCORING.exactScore, "Acertar goles de ambos equipos."],
-    ["Ganador o empate", SCORING.outcome, "Acertar quien gana, o que empatan, sin resultado exacto."],
+    ["Resultado exacto", SCORING.exactScore, "Acertar goles de ambos equipos en fase de grupos."],
+    ["Ganador o empate", SCORING.outcome, "Acertar quien gana, o que empatan, en fase de grupos."],
     ["Orden exacto del grupo", SCORING.perfectGroupOrder, "Bonus por acertar 1, 2, 3 y 4 de un grupo."],
     ["Clasificado a dieciseisavos", SCORING.groupQualified, "Por cada seleccionado que pase de fase de grupos."],
     ["Equipo en octavos", SCORING.round16, "Por cada seleccionado que llegue a octavos."],
@@ -634,6 +648,7 @@ function renderInfo() {
 }
 
 function renderAdmin() {
+  const realProjection = buildProjection(state.realResults);
   return `
     <section class="groupBlock">
       <div class="groupHeader">
@@ -651,7 +666,7 @@ function renderAdmin() {
     <section class="groupBlock">
       <div class="groupHeader"><h2>Resultados reales</h2><p>Carga marcadores oficiales para calcular el ranking.</p></div>
       <div class="matchGrid">
-        ${[...MATCHES, ...KNOCKOUT].map(match => {
+        ${MATCHES.map(match => {
           const real = state.realResults[scoreKey(match.id)] || {};
           return `
             <article class="matchCard">
@@ -667,9 +682,34 @@ function renderAdmin() {
       </div>
     </section>
     <section class="groupBlock">
+      <div class="groupHeader"><h2>Clasificados reales</h2><p>Desde dieciseisavos, marca solo quien avanza.</p></div>
+      <div class="matchGrid">
+        ${KNOCKOUT.map(match => renderAdminKnockoutResult(match, realProjection)).join("")}
+      </div>
+    </section>
+    <section class="groupBlock">
       <div class="groupHeader"><h2>Prodes guardados</h2><p>${Object.keys(state.users).length} usuarios registrados.</p></div>
       <div class="adminUserList">${Object.values(state.users).map(user => renderAdminUserRow(user)).join("")}</div>
     </section>
+  `;
+}
+
+function renderAdminKnockoutResult(match, projection) {
+  const home = resolveSlot(match.homeSlot, projection);
+  const away = resolveSlot(match.awaySlot, projection);
+  return `
+    <article class="matchCard knockout">
+      <div class="matchMeta"><span>#${match.id} ${match.label}</span><span>${formatArt(match, false)}</span></div>
+      <div class="venue">${match.venue} · ${formatArt(match, true)}</div>
+      ${home && away ? renderWinnerPicker(match, state.realResults, home, away, false, true) : `
+        <div class="pendingLine">
+          <span>${teamBadge(home)}</span>
+          <strong>vs</strong>
+          <span>${teamBadge(away)}</span>
+        </div>
+      `}
+      <small>Origen: ${match.homeSlot} vs ${match.awaySlot}</small>
+    </article>
   `;
 }
 
@@ -741,6 +781,14 @@ function bindEvents() {
 
   document.querySelectorAll("[data-real]").forEach(input => {
     input.addEventListener("input", updateRealScore);
+  });
+
+  document.querySelectorAll("[data-winner]").forEach(button => {
+    button.addEventListener("click", updatePredictionWinner);
+  });
+
+  document.querySelectorAll("[data-real-winner]").forEach(button => {
+    button.addEventListener("click", updateRealWinner);
   });
 
   document.querySelectorAll("[data-award]").forEach(select => {
@@ -827,6 +875,18 @@ function updatePredictionScore(event) {
   saveState();
 }
 
+function updatePredictionWinner(event) {
+  const user = state.users[state.currentUser];
+  const id = event.currentTarget.dataset.winner;
+  const key = scoreKey(id);
+  user.predictions[key] ||= {};
+  user.predictions[key].winner = event.currentTarget.dataset.team;
+  delete user.predictions[key].home;
+  delete user.predictions[key].away;
+  saveState();
+  render();
+}
+
 function updateRealScore(event) {
   const id = event.target.dataset.real;
   const key = scoreKey(id);
@@ -835,6 +895,17 @@ function updateRealScore(event) {
   if (value === null) delete state.realResults[key][event.target.dataset.side];
   else state.realResults[key][event.target.dataset.side] = value;
   saveState();
+}
+
+function updateRealWinner(event) {
+  const id = event.currentTarget.dataset.realWinner;
+  const key = scoreKey(id);
+  state.realResults[key] ||= {};
+  state.realResults[key].winner = event.currentTarget.dataset.team;
+  delete state.realResults[key].home;
+  delete state.realResults[key].away;
+  saveState();
+  render();
 }
 
 function sanitizeScoreInput(input) {
@@ -883,12 +954,21 @@ function buildProjection(predictions) {
   KNOCKOUT.forEach(match => {
     const home = resolveSlot(match.homeSlot, { tables, groupComplete, thirdMap, winners, losers });
     const away = resolveSlot(match.awaySlot, { tables, groupComplete, thirdMap, winners, losers });
-    const score = predictions[scoreKey(match.id)];
-    if (!home || !away || !isCompleteScore(score) || score.home === score.away) return;
-    winners[match.id] = score.home > score.away ? home : away;
-    losers[match.id] = score.home > score.away ? away : home;
+    const winner = selectedWinner(match, predictions, home, away);
+    if (!home || !away || !winner) return;
+    winners[match.id] = winner;
+    losers[match.id] = winner === home ? away : home;
   });
   return { tables, groupComplete, thirdGroups, thirdMap, winners, losers };
+}
+
+function selectedWinner(match, predictions, home, away) {
+  const prediction = predictions[scoreKey(match.id)] || {};
+  if ([home, away].includes(prediction.winner)) return prediction.winner;
+  if (isCompleteScore(prediction) && prediction.home !== prediction.away) {
+    return prediction.home > prediction.away ? home : away;
+  }
+  return null;
 }
 
 function assignThirdPlaces(qualifiedGroups, tables) {
@@ -964,7 +1044,7 @@ function buildLeaderboard() {
 
 function scoreUser(user) {
   let points = 0;
-  [...MATCHES, ...KNOCKOUT].forEach(match => {
+  MATCHES.forEach(match => {
     points += matchScorePoints(match, user.predictions) || 0;
   });
   const predictedProgress = collectProgress(buildProjection(user.predictions));
@@ -981,6 +1061,7 @@ function scoreUser(user) {
 }
 
 function matchScorePoints(match, predictions) {
+  if (match.stage !== "groups") return knockoutMatchPoints(match, predictions);
   const pred = predictions[scoreKey(match.id)];
   const real = state.realResults[scoreKey(match.id)];
   if (!isCompleteScore(real)) return null;
@@ -988,6 +1069,53 @@ function matchScorePoints(match, predictions) {
   if (pred.home === real.home && pred.away === real.away) return SCORING.exactScore;
   if (outcome(pred) === outcome(real)) return SCORING.outcome;
   return 0;
+}
+
+function knockoutMatchPoints(match, predictions) {
+  const projection = buildProjection(predictions);
+  const home = resolveSlot(match.homeSlot, projection);
+  const away = resolveSlot(match.awaySlot, projection);
+  const winner = selectedWinner(match, predictions, home, away);
+  const realProgress = collectProgress(buildProjection(state.realResults));
+  const target = stageTarget(match.stage);
+  if (!target || !isRealStageClosed(match.stage, realProgress)) return null;
+  if (!winner) return 0;
+  return realProgress[target].has(winner) ? stagePoints(match.stage) : 0;
+}
+
+function stageTarget(stage) {
+  return {
+    r32: "round16",
+    r16: "quarterFinal",
+    qf: "semiFinal",
+    sf: "finalist",
+    final: "champion",
+    third: "thirdPlace"
+  }[stage];
+}
+
+function stagePoints(stage) {
+  return {
+    r32: SCORING.round16,
+    r16: SCORING.quarterFinal,
+    qf: SCORING.semiFinal,
+    sf: SCORING.finalist,
+    final: SCORING.champion,
+    third: SCORING.thirdPlace
+  }[stage] || 0;
+}
+
+function isRealStageClosed(stage, realProgress) {
+  const expected = {
+    r32: 16,
+    r16: 8,
+    qf: 4,
+    sf: 2,
+    final: 1,
+    third: 1
+  }[stage];
+  const target = stageTarget(stage);
+  return Boolean(target && realProgress[target].size >= expected);
 }
 
 function predictedPodium(user) {
