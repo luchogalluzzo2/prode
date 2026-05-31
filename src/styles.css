@@ -48,6 +48,13 @@ button:hover {
   filter: brightness(0.95);
 }
 
+button:disabled,
+input:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
 input,
 select {
   border: 1px solid var(--line);
@@ -444,6 +451,18 @@ small {
   border-bottom: 1px solid var(--line);
 }
 
+.linkButton {
+  padding: 0.42rem 0.65rem;
+  background: #ecf1eb;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.readonlyNotice {
+  border-color: rgba(32, 201, 90, 0.42);
+  background: #f7fff8;
+}
+
 .standings th {
   color: var(--muted);
   font-size: 0.75rem;
@@ -470,6 +489,23 @@ small {
   display: grid;
   gap: 0.4rem;
   font-weight: 900;
+}
+
+.readonlyAward {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.85rem;
+  background: #fff;
+}
+
+.readonlyAward span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.readonlyAward strong {
+  font-size: 1rem;
 }
 
 .bracketBoard {
@@ -675,6 +711,34 @@ small {
 
 .adminScore {
   grid-template-columns: 4rem minmax(0, 1fr) 4rem;
+}
+
+.switchRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  max-width: 720px;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.switchRow input {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.15rem;
+  accent-color: var(--teal);
+}
+
+.switchRow span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.switchRow small {
+  display: block;
 }
 
 @media (max-width: 820px) {

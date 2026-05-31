@@ -19,6 +19,12 @@ create table if not exists public.real_results (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.app_settings (
+  id text primary key default 'public',
+  data jsonb not null default '{}'::jsonb,
+  updated_at timestamptz not null default now()
+);
+
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -45,6 +51,7 @@ for each row execute function public.handle_new_user();
 alter table public.profiles enable row level security;
 alter table public.predictions enable row level security;
 alter table public.real_results enable row level security;
+alter table public.app_settings enable row level security;
 
 drop policy if exists "profiles select authenticated" on public.profiles;
 create policy "profiles select authenticated"
@@ -78,7 +85,8 @@ with check (
 );
 
 drop policy if exists "predictions select own or admin" on public.predictions;
-create policy "predictions select own or admin"
+drop policy if exists "predictions select own admin or public enabled" on public.predictions;
+create policy "predictions select own admin or public enabled"
 on public.predictions for select
 to authenticated
 using (
@@ -86,6 +94,11 @@ using (
   or exists (
     select 1 from public.profiles p
     where p.user_id = auth.uid() and p.role = 'admin'
+  )
+  or exists (
+    select 1 from public.app_settings s
+    where s.id = 'public'
+      and coalesce((s.data->>'viewPredictionsEnabled')::boolean, false)
   )
 );
 
@@ -136,6 +149,44 @@ with check (
   )
 );
 
+drop policy if exists "app settings select authenticated" on public.app_settings;
+create policy "app settings select authenticated"
+on public.app_settings for select
+to authenticated
+using (true);
+
+drop policy if exists "app settings insert admin" on public.app_settings;
+create policy "app settings insert admin"
+on public.app_settings for insert
+to authenticated
+with check (
+  exists (
+    select 1 from public.profiles p
+    where p.user_id = auth.uid() and p.role = 'admin'
+  )
+);
+
+drop policy if exists "app settings update admin" on public.app_settings;
+create policy "app settings update admin"
+on public.app_settings for update
+to authenticated
+using (
+  exists (
+    select 1 from public.profiles p
+    where p.user_id = auth.uid() and p.role = 'admin'
+  )
+)
+with check (
+  exists (
+    select 1 from public.profiles p
+    where p.user_id = auth.uid() and p.role = 'admin'
+  )
+);
+
 insert into public.real_results (id, data)
 values ('official', '{}'::jsonb)
+on conflict (id) do nothing;
+
+insert into public.app_settings (id, data)
+values ('public', '{"viewPredictionsEnabled": false}'::jsonb)
 on conflict (id) do nothing;

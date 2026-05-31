@@ -8,11 +8,15 @@ const emptyState = {
   users: {
     [ADMIN.username]: { username: ADMIN.username, password: ADMIN.password, role: "admin", predictions: {}, awards: {}, savedAt: null }
   },
-  realResults: {}
+  realResults: {},
+  appSettings: {
+    viewPredictionsEnabled: false
+  }
 };
 
 let state = structuredClone(emptyState);
 let activeTab = "prode";
+let viewedUsername = null;
 let pendingFocus = null;
 let storageMode = "local";
 let supabase = null;
@@ -34,7 +38,8 @@ function loadState() {
   return {
     ...structuredClone(emptyState),
     ...parsed,
-    users: { ...emptyState.users, ...(parsed.users || {}) }
+    users: { ...emptyState.users, ...(parsed.users || {}) },
+    appSettings: { ...emptyState.appSettings, ...(parsed.appSettings || {}) }
   };
 }
 
@@ -93,6 +98,7 @@ async function loadSupabaseState(authUser) {
   const profilesResult = await supabase.from("profiles").select("*").order("username");
   const predictionsResult = await supabase.from("predictions").select("*");
   const realResult = await supabase.from("real_results").select("*").eq("id", "official").maybeSingle();
+  const settingsResult = await supabase.from("app_settings").select("*").eq("id", "public").maybeSingle();
 
   const users = {};
   (profilesResult.data || [profile]).forEach(row => {
@@ -117,7 +123,11 @@ async function loadSupabaseState(authUser) {
   state = {
     currentUser: profile.username,
     users,
-    realResults: realResult.data?.data || {}
+    realResults: realResult.data?.data || {},
+    appSettings: {
+      ...emptyState.appSettings,
+      ...(settingsResult.data?.data || {})
+    }
   };
 }
 
@@ -140,6 +150,11 @@ async function syncSupabaseState() {
     await supabase.from("real_results").upsert({
       id: "official",
       data: state.realResults || {},
+      updated_at: new Date().toISOString()
+    });
+    await supabase.from("app_settings").upsert({
+      id: "public",
+      data: state.appSettings || {},
       updated_at: new Date().toISOString()
     });
   }
@@ -179,6 +194,13 @@ function render() {
   const user = state.users[state.currentUser];
   const projection = buildProjection(user.predictions);
   const leaderboard = buildLeaderboard();
+  const canViewPredictions = canViewOtherPredictions(user);
+  if (activeTab === "player" && (!viewedUsername || !canViewPredictions || !state.users[viewedUsername])) {
+    activeTab = "ranking";
+    viewedUsername = null;
+  }
+  const viewedUser = viewedUsername ? state.users[viewedUsername] : null;
+  const viewedProjection = viewedUser ? buildProjection(viewedUser.predictions) : null;
 
   app.innerHTML = `
     <header class="topbar">
@@ -206,6 +228,7 @@ function render() {
         <button class="tab ${activeTab === "prode" ? "active" : ""}" data-tab="prode">Mi prode</button>
         <button class="tab ${activeTab === "bracket" ? "active" : ""}" data-tab="bracket">Llave</button>
         <button class="tab ${activeTab === "ranking" ? "active" : ""}" data-tab="ranking">Ranking</button>
+        ${viewedUser ? `<button class="tab ${activeTab === "player" ? "active" : ""}" data-tab="player">Prode de ${viewedUser.username}</button>` : ""}
         <button class="tab ${activeTab === "info" ? "active" : ""}" data-tab="info">Info</button>
         ${user.role === "admin" ? `<button class="tab ${activeTab === "admin" ? "active" : ""}" data-tab="admin">Admin</button>` : ""}
       </nav>
@@ -219,8 +242,9 @@ function render() {
         ${renderBracket(user.predictions, projection)}
       </section>
       <section id="view-ranking" class="view ${activeTab === "ranking" ? "active" : ""}">
-        ${renderLeaderboard(leaderboard)}
+        ${renderLeaderboard(leaderboard, user)}
       </section>
+      ${viewedUser ? `<section id="view-player" class="view ${activeTab === "player" ? "active" : ""}">${renderReadonlyProde(viewedUser, viewedProjection)}</section>` : ""}
       <section id="view-info" class="view ${activeTab === "info" ? "active" : ""}">${renderInfo()}</section>
       ${user.role === "admin" ? `<section id="view-admin" class="view ${activeTab === "admin" ? "active" : ""}">${renderAdmin()}</section>` : ""}
     </main>
@@ -357,24 +381,25 @@ function renderGroups(predictions, projection) {
   `).join("");
 }
 
-function renderPredictionMatch(match, predictions) {
+function renderPredictionMatch(match, predictions, readOnly = false) {
   const score = predictions[scoreKey(match.id)] || {};
   return `
     <article class="matchCard">
       <div class="matchMeta"><span>#${match.id} ${match.label}</span><span>${formatArt(match)}</span></div>
       <div class="venue">${match.venue}</div>
       <div class="scoreLine">
-        <label>${teamBadge(match.home)}${renderScoreInput("match", match.id, "home", score.home)}</label>
+        <label>${teamBadge(match.home)}${renderScoreInput("match", match.id, "home", score.home, readOnly)}</label>
         <span class="vs">vs</span>
-        <label>${renderScoreInput("match", match.id, "away", score.away)}${teamBadge(match.away)}</label>
+        <label>${renderScoreInput("match", match.id, "away", score.away, readOnly)}${teamBadge(match.away)}</label>
       </div>
     </article>
   `;
 }
 
-function renderScoreInput(kind, id, side, value) {
+function renderScoreInput(kind, id, side, value, readOnly = false) {
   const attr = kind === "real" ? "data-real" : "data-match";
-  return `<input ${attr}="${id}" data-side="${side}" class="scoreInput" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" value="${value ?? ""}" />`;
+  const disabled = readOnly ? "disabled" : "";
+  return `<input ${attr}="${id}" data-side="${side}" class="scoreInput" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" autocomplete="off" value="${value ?? ""}" ${disabled} />`;
 }
 
 function renderTable(rows = []) {
@@ -388,7 +413,20 @@ function renderTable(rows = []) {
   `;
 }
 
-function renderAwards(user) {
+function renderAwards(user, readOnly = false) {
+  if (readOnly) {
+    const awards = user.awards || {};
+    return `
+      <section class="groupBlock">
+        <div class="groupHeader"><h2>Premios</h2><p>Pronostico individual de ${user.username}.</p></div>
+        <div class="awardGrid">
+          ${renderReadonlyAward("Goleador", awards.topScorer)}
+          ${renderReadonlyAward("Balon de Oro", awards.goldenBall)}
+          ${renderReadonlyAward("Mejor arquero", awards.goldenGlove)}
+        </div>
+      </section>
+    `;
+  }
   const fieldOptions = renderPlayerOptions(FIELD_PLAYERS);
   const goalkeeperOptions = renderPlayerOptions(GOALKEEPERS);
   return `
@@ -406,6 +444,10 @@ function renderAwards(user) {
   `;
 }
 
+function renderReadonlyAward(label, value) {
+  return `<div class="award readonlyAward"><span>${label}</span><strong>${value || "Sin elegir"}</strong></div>`;
+}
+
 function renderPlayerOptions(players) {
   return players.map(player => `<option value="${player.name}">${TEAMS[player.team]?.flag || ""} ${player.name} · ${TEAMS[player.team]?.name || player.team}</option>`).join("");
 }
@@ -414,7 +456,7 @@ function renderAwardSelect(key, label, value, options) {
   return `<label class="award">${label}<select data-award="${key}"><option value="">Elegir jugador</option>${options}</select></label>`.replace(`value="${value}"`, `value="${value}" selected`);
 }
 
-function renderBracket(predictions, projection) {
+function renderBracket(predictions, projection, readOnly = false) {
   const rounds = {
     r32: KNOCKOUT.filter(match => match.stage === "r32"),
     r16: KNOCKOUT.filter(match => match.stage === "r16"),
@@ -424,33 +466,33 @@ function renderBracket(predictions, projection) {
   };
   return `
     <section class="bracketBoard">
-      ${renderRound("Dieciseisavos", rounds.r32, predictions, projection)}
-      ${renderRound("Octavos", rounds.r16, predictions, projection)}
-      ${renderRound("Cuartos", rounds.qf, predictions, projection)}
-      ${renderRound("Semifinales", rounds.sf, predictions, projection)}
-      ${renderRound("Final", rounds.final, predictions, projection, "centerRound")}
+      ${renderRound("Dieciseisavos", rounds.r32, predictions, projection, "", readOnly)}
+      ${renderRound("Octavos", rounds.r16, predictions, projection, "", readOnly)}
+      ${renderRound("Cuartos", rounds.qf, predictions, projection, "", readOnly)}
+      ${renderRound("Semifinales", rounds.sf, predictions, projection, "", readOnly)}
+      ${renderRound("Final", rounds.final, predictions, projection, "centerRound", readOnly)}
     </section>
   `;
 }
 
-function renderRound(title, matches, predictions, projection, extraClass = "") {
+function renderRound(title, matches, predictions, projection, extraClass = "", readOnly = false) {
   return `
     <div class="round ${extraClass}">
       <h2>${title}</h2>
-      ${matches.map(match => renderKnockoutMatch(match, predictions, projection)).join("")}
+      ${matches.map(match => renderKnockoutMatch(match, predictions, projection, readOnly)).join("")}
     </div>
   `;
 }
 
-function renderKnockoutMatch(match, predictions, projection) {
+function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
   const score = predictions[scoreKey(match.id)] || {};
   const home = resolveSlot(match.homeSlot, projection);
   const away = resolveSlot(match.awaySlot, projection);
   const scoreControls = home && away ? `
     <div class="scoreLine">
-      <label>${teamBadge(home)}${renderScoreInput("match", match.id, "home", score.home)}</label>
+      <label>${teamBadge(home)}${renderScoreInput("match", match.id, "home", score.home, readOnly)}</label>
       <span class="vs">vs</span>
-      <label>${renderScoreInput("match", match.id, "away", score.away)}${teamBadge(away)}</label>
+      <label>${renderScoreInput("match", match.id, "away", score.away, readOnly)}${teamBadge(away)}</label>
     </div>
   ` : `
     <div class="pendingLine">
@@ -469,16 +511,62 @@ function renderKnockoutMatch(match, predictions, projection) {
   `;
 }
 
-function renderLeaderboard(rows) {
+function renderLeaderboard(rows, currentUser) {
+  const canViewPredictions = canViewOtherPredictions(currentUser);
   return `
     <section class="groupBlock">
-      <div class="groupHeader"><h2>Ranking</h2><p>Calculado contra resultados reales cargados por admin.</p></div>
+      <div class="groupHeader">
+        <h2>Ranking</h2>
+        <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
+      </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Guardado</th></tr></thead>
-        <tbody>${rows.map((row, index) => `<tr><td>${index + 1}</td><td>${row.username}</td><td>${row.points}</td><td>${row.savedAt || "-"}</td></tr>`).join("")}</tbody>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Guardado</th>${canViewPredictions ? "<th>Prode</th>" : ""}</tr></thead>
+        <tbody>${rows.map((row, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${row.username}</td>
+            <td>${row.points}</td>
+            <td>${row.savedAt || "-"}</td>
+            ${canViewPredictions ? `<td><button class="linkButton" data-view-predictions="${row.username}">Ver prode</button></td>` : ""}
+          </tr>
+        `).join("")}</tbody>
       </table>
     </section>
   `;
+}
+
+function canViewOtherPredictions(currentUser) {
+  return Boolean(state.appSettings.viewPredictionsEnabled || currentUser?.role === "admin");
+}
+
+function renderReadonlyProde(user, projection) {
+  return `
+    <section class="saveBar readonlyNotice">
+      <div>
+        <strong>Prode de ${user.username}</strong>
+        <span>Vista solo lectura. ${user.savedAt ? `Guardado: ${new Date(user.savedAt).toLocaleString()}` : "Todavia no guardo su prode."}</span>
+      </div>
+      <button class="ghost" id="backToRankingBtn">Volver al ranking</button>
+    </section>
+    ${renderReadonlyGroups(user.predictions, projection)}
+    ${renderBracket(user.predictions, projection, true)}
+    ${renderAwards(user, true)}
+  `;
+}
+
+function renderReadonlyGroups(predictions, projection) {
+  return Object.entries(GROUPS).map(([group, teams]) => `
+    <section class="groupBlock">
+      <div class="groupHeader">
+        <h2>Grupo ${group}</h2>
+        <div class="teamStrip">${teams.map(code => `<span>${teamBadge(code)}</span>`).join("")}</div>
+      </div>
+      <div class="matchGrid">
+        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, true)).join("")}
+      </div>
+      ${renderTable(projection.tables[group])}
+    </section>
+  `).join("");
 }
 
 function renderInfo() {
@@ -513,6 +601,19 @@ function renderInfo() {
 
 function renderAdmin() {
   return `
+    <section class="groupBlock">
+      <div class="groupHeader">
+        <h2>Visibilidad de prodes</h2>
+        <p>Activa los enlaces del ranking para que todos puedan ver pronosticos ajenos en modo lectura.</p>
+      </div>
+      <label class="switchRow">
+        <input id="viewPredictionsToggle" type="checkbox" ${state.appSettings.viewPredictionsEnabled ? "checked" : ""} />
+        <span>
+          <strong>${state.appSettings.viewPredictionsEnabled ? "Prodes ajenos visibles" : "Prodes ajenos ocultos"}</strong>
+          <small>${state.appSettings.viewPredictionsEnabled ? "Los participantes ven el boton Ver prode en el ranking." : "Solo admin puede revisar prodes ajenos."}</small>
+        </span>
+      </label>
+    </section>
     <section class="groupBlock">
       <div class="groupHeader"><h2>Resultados reales</h2><p>Carga marcadores oficiales para calcular el ranking.</p></div>
       <div class="matchGrid">
@@ -564,6 +665,20 @@ function bindEvents() {
     });
   });
 
+  document.querySelectorAll("[data-view-predictions]").forEach(button => {
+    button.addEventListener("click", () => {
+      viewedUsername = button.dataset.viewPredictions;
+      activeTab = "player";
+      render();
+    });
+  });
+
+  byId("backToRankingBtn")?.addEventListener("click", () => {
+    viewedUsername = null;
+    activeTab = "ranking";
+    render();
+  });
+
   document.querySelectorAll("[data-match]").forEach(input => {
     input.addEventListener("input", updatePredictionScore);
     input.addEventListener("keydown", captureTabTarget);
@@ -579,6 +694,12 @@ function bindEvents() {
       state.users[state.currentUser].awards[event.target.dataset.award] = event.target.value;
       saveState();
     });
+  });
+
+  byId("viewPredictionsToggle")?.addEventListener("change", (event) => {
+    state.appSettings.viewPredictionsEnabled = event.target.checked;
+    saveState();
+    render();
   });
 }
 
