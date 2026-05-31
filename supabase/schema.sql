@@ -2,8 +2,12 @@ create table if not exists public.profiles (
   user_id uuid primary key references auth.users(id) on delete cascade,
   username text not null unique,
   role text not null default 'player' check (role in ('player', 'admin')),
+  active boolean not null default true,
   created_at timestamptz not null default now()
 );
+
+alter table public.profiles
+add column if not exists active boolean not null default true;
 
 create table if not exists public.predictions (
   user_id uuid primary key references public.profiles(user_id) on delete cascade,
@@ -32,11 +36,12 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (user_id, username, role)
+  insert into public.profiles (user_id, username, role, active)
   values (
     new.id,
     coalesce(new.raw_user_meta_data->>'username', split_part(new.email, '@', 1)),
-    'player'
+    'player',
+    true
   )
   on conflict (user_id) do nothing;
   return new;

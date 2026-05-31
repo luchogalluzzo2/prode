@@ -6,7 +6,7 @@ const app = document.querySelector("#app");
 const emptyState = {
   currentUser: null,
   users: {
-    [ADMIN.username]: { username: ADMIN.username, password: ADMIN.password, role: "admin", predictions: {}, awards: {}, savedAt: null }
+    [ADMIN.username]: { username: ADMIN.username, password: ADMIN.password, role: "admin", active: true, predictions: {}, awards: {}, savedAt: null }
   },
   realResults: {},
   appSettings: {
@@ -38,9 +38,16 @@ function loadState() {
   return {
     ...structuredClone(emptyState),
     ...parsed,
-    users: { ...emptyState.users, ...(parsed.users || {}) },
+    users: normalizeUsers({ ...emptyState.users, ...(parsed.users || {}) }),
     appSettings: { ...emptyState.appSettings, ...(parsed.appSettings || {}) }
   };
+}
+
+function normalizeUsers(users) {
+  return Object.fromEntries(Object.entries(users).map(([username, user]) => [username, {
+    ...user,
+    active: user.active !== false
+  }]));
 }
 
 function saveState() {
@@ -89,7 +96,7 @@ async function loadSupabaseState(authUser) {
   const username = authUser.user_metadata?.username || authUser.email?.replace("@prode.local", "") || "usuario";
   let { data: profile } = await supabase.from("profiles").select("*").eq("user_id", authUser.id).maybeSingle();
   if (!profile) {
-    const insert = { user_id: authUser.id, username, role: "player" };
+    const insert = { user_id: authUser.id, username, role: "player", active: true };
     await supabase.from("profiles").insert(insert);
     profile = insert;
   }
@@ -107,6 +114,7 @@ async function loadSupabaseState(authUser) {
       username: row.username,
       password: "",
       role: row.role,
+      active: row.active !== false,
       predictions: {},
       awards: {},
       savedAt: null
@@ -227,8 +235,7 @@ function render() {
       <nav class="tabs" aria-label="Secciones">
         <button class="tab ${activeTab === "prode" ? "active" : ""}" data-tab="prode">Mi prode</button>
         <button class="tab ${activeTab === "bracket" ? "active" : ""}" data-tab="bracket">Llave</button>
-        <button class="tab ${activeTab === "ranking" ? "active" : ""}" data-tab="ranking">Ranking</button>
-        ${viewedUser ? `<button class="tab ${activeTab === "player" ? "active" : ""}" data-tab="player">Prode de ${viewedUser.username}</button>` : ""}
+        <button class="tab ${["ranking", "player"].includes(activeTab) ? "active" : ""}" data-tab="ranking">Ranking</button>
         <button class="tab ${activeTab === "info" ? "active" : ""}" data-tab="info">Info</button>
         ${user.role === "admin" ? `<button class="tab ${activeTab === "admin" ? "active" : ""}" data-tab="admin">Admin</button>` : ""}
       </nav>
@@ -337,7 +344,7 @@ function renderAuth() {
       byId("authError").textContent = "Ese usuario ya existe.";
       return;
     }
-    state.users[data.username] = { username: data.username, password: data.password, role: "player", predictions: {}, awards: {}, savedAt: null };
+    state.users[data.username] = { username: data.username, password: data.password, role: "player", active: true, predictions: {}, awards: {}, savedAt: null };
     state.currentUser = data.username;
     saveState();
     render();
@@ -385,7 +392,7 @@ function renderPredictionMatch(match, predictions, readOnly = false) {
   const score = predictions[scoreKey(match.id)] || {};
   return `
     <article class="matchCard">
-      <div class="matchMeta"><span>#${match.id} ${match.label}</span><span>${formatArt(match)}</span></div>
+      <div class="matchMeta"><span>#${match.id} ${match.label}</span><span>${formatArt(match)}</span>${renderPointsBadge(match, predictions)}</div>
       <div class="venue">${match.venue}</div>
       <div class="scoreLine">
         <label>${teamBadge(match.home)}${renderScoreInput("match", match.id, "home", score.home, readOnly)}</label>
@@ -470,7 +477,7 @@ function renderBracket(predictions, projection, readOnly = false) {
       ${renderRound("Octavos", rounds.r16, predictions, projection, "", readOnly)}
       ${renderRound("Cuartos", rounds.qf, predictions, projection, "", readOnly)}
       ${renderRound("Semifinales", rounds.sf, predictions, projection, "", readOnly)}
-      ${renderRound("Final", rounds.final, predictions, projection, "centerRound", readOnly)}
+      ${renderRound("Final y tercer puesto", rounds.final, predictions, projection, "centerRound", readOnly)}
     </section>
   `;
 }
@@ -503,7 +510,7 @@ function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
   `;
   return `
     <article class="matchCard knockout">
-      <div class="matchMeta"><span>#${match.id}</span><span>${formatArt(match, false)}</span></div>
+      <div class="matchMeta"><span>#${match.id} ${match.label}</span><span>${formatArt(match, false)}</span>${renderPointsBadge(match, predictions)}</div>
       <div class="venue">${match.venue} · ${formatArt(match, true)}</div>
       ${scoreControls}
       <small>Origen: ${match.homeSlot} vs ${match.awaySlot}</small>
@@ -513,6 +520,7 @@ function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
 
 function renderLeaderboard(rows, currentUser) {
   const canViewPredictions = canViewOtherPredictions(currentUser);
+  const showPodium = state.appSettings.viewPredictionsEnabled;
   return `
     <section class="groupBlock">
       <div class="groupHeader">
@@ -520,12 +528,15 @@ function renderLeaderboard(rows, currentUser) {
         <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
       </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Guardado</th>${canViewPredictions ? "<th>Prode</th>" : ""}</tr></thead>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Guardado</th>${canViewPredictions ? "<th>Prode</th>" : ""}</tr></thead>
         <tbody>${rows.map((row, index) => `
           <tr>
             <td>${index + 1}</td>
             <td>${row.username}</td>
             <td>${row.points}</td>
+            <td>${renderPodiumCell(row.podium.champion, showPodium)}</td>
+            <td>${renderPodiumCell(row.podium.runnerUp, showPodium)}</td>
+            <td>${renderPodiumCell(row.podium.thirdPlace, showPodium)}</td>
             <td>${row.savedAt || "-"}</td>
             ${canViewPredictions ? `<td><button class="linkButton" data-view-predictions="${row.username}">Ver prode</button></td>` : ""}
           </tr>
@@ -535,8 +546,24 @@ function renderLeaderboard(rows, currentUser) {
   `;
 }
 
+function renderPointsBadge(match, predictions) {
+  const points = matchScorePoints(match, predictions);
+  const label = points === null ? "-" : String(points);
+  const tone = points === null ? "pending" : points > 0 ? "positive" : "zero";
+  return `<span class="pointsBadge ${tone}" title="Puntos del partido">${label}</span>`;
+}
+
+function renderPodiumCell(code, visible) {
+  if (!visible) return `<span class="mutedTeam">oculto</span>`;
+  return code ? teamBadge(code) : `<span class="mutedTeam">Sin definir</span>`;
+}
+
 function canViewOtherPredictions(currentUser) {
   return Boolean(state.appSettings.viewPredictionsEnabled || currentUser?.role === "admin");
+}
+
+function isActivePlayer(user) {
+  return user.role !== "admin" && user.active !== false;
 }
 
 function renderReadonlyProde(user, projection) {
@@ -580,6 +607,7 @@ function renderInfo() {
     ["Equipo en semifinales", SCORING.semiFinal, "Por cada seleccionado que llegue a semifinales."],
     ["Finalista", SCORING.finalist, "Por cada seleccionado que llegue a la final."],
     ["Campeon", SCORING.champion, "Por acertar el campeon."],
+    ["Tercero", SCORING.thirdPlace, "Por acertar el ganador del partido por tercer puesto."],
     ["Goleador", SCORING.topScorer, "Premio individual."],
     ["Balon de Oro", SCORING.goldenBall, "Premio individual."],
     ["Mejor arquero", SCORING.goldenGlove, "Premio individual."]
@@ -634,8 +662,28 @@ function renderAdmin() {
     </section>
     <section class="groupBlock">
       <div class="groupHeader"><h2>Prodes guardados</h2><p>${Object.keys(state.users).length} usuarios registrados.</p></div>
-      <div class="userList">${Object.values(state.users).map(user => `<span>${user.username} · ${user.role} · ${user.savedAt ? new Date(user.savedAt).toLocaleString() : "sin guardar"}</span>`).join("")}</div>
+      <div class="adminUserList">${Object.values(state.users).map(user => renderAdminUserRow(user)).join("")}</div>
     </section>
+  `;
+}
+
+function renderAdminUserRow(user) {
+  const savedAt = user.savedAt ? new Date(user.savedAt).toLocaleString() : "sin guardar";
+  const activeText = user.active !== false ? "Activo en ranking" : "Oculto del ranking";
+  const toggle = user.role === "admin" ? "" : `
+    <label class="miniSwitch">
+      <input type="checkbox" data-user-active="${user.username}" ${user.active !== false ? "checked" : ""} />
+      <span>${activeText}</span>
+    </label>
+  `;
+  return `
+    <article class="adminUserRow ${user.active === false ? "inactive" : ""}">
+      <div>
+        <strong>${user.username}</strong>
+        <small>${user.role} · ${savedAt}</small>
+      </div>
+      ${toggle}
+    </article>
   `;
 }
 
@@ -701,6 +749,26 @@ function bindEvents() {
     saveState();
     render();
   });
+
+  document.querySelectorAll("[data-user-active]").forEach(input => {
+    input.addEventListener("change", updateUserActive);
+  });
+}
+
+async function updateUserActive(event) {
+  const username = event.target.dataset.userActive;
+  const target = state.users[username];
+  if (!target || target.role === "admin") return;
+  target.active = event.target.checked;
+  if (viewedUsername === username && target.active === false && state.users[state.currentUser]?.role !== "admin") {
+    viewedUsername = null;
+    activeTab = "ranking";
+  }
+  saveState();
+  if (storageMode === "supabase" && supabase && state.users[state.currentUser]?.role === "admin") {
+    await supabase.from("profiles").update({ active: target.active }).eq("username", username);
+  }
+  render();
 }
 
 function captureTabTarget(event) {
@@ -860,9 +928,10 @@ function outcome(score) {
 }
 
 function buildLeaderboard() {
-  return Object.values(state.users).filter(user => user.role !== "admin").map(user => ({
+  return Object.values(state.users).filter(isActivePlayer).map(user => ({
     username: user.username,
     points: scoreUser(user),
+    podium: predictedPodium(user),
     savedAt: user.savedAt ? new Date(user.savedAt).toLocaleDateString() : null
   })).sort((a, b) => b.points - a.points || a.username.localeCompare(b.username));
 }
@@ -870,11 +939,7 @@ function buildLeaderboard() {
 function scoreUser(user) {
   let points = 0;
   [...MATCHES, ...KNOCKOUT].forEach(match => {
-    const pred = user.predictions[scoreKey(match.id)];
-    const real = state.realResults[scoreKey(match.id)];
-    if (!isCompleteScore(pred) || !isCompleteScore(real)) return;
-    if (pred.home === real.home && pred.away === real.away) points += SCORING.exactScore;
-    else if (outcome(pred) === outcome(real)) points += SCORING.outcome;
+    points += matchScorePoints(match, user.predictions) || 0;
   });
   const predictedProgress = collectProgress(buildProjection(user.predictions));
   const realProgress = collectProgress(buildProjection(state.realResults));
@@ -885,7 +950,27 @@ function scoreUser(user) {
   points += intersectionSize(predictedProgress.semiFinal, realProgress.semiFinal) * SCORING.semiFinal;
   points += intersectionSize(predictedProgress.finalist, realProgress.finalist) * SCORING.finalist;
   points += intersectionSize(predictedProgress.champion, realProgress.champion) * SCORING.champion;
+  points += intersectionSize(predictedProgress.thirdPlace, realProgress.thirdPlace) * SCORING.thirdPlace;
   return points;
+}
+
+function matchScorePoints(match, predictions) {
+  const pred = predictions[scoreKey(match.id)];
+  const real = state.realResults[scoreKey(match.id)];
+  if (!isCompleteScore(real)) return null;
+  if (!isCompleteScore(pred)) return 0;
+  if (pred.home === real.home && pred.away === real.away) return SCORING.exactScore;
+  if (outcome(pred) === outcome(real)) return SCORING.outcome;
+  return 0;
+}
+
+function predictedPodium(user) {
+  const projection = buildProjection(user.predictions);
+  return {
+    champion: projection.winners[104] || null,
+    runnerUp: projection.losers[104] || null,
+    thirdPlace: projection.winners[103] || null
+  };
 }
 
 function collectProgress(projection) {
@@ -909,7 +994,8 @@ function collectProgress(projection) {
     quarterFinal: winnersByStage("r16"),
     semiFinal: winnersByStage("qf"),
     finalist: winnersByStage("sf"),
-    champion: new Set(projection.winners[104] ? [projection.winners[104]] : [])
+    champion: new Set(projection.winners[104] ? [projection.winners[104]] : []),
+    thirdPlace: new Set(projection.winners[103] ? [projection.winners[103]] : [])
   };
 }
 
