@@ -497,6 +497,11 @@ small {
   white-space: nowrap;
 }
 
+.dangerButton {
+  background: #fff0ee;
+  color: var(--red);
+}
+
 .pointsBadge {
   display: inline-grid;
   place-items: center;
