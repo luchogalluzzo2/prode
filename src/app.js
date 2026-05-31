@@ -154,7 +154,7 @@ async function syncSupabaseState() {
     awards: user.awards || {},
     saved_at: user.savedAt || new Date().toISOString()
   });
-  if (user.role === "admin") {
+  if (isAdminUser(user)) {
     await supabase.from("real_results").upsert({
       id: "official",
       data: state.realResults || {},
@@ -217,7 +217,7 @@ function render() {
         <h1>Prode Mundial 2026</h1>
       </div>
       <div class="session">
-        <span>${user.role === "admin" ? "Administrador" : "Jugador"}: <strong>${user.username}</strong></span>
+        <span>${isAdminUser(user) ? "Administrador" : "Jugador"}: <strong>${user.username}</strong></span>
         <button class="ghost" id="logoutBtn">Salir</button>
       </div>
     </header>
@@ -237,7 +237,7 @@ function render() {
         <button class="tab ${activeTab === "bracket" ? "active" : ""}" data-tab="bracket">Llave</button>
         <button class="tab ${["ranking", "player"].includes(activeTab) ? "active" : ""}" data-tab="ranking">Ranking</button>
         <button class="tab ${activeTab === "info" ? "active" : ""}" data-tab="info">Info</button>
-        ${user.role === "admin" ? `<button class="tab ${activeTab === "admin" ? "active" : ""}" data-tab="admin">Admin</button>` : ""}
+        ${isAdminUser(user) ? `<button class="tab ${activeTab === "admin" ? "active" : ""}" data-tab="admin">Admin</button>` : ""}
       </nav>
 
       <section id="view-prode" class="view ${activeTab === "prode" ? "active" : ""}">
@@ -253,7 +253,7 @@ function render() {
       </section>
       ${viewedUser ? `<section id="view-player" class="view ${activeTab === "player" ? "active" : ""}">${renderReadonlyProde(viewedUser, viewedProjection)}</section>` : ""}
       <section id="view-info" class="view ${activeTab === "info" ? "active" : ""}">${renderInfo()}</section>
-      ${user.role === "admin" ? `<section id="view-admin" class="view ${activeTab === "admin" ? "active" : ""}">${renderAdmin()}</section>` : ""}
+      ${isAdminUser(user) ? `<section id="view-admin" class="view ${activeTab === "admin" ? "active" : ""}">${renderAdmin()}</section>` : ""}
     </main>
   `;
 
@@ -440,7 +440,7 @@ function renderAwards(user, readOnly = false) {
     <section class="groupBlock">
       <div class="groupHeader">
         <h2>Premios</h2>
-        ${user.role === "admin" ? "<p>Lista editable luego desde base de datos.</p>" : ""}
+        ${isAdminUser(user) ? "<p>Lista editable luego desde base de datos.</p>" : ""}
       </div>
       <div class="awardGrid">
         ${renderAwardSelect("topScorer", "Goleador", user.awards?.topScorer, fieldOptions)}
@@ -521,7 +521,7 @@ function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
 function renderLeaderboard(rows, currentUser) {
   const canViewPredictions = canViewOtherPredictions(currentUser);
   const showPodium = state.appSettings.viewPredictionsEnabled;
-  const canManagePlayers = currentUser?.role === "admin";
+  const canManagePlayers = isAdminUser(currentUser);
   return `
     <section class="groupBlock">
       <div class="groupHeader">
@@ -561,11 +561,15 @@ function renderPodiumCell(code, visible) {
 }
 
 function canViewOtherPredictions(currentUser) {
-  return Boolean(state.appSettings.viewPredictionsEnabled || currentUser?.role === "admin");
+  return Boolean(state.appSettings.viewPredictionsEnabled || isAdminUser(currentUser));
+}
+
+function isAdminUser(user) {
+  return Boolean(user && (user.role === "admin" || user.username === ADMIN.username));
 }
 
 function isActivePlayer(user) {
-  return user.role !== "admin" && user.active !== false;
+  return !isAdminUser(user) && user.active !== false;
 }
 
 function renderReadonlyProde(user, projection) {
@@ -672,7 +676,7 @@ function renderAdmin() {
 function renderAdminUserRow(user) {
   const savedAt = user.savedAt ? new Date(user.savedAt).toLocaleString() : "sin guardar";
   const activeText = user.active !== false ? "Activo en ranking" : "Oculto del ranking";
-  const toggle = user.role === "admin" ? "" : `
+  const toggle = isAdminUser(user) ? "" : `
     <label class="miniSwitch">
       <input type="checkbox" data-user-active="${user.username}" ${user.active !== false ? "checked" : ""} />
       <span>${activeText}</span>
@@ -764,14 +768,14 @@ function bindEvents() {
 async function hideUserFromRanking(event) {
   const username = event.target.dataset.hideUserRanking;
   const target = state.users[username];
-  if (!target || target.role === "admin") return;
+  if (!target || isAdminUser(target)) return;
   target.active = false;
   if (viewedUsername === username) {
     viewedUsername = null;
     activeTab = "ranking";
   }
   saveState();
-  if (storageMode === "supabase" && supabase && state.users[state.currentUser]?.role === "admin") {
+  if (storageMode === "supabase" && supabase && isAdminUser(state.users[state.currentUser])) {
     await supabase.from("profiles").update({ active: false }).eq("username", username);
   }
   render();
@@ -780,14 +784,14 @@ async function hideUserFromRanking(event) {
 async function updateUserActive(event) {
   const username = event.target.dataset.userActive;
   const target = state.users[username];
-  if (!target || target.role === "admin") return;
+  if (!target || isAdminUser(target)) return;
   target.active = event.target.checked;
-  if (viewedUsername === username && target.active === false && state.users[state.currentUser]?.role !== "admin") {
+  if (viewedUsername === username && target.active === false && !isAdminUser(state.users[state.currentUser])) {
     viewedUsername = null;
     activeTab = "ranking";
   }
   saveState();
-  if (storageMode === "supabase" && supabase && state.users[state.currentUser]?.role === "admin") {
+  if (storageMode === "supabase" && supabase && isAdminUser(state.users[state.currentUser])) {
     await supabase.from("profiles").update({ active: target.active }).eq("username", username);
   }
   render();
