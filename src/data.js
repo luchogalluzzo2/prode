@@ -13,6 +13,7 @@ export const SCORING = {
   semiFinal: 15,
   finalist: 20,
   champion: 30,
+  thirdPlace: 15,
   topScorer: 10,
   goldenBall: 10,
   goldenGlove: 8
