@@ -521,6 +521,7 @@ function renderKnockoutMatch(match, predictions, projection, readOnly = false) {
 function renderLeaderboard(rows, currentUser) {
   const canViewPredictions = canViewOtherPredictions(currentUser);
   const showPodium = state.appSettings.viewPredictionsEnabled;
+  const canManagePlayers = currentUser?.role === "admin";
   return `
     <section class="groupBlock">
       <div class="groupHeader">
@@ -528,7 +529,7 @@ function renderLeaderboard(rows, currentUser) {
         <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
       </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Guardado</th>${canViewPredictions ? "<th>Prode</th>" : ""}</tr></thead>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Guardado</th>${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
         <tbody>${rows.map((row, index) => `
           <tr>
             <td>${index + 1}</td>
@@ -539,6 +540,7 @@ function renderLeaderboard(rows, currentUser) {
             <td>${renderPodiumCell(row.podium.thirdPlace, showPodium)}</td>
             <td>${row.savedAt || "-"}</td>
             ${canViewPredictions ? `<td><button class="linkButton" data-view-predictions="${row.username}">Ver prode</button></td>` : ""}
+            ${canManagePlayers ? `<td><button class="linkButton dangerButton" data-hide-user-ranking="${row.username}">Ocultar</button></td>` : ""}
           </tr>
         `).join("")}</tbody>
       </table>
@@ -753,6 +755,26 @@ function bindEvents() {
   document.querySelectorAll("[data-user-active]").forEach(input => {
     input.addEventListener("change", updateUserActive);
   });
+
+  document.querySelectorAll("[data-hide-user-ranking]").forEach(button => {
+    button.addEventListener("click", hideUserFromRanking);
+  });
+}
+
+async function hideUserFromRanking(event) {
+  const username = event.target.dataset.hideUserRanking;
+  const target = state.users[username];
+  if (!target || target.role === "admin") return;
+  target.active = false;
+  if (viewedUsername === username) {
+    viewedUsername = null;
+    activeTab = "ranking";
+  }
+  saveState();
+  if (storageMode === "supabase" && supabase && state.users[state.currentUser]?.role === "admin") {
+    await supabase.from("profiles").update({ active: false }).eq("username", username);
+  }
+  render();
 }
 
 async function updateUserActive(event) {
