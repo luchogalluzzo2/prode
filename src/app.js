@@ -270,7 +270,7 @@ function renderAuth() {
             <div class="brandMark" aria-label="Prode Mundial 2026"><span>2026</span><strong>Prode Mundial</strong></div>
             <p class="eyebrow">Prode privado</p>
             <h1>Mundial 2026</h1>
-            <p>Entra con tu usuario o crea uno nuevo. El admin inicial es <strong>${ADMIN.username}</strong> / <strong>${ADMIN.password}</strong>.</p>
+            <p>Entra con tu usuario o crea uno nuevo.</p>
           </div>
           ${renderHeroMedia()}
         </div>
