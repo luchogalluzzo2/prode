@@ -1,4 +1,5 @@
-import { ADMIN, FIELD_PLAYERS, GOALKEEPERS, GROUPS, KNOCKOUT, MATCHES, SCORING, TEAMS } from "./data.js";
+import { ADMIN, GROUPS, KNOCKOUT, MATCHES, SCORING, TEAMS } from "./data.js";
+import { SQUADS } from "./squads.js";
 
 const STORAGE_KEY = "prode-wc26-state-v1";
 const app = document.querySelector("#app");
@@ -175,6 +176,33 @@ const teamBadge = (code) => code
   ? `<span class="teamName"><span class="flag">${flagMarkup(code)}</span><span>${TEAMS[code]?.name || code}</span></span>`
   : `<span class="teamName mutedTeam"><span>Por definir</span></span>`;
 const isCompleteScore = (score) => Number.isInteger(score?.home) && Number.isInteger(score?.away);
+const escapeHtml = (value = "") => String(value)
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#039;");
+
+const LEGACY_AWARD_TEAMS = {
+  "Lionel Messi": "ARG",
+  "Kylian Mbappe": "FRA",
+  "Erling Haaland": "NOR",
+  "Vinicius Junior": "BRA",
+  "Jude Bellingham": "ENG",
+  "Lamine Yamal": "ESP",
+  "Harry Kane": "ENG",
+  "Cristiano Ronaldo": "POR",
+  "Pedri": "ESP",
+  "Federico Valverde": "URU",
+  "Mohamed Salah": "EGY",
+  "Florian Wirtz": "GER",
+  "Jamal Musiala": "GER",
+  "Achraf Hakimi": "MAR",
+  "Emiliano Martinez": "ARG",
+  "Thibaut Courtois": "BEL",
+  "Alisson Becker": "BRA",
+  "Manuel Neuer": "GER"
+};
 
 function flagMarkup(code) {
   if (code === "SCO") return '<span class="scotlandFlag" aria-label="Escocia"></span>';
@@ -434,33 +462,123 @@ function renderAwards(user, readOnly = false) {
       </section>
     `;
   }
-  const fieldOptions = renderPlayerOptions(FIELD_PLAYERS);
-  const goalkeeperOptions = renderPlayerOptions(GOALKEEPERS);
   return `
     <section class="groupBlock">
       <div class="groupHeader">
         <h2>Premios</h2>
-        ${isAdminUser(user) ? "<p>Lista editable luego desde base de datos.</p>" : ""}
+        <p>Primero elegi el pais y despues el jugador.</p>
       </div>
       <div class="awardGrid">
-        ${renderAwardSelect("topScorer", "Goleador", user.awards?.topScorer, fieldOptions)}
-        ${renderAwardSelect("goldenBall", "Balon de Oro", user.awards?.goldenBall, fieldOptions)}
-        ${renderAwardSelect("goldenGlove", "Mejor arquero", user.awards?.goldenGlove, goalkeeperOptions)}
+        ${renderAwardSelect("topScorer", "Goleador", user.awards?.topScorer, user.awards?.topScorerTeam, false)}
+        ${renderAwardSelect("goldenBall", "Balon de Oro", user.awards?.goldenBall, user.awards?.goldenBallTeam, false)}
+        ${renderAwardSelect("goldenGlove", "Mejor arquero", user.awards?.goldenGlove, user.awards?.goldenGloveTeam, true)}
       </div>
     </section>
   `;
 }
 
 function renderReadonlyAward(label, value) {
-  return `<div class="award readonlyAward"><span>${label}</span><strong>${value || "Sin elegir"}</strong></div>`;
+  return `<div class="award readonlyAward"><span>${label}</span><strong>${escapeHtml(value || "Sin elegir")}</strong></div>`;
 }
 
-function renderPlayerOptions(players) {
-  return players.map(player => `<option value="${player.name}">${TEAMS[player.team]?.flag || ""} ${player.name} · ${TEAMS[player.team]?.name || player.team}</option>`).join("");
+function normalizePlayerName(value) {
+  return value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase();
 }
 
-function renderAwardSelect(key, label, value, options) {
-  return `<label class="award">${label}<select data-award="${key}"><option value="">Elegir jugador</option>${options}</select></label>`.replace(`value="${value}"`, `value="${value}" selected`);
+function comparablePlayerName(value) {
+  const aliases = {
+    "alisson becker": "alisson"
+  };
+  const normalized = normalizePlayerName(value);
+  return aliases[normalized] || normalized;
+}
+
+function playerTeam(value) {
+  if (!value) return "";
+  const normalizedValue = normalizePlayerName(value);
+  const squadTeam = Object.entries(SQUADS).find(([, players]) =>
+    players.some(player => normalizePlayerName(player.name) === normalizedValue)
+  )?.[0];
+  return squadTeam || LEGACY_AWARD_TEAMS[value] || "";
+}
+
+function renderTeamOptions(selectedTeam) {
+  return Object.keys(SQUADS)
+    .sort((a, b) => (TEAMS[a]?.name || a).localeCompare(TEAMS[b]?.name || b, "es"))
+    .map(code => {
+      const selected = code === selectedTeam ? " selected" : "";
+      return `<option value="${code}"${selected}>${TEAMS[code]?.flag || ""} ${escapeHtml(TEAMS[code]?.name || code)}</option>`;
+    })
+    .join("");
+}
+
+function renderSquadOptions(team, value, goalkeepersOnly) {
+  if (!team) {
+    return value
+      ? `<option value="${escapeHtml(value)}" selected>Eleccion guardada: ${escapeHtml(value)}</option>`
+      : "";
+  }
+  const availablePlayers = (SQUADS[team] || []).filter(player =>
+    goalkeepersOnly ? player.position === "PO" : player.position !== "PO"
+  );
+  const hasSavedPlayer = availablePlayers.some(player =>
+    normalizePlayerName(player.name) === normalizePlayerName(value || "")
+  );
+  const savedOption = value && !hasSavedPlayer
+    ? `<option value="${escapeHtml(value)}" selected>Eleccion guardada: ${escapeHtml(value)}</option>`
+    : "";
+  return savedOption + availablePlayers.map(player => {
+    const selected = normalizePlayerName(player.name) === normalizePlayerName(value || "") ? " selected" : "";
+    return `<option value="${escapeHtml(player.name)}"${selected}>${escapeHtml(player.name)}</option>`;
+  }).join("");
+}
+
+function renderAwardSelect(key, label, value, savedTeam, goalkeepersOnly) {
+  const selectedTeam = SQUADS[savedTeam] ? savedTeam : playerTeam(value);
+  const playerDisabled = selectedTeam ? "" : " disabled";
+  return `
+    <fieldset class="award">
+      <legend>${label}</legend>
+      <label>
+        <span>Pais</span>
+        <select data-award-team="${key}">
+          <option value="">Elegir pais</option>
+          ${renderTeamOptions(selectedTeam)}
+        </select>
+      </label>
+      <label>
+        <span>${goalkeepersOnly ? "Arquero" : "Jugador"}</span>
+        <select data-award="${key}"${playerDisabled}>
+          <option value="">Elegir ${goalkeepersOnly ? "arquero" : "jugador"}</option>
+          ${renderSquadOptions(selectedTeam, value, goalkeepersOnly)}
+        </select>
+      </label>
+    </fieldset>
+  `;
+}
+
+function renderAdminAwardSelect(key, label, value, savedTeam, goalkeepersOnly) {
+  const selectedTeam = SQUADS[savedTeam] ? savedTeam : playerTeam(value);
+  const playerDisabled = selectedTeam ? "" : " disabled";
+  return `
+    <fieldset class="award">
+      <legend>${label}</legend>
+      <label>
+        <span>Pais</span>
+        <select data-real-award-team="${key}">
+          <option value="">Elegir pais</option>
+          ${renderTeamOptions(selectedTeam)}
+        </select>
+      </label>
+      <label>
+        <span>${goalkeepersOnly ? "Arquero ganador" : "Jugador ganador"}</span>
+        <select data-real-award="${key}"${playerDisabled}>
+          <option value="">Elegir ${goalkeepersOnly ? "arquero" : "jugador"}</option>
+          ${renderSquadOptions(selectedTeam, value, goalkeepersOnly)}
+        </select>
+      </label>
+    </fieldset>
+  `;
 }
 
 function renderBracket(predictions, projection, readOnly = false) {
@@ -649,6 +767,7 @@ function renderInfo() {
 
 function renderAdmin() {
   const realProjection = buildProjection(state.realResults);
+  const realAwards = state.realResults.awards || {};
   return `
     <section class="groupBlock">
       <div class="groupHeader">
@@ -662,6 +781,17 @@ function renderAdmin() {
           <small>${state.appSettings.viewPredictionsEnabled ? "Los participantes ven el boton Ver prode en el ranking." : "Solo admin puede revisar prodes ajenos."}</small>
         </span>
       </label>
+    </section>
+    <section class="groupBlock">
+      <div class="groupHeader">
+        <h2>Premios oficiales</h2>
+        <p>Selecciona los ganadores para comparar con cada participante y sumar los puntos definidos.</p>
+      </div>
+      <div class="awardGrid">
+        ${renderAdminAwardSelect("topScorer", `Goleador · ${SCORING.topScorer} puntos`, realAwards.topScorer, realAwards.topScorerTeam, false)}
+        ${renderAdminAwardSelect("goldenBall", `Balon de Oro · ${SCORING.goldenBall} puntos`, realAwards.goldenBall, realAwards.goldenBallTeam, false)}
+        ${renderAdminAwardSelect("goldenGlove", `Mejor arquero · ${SCORING.goldenGlove} puntos`, realAwards.goldenGlove, realAwards.goldenGloveTeam, true)}
+      </div>
     </section>
     <section class="groupBlock">
       <div class="groupHeader"><h2>Resultados reales</h2><p>Carga marcadores oficiales para calcular el ranking.</p></div>
@@ -795,6 +925,36 @@ function bindEvents() {
     select.addEventListener("change", (event) => {
       state.users[state.currentUser].awards[event.target.dataset.award] = event.target.value;
       saveState();
+    });
+  });
+
+  document.querySelectorAll("[data-award-team]").forEach(select => {
+    select.addEventListener("change", (event) => {
+      const awardKey = event.target.dataset.awardTeam;
+      state.users[state.currentUser].awards[awardKey] = "";
+      state.users[state.currentUser].awards[`${awardKey}Team`] = event.target.value;
+      saveState();
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-real-award]").forEach(select => {
+    select.addEventListener("change", (event) => {
+      state.realResults.awards ||= {};
+      state.realResults.awards[event.target.dataset.realAward] = event.target.value;
+      saveState();
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-real-award-team]").forEach(select => {
+    select.addEventListener("change", (event) => {
+      const awardKey = event.target.dataset.realAwardTeam;
+      state.realResults.awards ||= {};
+      state.realResults.awards[awardKey] = "";
+      state.realResults.awards[`${awardKey}Team`] = event.target.value;
+      saveState();
+      render();
     });
   });
 
@@ -1057,7 +1217,21 @@ function scoreUser(user) {
   points += intersectionSize(predictedProgress.finalist, realProgress.finalist) * SCORING.finalist;
   points += intersectionSize(predictedProgress.champion, realProgress.champion) * SCORING.champion;
   points += intersectionSize(predictedProgress.thirdPlace, realProgress.thirdPlace) * SCORING.thirdPlace;
+  points += awardPoints(user.awards, state.realResults.awards);
   return points;
+}
+
+function awardPoints(predictedAwards = {}, realAwards = {}) {
+  return [
+    ["topScorer", SCORING.topScorer],
+    ["goldenBall", SCORING.goldenBall],
+    ["goldenGlove", SCORING.goldenGlove]
+  ].reduce((points, [key, value]) => {
+    const predicted = predictedAwards[key];
+    const real = realAwards[key];
+    if (!predicted || !real) return points;
+    return comparablePlayerName(predicted) === comparablePlayerName(real) ? points + value : points;
+  }, 0);
 }
 
 function matchScorePoints(match, predictions) {

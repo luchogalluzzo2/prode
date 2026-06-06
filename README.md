@@ -26,8 +26,33 @@ Los datos base del fixture siguen en `src/data.js`:
 - `GROUPS`
 - `MATCHES`
 - `KNOCKOUT`
-- `AWARD_PLAYERS`
 - `SCORING`
+
+Las convocatorias para Goleador, Balon de Oro y Mejor arquero estan en
+`src/squads.js`. Es un archivo estatico: no requiere una tabla adicional.
+
+Para regenerarlo desde el PDF oficial:
+
+```bash
+python3 tools/extract_squads.py /ruta/SquadLists-Spanish.pdf src/squads.js
+```
+
+## Publicacion
+
+La version hosteada esta preparada para Vercel. Subir el proyecto completo al
+repositorio conectado a Vercel; para este cambio alcanzan:
+
+- `src/app.js`
+- `src/styles.css`
+- `src/squads.js`
+- `tools/extract_squads.py` y `README.md` (documentacion/reproducibilidad)
+
+No hay que ejecutar SQL ni modificar Supabase para actualizar las listas.
+
+El administrador carga los ganadores oficiales de Goleador, Balon de Oro y
+Mejor arquero desde la pestana Admin. Se guardan junto con los resultados
+reales existentes y el ranking suma automaticamente los puntos configurados en
+`SCORING`.
 
 ## Fuentes
 
