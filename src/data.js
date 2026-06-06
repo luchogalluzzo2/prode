@@ -19,30 +19,6 @@ export const SCORING = {
   goldenGlove: 8
 };
 
-export const FIELD_PLAYERS = [
-  { name: "Lionel Messi", team: "ARG" },
-  { name: "Kylian Mbappe", team: "FRA" },
-  { name: "Erling Haaland", team: "NOR" },
-  { name: "Vinicius Junior", team: "BRA" },
-  { name: "Jude Bellingham", team: "ENG" },
-  { name: "Lamine Yamal", team: "ESP" },
-  { name: "Harry Kane", team: "ENG" },
-  { name: "Cristiano Ronaldo", team: "POR" },
-  { name: "Pedri", team: "ESP" },
-  { name: "Federico Valverde", team: "URU" },
-  { name: "Mohamed Salah", team: "EGY" },
-  { name: "Florian Wirtz", team: "GER" },
-  { name: "Jamal Musiala", team: "GER" },
-  { name: "Achraf Hakimi", team: "MAR" }
-];
-
-export const GOALKEEPERS = [
-  { name: "Emiliano Martinez", team: "ARG" },
-  { name: "Thibaut Courtois", team: "BEL" },
-  { name: "Alisson Becker", team: "BRA" },
-  { name: "Manuel Neuer", team: "GER" }
-];
-
 export const TEAMS = {
   MEX: { name: "Mexico", flag: "🇲🇽" },
   RSA: { name: "Sudafrica", flag: "🇿🇦" },
