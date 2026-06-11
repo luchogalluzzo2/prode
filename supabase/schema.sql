@@ -111,14 +111,35 @@ drop policy if exists "predictions upsert own" on public.predictions;
 create policy "predictions upsert own"
 on public.predictions for insert
 to authenticated
-with check (auth.uid() = user_id);
+with check (
+  auth.uid() = user_id
+  and not exists (
+    select 1 from public.app_settings s
+    where s.id = 'public'
+      and coalesce((s.data->>'predictionsLocked')::boolean, false)
+  )
+);
 
 drop policy if exists "predictions update own" on public.predictions;
 create policy "predictions update own"
 on public.predictions for update
 to authenticated
-using (auth.uid() = user_id)
-with check (auth.uid() = user_id);
+using (
+  auth.uid() = user_id
+  and not exists (
+    select 1 from public.app_settings s
+    where s.id = 'public'
+      and coalesce((s.data->>'predictionsLocked')::boolean, false)
+  )
+)
+with check (
+  auth.uid() = user_id
+  and not exists (
+    select 1 from public.app_settings s
+    where s.id = 'public'
+      and coalesce((s.data->>'predictionsLocked')::boolean, false)
+  )
+);
 
 drop policy if exists "real results select authenticated" on public.real_results;
 create policy "real results select authenticated"
@@ -193,5 +214,5 @@ values ('official', '{}'::jsonb)
 on conflict (id) do nothing;
 
 insert into public.app_settings (id, data)
-values ('public', '{"viewPredictionsEnabled": false}'::jsonb)
+values ('public', '{"viewPredictionsEnabled": false, "predictionsLocked": false}'::jsonb)
 on conflict (id) do nothing;

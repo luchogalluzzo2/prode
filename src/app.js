@@ -11,7 +11,8 @@ const emptyState = {
   },
   realResults: {},
   appSettings: {
-    viewPredictionsEnabled: false
+    viewPredictionsEnabled: false,
+    predictionsLocked: false
   }
 };
 
@@ -149,12 +150,14 @@ async function syncSupabaseState() {
   if (!supabase || !currentProfile || !state.currentUser) return;
   const user = state.users[state.currentUser];
   if (!user) return;
-  await supabase.from("predictions").upsert({
-    user_id: currentProfile.user_id,
-    data: user.predictions || {},
-    awards: user.awards || {},
-    saved_at: user.savedAt || new Date().toISOString()
-  });
+  if (!state.appSettings.predictionsLocked) {
+    await supabase.from("predictions").upsert({
+      user_id: currentProfile.user_id,
+      data: user.predictions || {},
+      awards: user.awards || {},
+      saved_at: user.savedAt || new Date().toISOString()
+    });
+  }
   if (isAdminUser(user)) {
     await supabase.from("real_results").upsert({
       id: "official",
@@ -228,6 +231,7 @@ function render() {
   }
 
   const user = state.users[state.currentUser];
+  const predictionsLocked = state.appSettings.predictionsLocked;
   const projection = buildProjection(user.predictions);
   const leaderboard = buildLeaderboard();
   const canViewPredictions = canViewOtherPredictions(user);
@@ -269,12 +273,13 @@ function render() {
       </nav>
 
       <section id="view-prode" class="view ${activeTab === "prode" ? "active" : ""}">
-        ${renderAutosave(user)}
-        ${renderGroups(user.predictions, projection)}
-        ${renderAwards(user)}
+        ${predictionsLocked ? renderLockedNotice() : renderAutosave(user)}
+        ${renderGroups(user.predictions, projection, predictionsLocked)}
+        ${renderAwards(user, predictionsLocked)}
       </section>
       <section id="view-bracket" class="view ${activeTab === "bracket" ? "active" : ""}">
-        ${renderBracket(user.predictions, projection)}
+        ${predictionsLocked ? renderLockedNotice() : ""}
+        ${renderBracket(user.predictions, projection, predictionsLocked)}
       </section>
       <section id="view-ranking" class="view ${activeTab === "ranking" ? "active" : ""}">
         ${renderLeaderboard(leaderboard, user)}
@@ -401,7 +406,16 @@ function renderAutosave(user) {
   `;
 }
 
-function renderGroups(predictions, projection) {
+function renderLockedNotice() {
+  return `
+    <div class="lockedNotice" role="status">
+      <strong>El prode esta cerrado</strong>
+      <span>Los pronosticos quedaron en modo lectura y ya no se pueden modificar.</span>
+    </div>
+  `;
+}
+
+function renderGroups(predictions, projection, readOnly = false) {
   return Object.entries(GROUPS).map(([group, teams]) => `
     <section class="groupBlock">
       <div class="groupHeader">
@@ -409,7 +423,7 @@ function renderGroups(predictions, projection) {
         <div class="teamStrip">${teams.map(code => `<span>${teamBadge(code)}</span>`).join("")}</div>
       </div>
       <div class="matchGrid">
-        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions)).join("")}
+        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, readOnly)).join("")}
       </div>
       ${renderTable(projection.tables[group])}
     </section>
@@ -769,6 +783,19 @@ function renderAdmin() {
   const realProjection = buildProjection(state.realResults);
   const realAwards = state.realResults.awards || {};
   return `
+    <section class="groupBlock lockSettings ${state.appSettings.predictionsLocked ? "locked" : ""}">
+      <div class="groupHeader">
+        <h2>Cierre del prode</h2>
+        <p>Bloquea todos los pronosticos cuando empiece el Mundial. Los usuarios podran seguir viendolos.</p>
+      </div>
+      <label class="switchRow">
+        <input id="predictionsLockToggle" type="checkbox" ${state.appSettings.predictionsLocked ? "checked" : ""} />
+        <span>
+          <strong>${state.appSettings.predictionsLocked ? "Prode cerrado" : "Prode abierto"}</strong>
+          <small>${state.appSettings.predictionsLocked ? "Nadie puede editar marcadores, clasificados ni premios." : "Los participantes todavia pueden modificar y guardar sus pronosticos."}</small>
+        </span>
+      </label>
+    </section>
     <section class="groupBlock">
       <div class="groupHeader">
         <h2>Visibilidad de prodes</h2>
@@ -875,6 +902,7 @@ function bindEvents() {
   });
 
   byId("saveBtn")?.addEventListener("click", () => {
+    if (state.appSettings.predictionsLocked) return;
     state.users[state.currentUser].savedAt = new Date().toISOString();
     saveState();
     render();
@@ -923,6 +951,7 @@ function bindEvents() {
 
   document.querySelectorAll("[data-award]").forEach(select => {
     select.addEventListener("change", (event) => {
+      if (state.appSettings.predictionsLocked) return;
       state.users[state.currentUser].awards[event.target.dataset.award] = event.target.value;
       saveState();
     });
@@ -930,6 +959,7 @@ function bindEvents() {
 
   document.querySelectorAll("[data-award-team]").forEach(select => {
     select.addEventListener("change", (event) => {
+      if (state.appSettings.predictionsLocked) return;
       const awardKey = event.target.dataset.awardTeam;
       state.users[state.currentUser].awards[awardKey] = "";
       state.users[state.currentUser].awards[`${awardKey}Team`] = event.target.value;
@@ -960,6 +990,12 @@ function bindEvents() {
 
   byId("viewPredictionsToggle")?.addEventListener("change", (event) => {
     state.appSettings.viewPredictionsEnabled = event.target.checked;
+    saveState();
+    render();
+  });
+
+  byId("predictionsLockToggle")?.addEventListener("change", (event) => {
+    state.appSettings.predictionsLocked = event.target.checked;
     saveState();
     render();
   });
@@ -1025,6 +1061,7 @@ function restorePendingFocus() {
 }
 
 function updatePredictionScore(event) {
+  if (state.appSettings.predictionsLocked) return;
   const user = state.users[state.currentUser];
   const id = event.target.dataset.match;
   const key = scoreKey(id);
@@ -1036,6 +1073,7 @@ function updatePredictionScore(event) {
 }
 
 function updatePredictionWinner(event) {
+  if (state.appSettings.predictionsLocked) return;
   const user = state.users[state.currentUser];
   const id = event.currentTarget.dataset.winner;
   const key = scoreKey(id);

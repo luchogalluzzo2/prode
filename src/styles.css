@@ -249,6 +249,25 @@ select {
   align-items: center;
 }
 
+.lockedNotice {
+  display: grid;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: rgba(214, 165, 41, 0.12);
+}
+
+.lockedNotice span {
+  color: var(--muted);
+}
+
+.lockSettings.locked {
+  border-color: var(--gold);
+  background: rgba(214, 165, 41, 0.08);
+}
+
 .saveBar span,
 .groupHeader p,
 .venue,
