@@ -54,6 +54,10 @@ Mejor arquero desde la pestana Admin. Se guardan junto con los resultados
 reales existentes y el ranking suma automaticamente los puntos configurados en
 `SCORING`.
 
+Desde la pestana Admin tambien puede cerrar globalmente el prode. Al activarlo,
+los pronosticos y premios de todos los participantes quedan en modo lectura,
+pero el administrador puede seguir cargando resultados oficiales.
+
 ## Fuentes
 
 - Fixture FIFA World Cup 26 Match Schedule v17, 10 April 2026.
@@ -63,6 +67,8 @@ reales existentes y el ranking suma automaticamente los puntos configurados en
 
 1. Crear proyecto en Supabase.
 2. En Supabase, ir a SQL Editor y ejecutar `supabase/schema.sql`.
+   Volver a ejecutarlo al desplegar cambios de politicas, como el cierre global
+   del prode.
 3. En Authentication > Providers > Email, desactivar confirmacion de email para este prode privado.
 4. Crear el usuario `admin` desde la app.
 5. En Supabase SQL Editor, ejecutar:
