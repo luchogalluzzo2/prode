@@ -675,7 +675,7 @@ function renderLeaderboard(rows, currentUser) {
         <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
       </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Guardado</th>${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Goleador</th><th>Balon de Oro</th><th>Mejor arquero</th>${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
         <tbody>${rows.map((row, index) => `
           <tr>
             <td>${index + 1}</td>
@@ -684,7 +684,9 @@ function renderLeaderboard(rows, currentUser) {
             <td>${renderPodiumCell(row.podium.champion, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.runnerUp, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.thirdPlace, showPodium)}</td>
-            <td>${row.savedAt || "-"}</td>
+            <td>${renderLeaderboardAward(row.awards, "topScorer", showPodium)}</td>
+            <td>${renderLeaderboardAward(row.awards, "goldenBall", showPodium)}</td>
+            <td>${renderLeaderboardAward(row.awards, "goldenGlove", showPodium)}</td>
             ${canViewPredictions ? `<td><button class="linkButton" data-view-predictions="${row.username}">Ver prode</button></td>` : ""}
             ${canManagePlayers ? `<td><button class="linkButton dangerButton" data-hide-user-ranking="${row.username}">Ocultar</button></td>` : ""}
           </tr>
@@ -704,6 +706,19 @@ function renderPointsBadge(match, predictions) {
 function renderPodiumCell(code, visible) {
   if (!visible) return `<span class="mutedTeam">oculto</span>`;
   return code ? teamBadge(code) : `<span class="mutedTeam">Sin definir</span>`;
+}
+
+function renderLeaderboardAward(awards = {}, key, visible) {
+  if (!visible) return `<span class="mutedTeam">oculto</span>`;
+  const player = awards[key];
+  const team = awards[`${key}Team`] || playerTeam(player);
+  if (!player) return `<span class="mutedTeam">Sin elegir</span>`;
+  return `
+    <span class="rankingAward">
+      <span class="flag">${flagMarkup(team)}</span>
+      <span>${escapeHtml(player)}</span>
+    </span>
+  `;
 }
 
 function canViewOtherPredictions(currentUser) {
@@ -1236,7 +1251,7 @@ function buildLeaderboard() {
     username: user.username,
     points: scoreUser(user),
     podium: predictedPodium(user),
-    savedAt: user.savedAt ? new Date(user.savedAt).toLocaleDateString() : null
+    awards: user.awards || {}
   })).sort((a, b) => b.points - a.points || a.username.localeCompare(b.username));
 }
 
