@@ -546,7 +546,7 @@ small {
 }
 
 .standings.big {
-  min-width: 980px;
+  min-width: 1320px;
 }
 
 .standings th,
@@ -554,6 +554,20 @@ small {
   text-align: left;
   padding: 0.55rem;
   border-bottom: 1px solid var(--line);
+}
+
+.rankingAward {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 9rem;
+  white-space: normal;
+}
+
+.rankingAward .flag {
+  flex: 0 0 auto;
+  width: 1.45rem;
+  text-align: center;
 }
 
 .linkButton {
