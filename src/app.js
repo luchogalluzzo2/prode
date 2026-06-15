@@ -24,6 +24,8 @@ let storageMode = "local";
 let supabase = null;
 let currentProfile = null;
 let syncTimer = null;
+let rankingAwardsVisible = true;
+const collapsedGroups = new Set();
 
 const FEATURED_ASSETS = {
   stadium: {
@@ -72,8 +74,43 @@ async function initApp() {
     }
   } else {
     state = loadState();
+    seedLocalDemoUsers();
   }
   render();
+}
+
+function seedLocalDemoUsers() {
+  if (!["localhost", "127.0.0.1"].includes(window.location.hostname)) return;
+  const demos = [
+    { username: "demo_lucia", seed: 1, awards: { topScorer: "Lionel Messi", topScorerTeam: "ARG", goldenBall: "Kylian Mbappe", goldenBallTeam: "FRA", goldenGlove: "Emiliano Martinez", goldenGloveTeam: "ARG" } },
+    { username: "demo_mateo", seed: 2, awards: { topScorer: "Harry Kane", topScorerTeam: "ENG", goldenBall: "Jude Bellingham", goldenBallTeam: "ENG", goldenGlove: "Thibaut Courtois", goldenGloveTeam: "BEL" } },
+    { username: "demo_sofia", seed: 3, awards: { topScorer: "Kylian Mbappe", topScorerTeam: "FRA", goldenBall: "Lamine Yamal", goldenBallTeam: "ESP", goldenGlove: "Alisson", goldenGloveTeam: "BRA" } }
+  ];
+  let changed = false;
+  demos.forEach(demo => {
+    state.users[demo.username] = {
+      username: demo.username,
+      password: "demo2026",
+      role: "player",
+      active: true,
+      predictions: buildDemoPredictions(demo.seed),
+      awards: demo.awards,
+      savedAt: new Date().toISOString()
+    };
+    changed = true;
+  });
+  if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function buildDemoPredictions(seed) {
+  const predictions = {};
+  MATCHES.slice(0, 16).forEach(match => {
+    predictions[scoreKey(match.id)] = {
+      home: (match.id + seed) % 4,
+      away: (match.id * seed + 1) % 3
+    };
+  });
+  return predictions;
 }
 
 async function initSupabase() {
@@ -274,6 +311,7 @@ function render() {
 
       <section id="view-prode" class="view ${activeTab === "prode" ? "active" : ""}">
         ${predictionsLocked ? renderLockedNotice() : renderAutosave(user)}
+        ${renderGroupNavigation()}
         ${renderGroups(user.predictions, projection, predictionsLocked)}
         ${renderAwards(user, predictionsLocked)}
       </section>
@@ -415,17 +453,32 @@ function renderLockedNotice() {
   `;
 }
 
+function renderGroupNavigation() {
+  return `
+    <div class="groupNavigation">
+      <span>Navegacion de grupos</span>
+      <button class="ghost compactButton" type="button" data-collapse-all-groups>Cerrar todos</button>
+      <button class="ghost compactButton" type="button" data-expand-all-groups>Abrir todos</button>
+    </div>
+  `;
+}
+
 function renderGroups(predictions, projection, readOnly = false) {
   return Object.entries(GROUPS).map(([group, teams]) => `
-    <section class="groupBlock">
+    <section class="groupBlock collapsibleGroup ${collapsedGroups.has(group) ? "collapsed" : ""}">
       <div class="groupHeader">
-        <h2>Grupo ${group}</h2>
+        <button class="groupToggle" type="button" data-toggle-group="${group}" aria-expanded="${!collapsedGroups.has(group)}">
+          <span class="groupToggleArrow" aria-hidden="true">${collapsedGroups.has(group) ? "▸" : "▾"}</span>
+          <span>Grupo ${group}</span>
+        </button>
         <div class="teamStrip">${teams.map(code => `<span>${teamBadge(code)}</span>`).join("")}</div>
       </div>
-      <div class="matchGrid">
-        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, readOnly)).join("")}
+      <div class="groupContent">
+        <div class="matchGrid">
+          ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, readOnly)).join("")}
+        </div>
+        ${renderTable(projection.tables[group])}
       </div>
-      ${renderTable(projection.tables[group])}
     </section>
   `).join("");
 }
@@ -666,16 +719,21 @@ function renderWinnerPicker(match, predictions, home, away, readOnly = false, re
 
 function renderLeaderboard(rows, currentUser) {
   const canViewPredictions = canViewOtherPredictions(currentUser);
-  const showPodium = state.appSettings.viewPredictionsEnabled;
   const canManagePlayers = isAdminUser(currentUser);
+  const showPodium = state.appSettings.viewPredictionsEnabled || canManagePlayers;
+  const nextMatch = nextPendingMatch();
+  const awardHeaders = rankingAwardsVisible ? "<th>Goleador</th><th>Balon de Oro</th><th>Mejor arquero</th>" : "";
   return `
     <section class="groupBlock">
       <div class="groupHeader">
-        <h2>Ranking</h2>
-        <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
+        <div>
+          <h2>Ranking</h2>
+          <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
+        </div>
+        <button class="ghost compactButton" id="toggleRankingAwards">${rankingAwardsVisible ? "Ocultar premios de jugadores" : "Mostrar premios de jugadores"}</button>
       </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Goleador</th><th>Balon de Oro</th><th>Mejor arquero</th>${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th class="nextMatchHeading">Proximo partido${nextMatch ? `<small>${nextMatchLabel(nextMatch)}</small>` : "<small>Todos finalizados</small>"}</th>${awardHeaders}${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
         <tbody>${rows.map((row, index) => `
           <tr>
             <td>${index + 1}</td>
@@ -684,9 +742,12 @@ function renderLeaderboard(rows, currentUser) {
             <td>${renderPodiumCell(row.podium.champion, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.runnerUp, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.thirdPlace, showPodium)}</td>
-            <td>${renderLeaderboardAward(row.awards, "topScorer", showPodium)}</td>
-            <td>${renderLeaderboardAward(row.awards, "goldenBall", showPodium)}</td>
-            <td>${renderLeaderboardAward(row.awards, "goldenGlove", showPodium)}</td>
+            <td>${renderNextMatchPrediction(row.predictions, nextMatch, showPodium)}</td>
+            ${rankingAwardsVisible ? `
+              <td>${renderLeaderboardAward(row.awards, "topScorer", showPodium)}</td>
+              <td>${renderLeaderboardAward(row.awards, "goldenBall", showPodium)}</td>
+              <td>${renderLeaderboardAward(row.awards, "goldenGlove", showPodium)}</td>
+            ` : ""}
             ${canViewPredictions ? `<td><button class="linkButton" data-view-predictions="${row.username}">Ver prode</button></td>` : ""}
             ${canManagePlayers ? `<td><button class="linkButton dangerButton" data-hide-user-ranking="${row.username}">Ocultar</button></td>` : ""}
           </tr>
@@ -721,6 +782,52 @@ function renderLeaderboardAward(awards = {}, key, visible) {
   `;
 }
 
+function matchTimestamp(match) {
+  const months = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6 };
+  const [day, month, year] = match.date.split(" ");
+  const [hour, minute] = match.time.split(":");
+  // El fixture se muestra una hora adelantado y en Argentina (UTC-3).
+  return Date.UTC(Number(year), months[month], Number(day), Number(hour) + 4, Number(minute));
+}
+
+function nextPendingMatch() {
+  const now = Date.now();
+  const matchVisibilityMs = (2 * 60 + 15) * 60 * 1000;
+  return [...MATCHES, ...KNOCKOUT]
+    .sort((a, b) => matchTimestamp(a) - matchTimestamp(b))
+    .find(match => {
+      const real = state.realResults[scoreKey(match.id)];
+      const hasOfficialResult = match.stage === "groups" ? isCompleteScore(real) : Boolean(real?.winner);
+      return now < matchTimestamp(match) + matchVisibilityMs && !hasOfficialResult;
+    }) || null;
+}
+
+function nextMatchLabel(match) {
+  if (match.stage === "groups") {
+    return `${teamName(match.home)} vs ${teamName(match.away)} · ${formatArt(match)}`;
+  }
+  const projection = buildProjection(state.realResults);
+  const home = resolveSlot(match.homeSlot, projection);
+  const away = resolveSlot(match.awaySlot, projection);
+  return `${teamName(home)} vs ${teamName(away)} · ${formatArt(match)}`;
+}
+
+function renderNextMatchPrediction(predictions, match, visible) {
+  if (!match) return `<span class="mutedTeam">Finalizado</span>`;
+  if (!visible) return `<span class="mutedTeam">oculto</span>`;
+  if (match.stage === "groups") {
+    const score = predictions[scoreKey(match.id)];
+    return isCompleteScore(score)
+      ? `<strong class="nextPrediction">${score.home} - ${score.away}</strong>`
+      : `<span class="mutedTeam">Sin pronostico</span>`;
+  }
+  const projection = buildProjection(predictions);
+  const home = resolveSlot(match.homeSlot, projection);
+  const away = resolveSlot(match.awaySlot, projection);
+  const winner = selectedWinner(match, predictions, home, away);
+  return winner ? teamBadge(winner) : `<span class="mutedTeam">Sin pronostico</span>`;
+}
+
 function canViewOtherPredictions(currentUser) {
   return Boolean(state.appSettings.viewPredictionsEnabled || isAdminUser(currentUser));
 }
@@ -742,6 +849,7 @@ function renderReadonlyProde(user, projection) {
       </div>
       <button class="ghost" id="backToRankingBtn">Volver al ranking</button>
     </section>
+    ${renderGroupNavigation()}
     ${renderReadonlyGroups(user.predictions, projection)}
     ${renderBracket(user.predictions, projection, true)}
     ${renderAwards(user, true)}
@@ -749,18 +857,7 @@ function renderReadonlyProde(user, projection) {
 }
 
 function renderReadonlyGroups(predictions, projection) {
-  return Object.entries(GROUPS).map(([group, teams]) => `
-    <section class="groupBlock">
-      <div class="groupHeader">
-        <h2>Grupo ${group}</h2>
-        <div class="teamStrip">${teams.map(code => `<span>${teamBadge(code)}</span>`).join("")}</div>
-      </div>
-      <div class="matchGrid">
-        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, true)).join("")}
-      </div>
-      ${renderTable(projection.tables[group])}
-    </section>
-  `).join("");
+  return renderGroups(predictions, projection, true);
 }
 
 function renderInfo() {
@@ -944,6 +1041,34 @@ function bindEvents() {
     viewedUsername = null;
     activeTab = "ranking";
     render();
+  });
+
+  byId("toggleRankingAwards")?.addEventListener("click", () => {
+    rankingAwardsVisible = !rankingAwardsVisible;
+    render();
+  });
+
+  document.querySelectorAll("[data-collapse-all-groups]").forEach(button => {
+    button.addEventListener("click", () => {
+      Object.keys(GROUPS).forEach(group => collapsedGroups.add(group));
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-expand-all-groups]").forEach(button => {
+    button.addEventListener("click", () => {
+      collapsedGroups.clear();
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-toggle-group]").forEach(button => {
+    button.addEventListener("click", () => {
+      const group = button.dataset.toggleGroup;
+      if (collapsedGroups.has(group)) collapsedGroups.delete(group);
+      else collapsedGroups.add(group);
+      render();
+    });
   });
 
   document.querySelectorAll("[data-match]").forEach(input => {
@@ -1251,7 +1376,8 @@ function buildLeaderboard() {
     username: user.username,
     points: scoreUser(user),
     podium: predictedPodium(user),
-    awards: user.awards || {}
+    awards: user.awards || {},
+    predictions: user.predictions || {}
   })).sort((a, b) => b.points - a.points || a.username.localeCompare(b.username));
 }
 
@@ -1396,4 +1522,7 @@ function intersectionSize(left, right) {
   return total;
 }
 
-initApp();
+initApp().catch(error => {
+  console.error("No se pudo iniciar el prode", error);
+  app.innerHTML = `<main class="authPage"><p class="error">No se pudo iniciar el prode. Recarga la pagina.</p></main>`;
+});
