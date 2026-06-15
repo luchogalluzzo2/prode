@@ -804,12 +804,12 @@ function nextPendingMatch() {
 
 function nextMatchLabel(match) {
   if (match.stage === "groups") {
-    return `${teamName(match.home)} vs ${teamName(match.away)} · ${formatArt(match)}`;
+    return `${teamName(match.home)} vs ${teamName(match.away)}`;
   }
   const projection = buildProjection(state.realResults);
   const home = resolveSlot(match.homeSlot, projection);
   const away = resolveSlot(match.awaySlot, projection);
-  return `${teamName(home)} vs ${teamName(away)} · ${formatArt(match)}`;
+  return `${teamName(home)} vs ${teamName(away)}`;
 }
 
 function renderNextMatchPrediction(predictions, match, visible) {

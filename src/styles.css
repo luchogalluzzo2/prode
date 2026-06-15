@@ -580,7 +580,7 @@ small {
 }
 
 .standings.big {
-  min-width: 1420px;
+  min-width: 1240px;
 }
 
 .standings th,
@@ -605,12 +605,12 @@ small {
 }
 
 .nextMatchHeading {
-  min-width: 15rem;
+  min-width: 10rem;
 }
 
 .nextMatchHeading small {
   display: block;
-  max-width: 18rem;
+  max-width: 13rem;
   margin-top: 0.25rem;
   font-weight: 500;
   white-space: normal;
