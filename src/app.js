@@ -24,6 +24,8 @@ let storageMode = "local";
 let supabase = null;
 let currentProfile = null;
 let syncTimer = null;
+let rankingAwardsVisible = true;
+const collapsedGroups = new Set();
 
 const FEATURED_ASSETS = {
   stadium: {
@@ -72,8 +74,57 @@ async function initApp() {
     }
   } else {
     state = loadState();
+    seedLocalDemoUsers();
   }
   render();
+}
+
+function seedLocalDemoUsers() {
+  if (!["localhost", "127.0.0.1"].includes(window.location.hostname)) return;
+  const demos = [
+    { username: "demo_lucia", seed: 1, awards: { topScorer: "Lionel Messi", topScorerTeam: "ARG", goldenBall: "Kylian Mbappe", goldenBallTeam: "FRA", goldenGlove: "Emiliano Martinez", goldenGloveTeam: "ARG" } },
+    { username: "demo_mateo", seed: 2, awards: { topScorer: "Harry Kane", topScorerTeam: "ENG", goldenBall: "Jude Bellingham", goldenBallTeam: "ENG", goldenGlove: "Thibaut Courtois", goldenGloveTeam: "BEL" } },
+    { username: "demo_sofia", seed: 3, awards: { topScorer: "Kylian Mbappe", topScorerTeam: "FRA", goldenBall: "Lamine Yamal", goldenBallTeam: "ESP", goldenGlove: "Alisson", goldenGloveTeam: "BRA" } }
+  ];
+  let changed = false;
+  demos.forEach(demo => {
+    state.users[demo.username] = {
+      username: demo.username,
+      password: "demo2026",
+      role: "player",
+      active: true,
+      predictions: buildDemoPredictions(demo.seed),
+      awards: demo.awards,
+      savedAt: new Date().toISOString()
+    };
+    changed = true;
+  });
+  state.realResults = buildDemoOfficialResults();
+  state.appSettings.viewPredictionsEnabled = true;
+  changed = true;
+  if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function buildDemoPredictions(seed) {
+  const predictions = {};
+  MATCHES.forEach(match => {
+    predictions[scoreKey(match.id)] = {
+      home: (match.id + seed) % 4,
+      away: (match.id * seed + 1) % 3
+    };
+  });
+  return predictions;
+}
+
+function buildDemoOfficialResults() {
+  const results = {};
+  MATCHES.forEach(match => {
+    results[scoreKey(match.id)] = {
+      home: (match.id + 2) % 4,
+      away: (match.id + 1) % 3
+    };
+  });
+  return results;
 }
 
 async function initSupabase() {
@@ -274,6 +325,7 @@ function render() {
 
       <section id="view-prode" class="view ${activeTab === "prode" ? "active" : ""}">
         ${predictionsLocked ? renderLockedNotice() : renderAutosave(user)}
+        ${renderGroupNavigation()}
         ${renderGroups(user.predictions, projection, predictionsLocked)}
         ${renderAwards(user, predictionsLocked)}
       </section>
@@ -415,19 +467,152 @@ function renderLockedNotice() {
   `;
 }
 
-function renderGroups(predictions, projection, readOnly = false) {
+function renderGroupNavigation() {
+  return `
+    <div class="groupNavigation">
+      <span>Navegacion de grupos</span>
+      <button class="ghost compactButton" type="button" data-collapse-all-groups>Cerrar todos</button>
+      <button class="ghost compactButton" type="button" data-expand-all-groups>Abrir todos</button>
+    </div>
+  `;
+}
+
+function renderGroups(predictions, projection, readOnly = false, showQualificationPoints = false) {
   return Object.entries(GROUPS).map(([group, teams]) => `
-    <section class="groupBlock">
+    <section class="groupBlock collapsibleGroup ${collapsedGroups.has(group) ? "collapsed" : ""}">
       <div class="groupHeader">
-        <h2>Grupo ${group}</h2>
+        <button class="groupToggle" type="button" data-toggle-group="${group}" aria-expanded="${!collapsedGroups.has(group)}">
+          <span class="groupToggleArrow" aria-hidden="true">${collapsedGroups.has(group) ? "▸" : "▾"}</span>
+          <span>Grupo ${group}</span>
+        </button>
         <div class="teamStrip">${teams.map(code => `<span>${teamBadge(code)}</span>`).join("")}</div>
       </div>
-      <div class="matchGrid">
-        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, readOnly)).join("")}
+      <div class="groupContent">
+        <div class="matchGrid">
+          ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, readOnly)).join("")}
+        </div>
+        ${showQualificationPoints ? renderGroupQualificationPoints(group, projection) : ""}
+        ${renderTable(projection.tables[group])}
       </div>
-      ${renderTable(projection.tables[group])}
     </section>
   `).join("");
+}
+
+function renderReadonlyQualificationSummary(predictions) {
+  const summary = qualificationPointsSummary(predictions);
+  const closedLabel = summary.closedGroups === 1 ? "1 grupo definido" : `${summary.closedGroups} grupos definidos`;
+  const total = summary.points + summary.perfectOrderPoints;
+  return `
+    <section class="groupBlock qualificationSummary">
+      <div class="groupHeader">
+        <div>
+          <h2>Puntos por grupos</h2>
+          <p>${closedLabel}. Clasificados: ${SCORING.groupQualified} puntos por equipo. Orden exacto: ${SCORING.perfectGroupOrder} puntos por grupo.</p>
+        </div>
+        <strong class="summaryScore">${total} pts</strong>
+      </div>
+      <div class="qualificationBreakdown">
+        <span>Clasificados: <strong>${summary.points} pts</strong></span>
+        <span>Orden exacto: <strong>${summary.perfectOrderPoints} pts</strong></span>
+      </div>
+      <div class="qualificationLegend">
+        <span><i class="legendDot hit"></i>Sumo puntos</span>
+        <span><i class="legendDot miss"></i>No sumo</span>
+        <span><i class="legendDot pending"></i>Grupo pendiente</span>
+      </div>
+    </section>
+  `;
+}
+
+function renderGroupQualificationPoints(group, projection) {
+  const realProjection = buildProjection(state.realResults);
+  const closed = Boolean(realProjection.groupComplete[group]);
+  const realQualified = new Set(closed ? realProjection.tables[group].slice(0, 2).map(row => row.code) : []);
+  const predictedQualified = projection.groupComplete[group]
+    ? projection.tables[group].slice(0, 2).map(row => row.code)
+    : [];
+  const earned = predictedQualified.filter(code => realQualified.has(code)).length * SCORING.groupQualified;
+  const orderHit = closed && projection.groupComplete[group] && isExactGroupOrder(group, projection, realProjection);
+  const orderStatus = !closed ? "pending" : orderHit ? "hit" : "miss";
+  return `
+    <div class="qualificationPanel ${closed ? "closed" : "pending"}">
+      <div class="qualificationPanelHeader">
+        <strong>Clasificados pronosticados</strong>
+        <span>${closed ? `${earned} pts` : "Pendiente de resultado oficial"}</span>
+      </div>
+      <div class="qualificationChips">
+        ${predictedQualified.length ? predictedQualified.map(code => renderQualificationChip(code, closed, realQualified.has(code))).join("") : `<span class="mutedTeam">Este grupo no esta completo en el prode.</span>`}
+      </div>
+      <div class="exactOrderPanel ${orderStatus}">
+        <span>Orden exacto del grupo</span>
+        <strong>${!closed ? "-" : orderHit ? `+${SCORING.perfectGroupOrder}` : "+0"}</strong>
+      </div>
+    </div>
+  `;
+}
+
+function renderQualificationChip(code, closed, hit) {
+  const status = !closed ? "pending" : hit ? "hit" : "miss";
+  const points = !closed ? "-" : hit ? `+${SCORING.groupQualified}` : "+0";
+  const label = !closed ? "pendiente" : hit ? "sumo" : "no sumo";
+  return `
+    <span class="qualificationChip ${status}" title="${label}">
+      ${teamBadge(code)}
+      <strong>${points}</strong>
+    </span>
+  `;
+}
+
+function renderReadonlyThirdPlaces(predictions) {
+  const predictedProjection = buildProjection(predictions);
+  const realProjection = buildProjection(state.realResults);
+  const predictedComplete = Object.values(predictedProjection.groupComplete).every(Boolean);
+  const realComplete = Object.values(realProjection.groupComplete).every(Boolean);
+  const predictedQualified = new Set(predictedProjection.thirdGroups.map(row => row.code));
+  const realQualified = collectProgress(realProjection).groupQualified;
+  const rows = predictedProjection.thirdRankings;
+  return `
+    <section class="groupBlock thirdPlacesBlock">
+      <div class="groupHeader">
+        <div>
+          <h2>Tabla de terceros</h2>
+          <p>Los terceros se definen recien cuando terminan todos los grupos. Pasan los mejores 8 de 12.</p>
+        </div>
+        <strong class="thirdStatus ${realComplete ? "closed" : "pending"}">${realComplete ? "Definido" : "En curso"}</strong>
+      </div>
+      ${predictedComplete ? `
+        <table class="standings thirdPlacesTable">
+          <thead><tr><th>Orden</th><th>Grupo</th><th>Equipo</th><th>Pts</th><th>DG</th><th>GF</th><th>Puntos</th></tr></thead>
+          <tbody>
+            ${rows.map((row, index) => renderThirdPlaceRow(row, index, predictedQualified, realQualified, realComplete)).join("")}
+          </tbody>
+        </table>
+      ` : `
+        <div class="pendingThirds">
+          <strong>Faltan grupos en este prode.</strong>
+          <span>Cuando esten cargados todos los partidos de fase de grupos se ordenan los 12 terceros.</span>
+        </div>
+      `}
+    </section>
+  `;
+}
+
+function renderThirdPlaceRow(row, index, predictedQualified, realQualified, realComplete) {
+  const predictedPass = predictedQualified.has(row.code);
+  const realPass = realQualified.has(row.code);
+  const status = !realComplete ? "pending" : predictedPass && realPass ? "hit" : predictedPass ? "miss" : "empty";
+  const points = !realComplete ? "-" : predictedPass && realPass ? `+${SCORING.groupQualified}` : predictedPass ? "+0" : "";
+  return `
+    <tr class="${predictedPass ? "qualified" : ""}">
+      <td>${index + 1}</td>
+      <td>Grupo ${row.group}</td>
+      <td>${teamBadge(row.code)}</td>
+      <td>${row.pts}</td>
+      <td>${row.gd}</td>
+      <td>${row.gf}</td>
+      <td>${points ? `<span class="thirdPill ${status}">${points}</span>` : ""}</td>
+    </tr>
+  `;
 }
 
 function renderPredictionMatch(match, predictions, readOnly = false) {
@@ -666,16 +851,21 @@ function renderWinnerPicker(match, predictions, home, away, readOnly = false, re
 
 function renderLeaderboard(rows, currentUser) {
   const canViewPredictions = canViewOtherPredictions(currentUser);
-  const showPodium = state.appSettings.viewPredictionsEnabled;
   const canManagePlayers = isAdminUser(currentUser);
+  const showPodium = state.appSettings.viewPredictionsEnabled || canManagePlayers;
+  const nextMatch = nextPendingMatch();
+  const awardHeaders = rankingAwardsVisible ? "<th>Goleador</th><th>Balon de Oro</th><th>Mejor arquero</th>" : "";
   return `
     <section class="groupBlock">
       <div class="groupHeader">
-        <h2>Ranking</h2>
-        <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
+        <div>
+          <h2>Ranking</h2>
+          <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
+        </div>
+        <button class="ghost compactButton" id="toggleRankingAwards">${rankingAwardsVisible ? "Ocultar premios de jugadores" : "Mostrar premios de jugadores"}</button>
       </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th>Goleador</th><th>Balon de Oro</th><th>Mejor arquero</th>${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th class="nextMatchHeading">Proximo partido${nextMatch ? `<small>${nextMatchLabel(nextMatch)}</small>` : "<small>Todos finalizados</small>"}</th>${awardHeaders}${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
         <tbody>${rows.map((row, index) => `
           <tr>
             <td>${index + 1}</td>
@@ -684,9 +874,12 @@ function renderLeaderboard(rows, currentUser) {
             <td>${renderPodiumCell(row.podium.champion, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.runnerUp, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.thirdPlace, showPodium)}</td>
-            <td>${renderLeaderboardAward(row.awards, "topScorer", showPodium)}</td>
-            <td>${renderLeaderboardAward(row.awards, "goldenBall", showPodium)}</td>
-            <td>${renderLeaderboardAward(row.awards, "goldenGlove", showPodium)}</td>
+            <td>${renderNextMatchPrediction(row.predictions, nextMatch, showPodium)}</td>
+            ${rankingAwardsVisible ? `
+              <td>${renderLeaderboardAward(row.awards, "topScorer", showPodium)}</td>
+              <td>${renderLeaderboardAward(row.awards, "goldenBall", showPodium)}</td>
+              <td>${renderLeaderboardAward(row.awards, "goldenGlove", showPodium)}</td>
+            ` : ""}
             ${canViewPredictions ? `<td><button class="linkButton" data-view-predictions="${row.username}">Ver prode</button></td>` : ""}
             ${canManagePlayers ? `<td><button class="linkButton dangerButton" data-hide-user-ranking="${row.username}">Ocultar</button></td>` : ""}
           </tr>
@@ -721,6 +914,52 @@ function renderLeaderboardAward(awards = {}, key, visible) {
   `;
 }
 
+function matchTimestamp(match) {
+  const months = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6 };
+  const [day, month, year] = match.date.split(" ");
+  const [hour, minute] = match.time.split(":");
+  // El fixture se muestra una hora adelantado y en Argentina (UTC-3).
+  return Date.UTC(Number(year), months[month], Number(day), Number(hour) + 4, Number(minute));
+}
+
+function nextPendingMatch() {
+  const now = Date.now();
+  const matchVisibilityMs = (2 * 60 + 15) * 60 * 1000;
+  return [...MATCHES, ...KNOCKOUT]
+    .sort((a, b) => matchTimestamp(a) - matchTimestamp(b))
+    .find(match => {
+      const real = state.realResults[scoreKey(match.id)];
+      const hasOfficialResult = match.stage === "groups" ? isCompleteScore(real) : Boolean(real?.winner);
+      return now < matchTimestamp(match) + matchVisibilityMs && !hasOfficialResult;
+    }) || null;
+}
+
+function nextMatchLabel(match) {
+  if (match.stage === "groups") {
+    return `${teamName(match.home)} vs ${teamName(match.away)}`;
+  }
+  const projection = buildProjection(state.realResults);
+  const home = resolveSlot(match.homeSlot, projection);
+  const away = resolveSlot(match.awaySlot, projection);
+  return `${teamName(home)} vs ${teamName(away)}`;
+}
+
+function renderNextMatchPrediction(predictions, match, visible) {
+  if (!match) return `<span class="mutedTeam">Finalizado</span>`;
+  if (!visible) return `<span class="mutedTeam">oculto</span>`;
+  if (match.stage === "groups") {
+    const score = predictions[scoreKey(match.id)];
+    return isCompleteScore(score)
+      ? `<strong class="nextPrediction">${score.home} - ${score.away}</strong>`
+      : `<span class="mutedTeam">Sin pronostico</span>`;
+  }
+  const projection = buildProjection(predictions);
+  const home = resolveSlot(match.homeSlot, projection);
+  const away = resolveSlot(match.awaySlot, projection);
+  const winner = selectedWinner(match, predictions, home, away);
+  return winner ? teamBadge(winner) : `<span class="mutedTeam">Sin pronostico</span>`;
+}
+
 function canViewOtherPredictions(currentUser) {
   return Boolean(state.appSettings.viewPredictionsEnabled || isAdminUser(currentUser));
 }
@@ -742,25 +981,17 @@ function renderReadonlyProde(user, projection) {
       </div>
       <button class="ghost" id="backToRankingBtn">Volver al ranking</button>
     </section>
+    ${renderReadonlyQualificationSummary(user.predictions)}
+    ${renderGroupNavigation()}
     ${renderReadonlyGroups(user.predictions, projection)}
+    ${renderReadonlyThirdPlaces(user.predictions)}
     ${renderBracket(user.predictions, projection, true)}
     ${renderAwards(user, true)}
   `;
 }
 
 function renderReadonlyGroups(predictions, projection) {
-  return Object.entries(GROUPS).map(([group, teams]) => `
-    <section class="groupBlock">
-      <div class="groupHeader">
-        <h2>Grupo ${group}</h2>
-        <div class="teamStrip">${teams.map(code => `<span>${teamBadge(code)}</span>`).join("")}</div>
-      </div>
-      <div class="matchGrid">
-        ${MATCHES.filter(match => match.group === group).map(match => renderPredictionMatch(match, predictions, true)).join("")}
-      </div>
-      ${renderTable(projection.tables[group])}
-    </section>
-  `).join("");
+  return renderGroups(predictions, projection, true, true);
 }
 
 function renderInfo() {
@@ -782,6 +1013,10 @@ function renderInfo() {
   return `
     <section class="rules">
       <div class="groupHeader"><h2>Info y puntos</h2><p>Horario argentino y reglas sugeridas para esta primera version.</p></div>
+      <article class="prizeInfo">
+        <strong>Premio del ganador: $160.000</strong>
+        <p>Somos 16 participantes y cada uno puso $10.000. El pozo completo queda para quien termine primero en el ranking final.</p>
+      </article>
       <div class="rulesGrid">
         ${rows.map(([title, points, detail]) => `
           <article class="ruleCard">
@@ -944,6 +1179,34 @@ function bindEvents() {
     viewedUsername = null;
     activeTab = "ranking";
     render();
+  });
+
+  byId("toggleRankingAwards")?.addEventListener("click", () => {
+    rankingAwardsVisible = !rankingAwardsVisible;
+    render();
+  });
+
+  document.querySelectorAll("[data-collapse-all-groups]").forEach(button => {
+    button.addEventListener("click", () => {
+      Object.keys(GROUPS).forEach(group => collapsedGroups.add(group));
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-expand-all-groups]").forEach(button => {
+    button.addEventListener("click", () => {
+      collapsedGroups.clear();
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-toggle-group]").forEach(button => {
+    button.addEventListener("click", () => {
+      const group = button.dataset.toggleGroup;
+      if (collapsedGroups.has(group)) collapsedGroups.delete(group);
+      else collapsedGroups.add(group);
+      render();
+    });
   });
 
   document.querySelectorAll("[data-match]").forEach(input => {
@@ -1158,9 +1421,9 @@ function buildProjection(predictions) {
   }
 
   const allGroupsComplete = Object.values(groupComplete).every(Boolean);
-  const thirdGroups = allGroupsComplete ? Object.entries(tables).map(([group, rows]) => ({ group, ...rows[2] }))
-    .sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf || a.group.localeCompare(b.group))
-    .slice(0, 8) : [];
+  const thirdRankings = allGroupsComplete ? Object.entries(tables).map(([group, rows]) => ({ group, ...rows[2] }))
+    .sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf || a.group.localeCompare(b.group)) : [];
+  const thirdGroups = thirdRankings.slice(0, 8);
   const thirdMap = allGroupsComplete ? assignThirdPlaces(thirdGroups.map(row => row.group), tables) : {};
   const winners = {};
   const losers = {};
@@ -1172,7 +1435,7 @@ function buildProjection(predictions) {
     winners[match.id] = winner;
     losers[match.id] = winner === home ? away : home;
   });
-  return { tables, groupComplete, thirdGroups, thirdMap, winners, losers };
+  return { tables, groupComplete, thirdRankings, thirdGroups, thirdMap, winners, losers };
 }
 
 function selectedWinner(match, predictions, home, away) {
@@ -1251,7 +1514,8 @@ function buildLeaderboard() {
     username: user.username,
     points: scoreUser(user),
     podium: predictedPodium(user),
-    awards: user.awards || {}
+    awards: user.awards || {},
+    predictions: user.predictions || {}
   })).sort((a, b) => b.points - a.points || a.username.localeCompare(b.username));
 }
 
@@ -1272,6 +1536,22 @@ function scoreUser(user) {
   points += intersectionSize(predictedProgress.thirdPlace, realProgress.thirdPlace) * SCORING.thirdPlace;
   points += awardPoints(user.awards, state.realResults.awards);
   return points;
+}
+
+function qualificationPointsSummary(predictions = {}) {
+  const predictedProgress = collectProgress(buildProjection(predictions));
+  const realProgress = collectProgress(buildProjection(state.realResults));
+  return {
+    points: intersectionSize(predictedProgress.groupQualified, realProgress.groupQualified) * SCORING.groupQualified,
+    perfectOrderPoints: perfectGroupMatches(predictedProgress.groupOrder, realProgress.groupOrder) * SCORING.perfectGroupOrder,
+    closedGroups: Object.keys(realProgress.groupOrder).length
+  };
+}
+
+function isExactGroupOrder(group, predictedProjection, realProjection) {
+  const predicted = predictedProjection.tables[group]?.map(row => row.code).join("|");
+  const real = realProjection.tables[group]?.map(row => row.code).join("|");
+  return Boolean(predicted && real && predicted === real);
 }
 
 function awardPoints(predictedAwards = {}, realAwards = {}) {
@@ -1396,4 +1676,7 @@ function intersectionSize(left, right) {
   return total;
 }
 
-initApp();
+initApp().catch(error => {
+  console.error("No se pudo iniciar el prode", error);
+  app.innerHTML = `<main class="authPage"><p class="error">No se pudo iniciar el prode. Recarga la pagina.</p></main>`;
+});
