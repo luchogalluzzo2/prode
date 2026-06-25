@@ -569,7 +569,6 @@ function renderReadonlyThirdPlaces(predictions) {
   const predictedComplete = Object.values(predictedProjection.groupComplete).every(Boolean);
   const realComplete = Object.values(realProjection.groupComplete).every(Boolean);
   const predictedQualified = new Set(predictedProjection.thirdGroups.map(row => row.code));
-  const realQualified = collectProgress(realProjection).groupQualified;
   const rows = predictedProjection.thirdRankings;
   return `
     <section class="groupBlock thirdPlacesBlock">
@@ -584,7 +583,7 @@ function renderReadonlyThirdPlaces(predictions) {
         <table class="standings thirdPlacesTable">
           <thead><tr><th>Orden</th><th>Grupo</th><th>Equipo</th><th>Pts</th><th>DG</th><th>GF</th><th>Puntos</th></tr></thead>
           <tbody>
-            ${rows.map((row, index) => renderThirdPlaceRow(row, index, predictedQualified, realQualified, realComplete)).join("")}
+            ${rows.map((row, index) => renderThirdPlaceRow(row, index, predictedQualified, realProjection, realComplete)).join("")}
           </tbody>
         </table>
       ` : `
@@ -597,11 +596,9 @@ function renderReadonlyThirdPlaces(predictions) {
   `;
 }
 
-function renderThirdPlaceRow(row, index, predictedQualified, realQualified, realComplete) {
+function renderThirdPlaceRow(row, index, predictedQualified, realProjection, realComplete) {
   const predictedPass = predictedQualified.has(row.code);
-  const realPass = realQualified.has(row.code);
-  const status = !realComplete ? "pending" : predictedPass && realPass ? "hit" : predictedPass ? "miss" : "empty";
-  const points = !realComplete ? "-" : predictedPass && realPass ? `+${SCORING.groupQualified}` : predictedPass ? "+0" : "";
+  const result = thirdPlaceQualificationResult(row.code, predictedPass, realProjection, realComplete);
   return `
     <tr class="${predictedPass ? "qualified" : ""}">
       <td>${index + 1}</td>
@@ -610,9 +607,26 @@ function renderThirdPlaceRow(row, index, predictedQualified, realQualified, real
       <td>${row.pts}</td>
       <td>${row.gd}</td>
       <td>${row.gf}</td>
-      <td>${points ? `<span class="thirdPill ${status}">${points}</span>` : ""}</td>
+      <td>${result.points ? `<span class="thirdPill ${result.status}">${result.points}</span>` : ""}</td>
     </tr>
   `;
+}
+
+function thirdPlaceQualificationResult(code, predictedPass, realProjection, realComplete) {
+  if (!predictedPass) return { status: "empty", points: "" };
+  const group = Object.entries(GROUPS).find(([, teams]) => teams.includes(code))?.[0];
+  const realGroupClosed = Boolean(group && realProjection.groupComplete[group]);
+  if (!realGroupClosed) return { status: "pending", points: "-" };
+
+  const realPosition = realProjection.tables[group].findIndex(row => row.code === code);
+  if (realPosition < 2) return { status: "hit", points: `+${SCORING.groupQualified}` };
+  if (realPosition > 2) return { status: "miss", points: "+0" };
+
+  if (!realComplete) return { status: "pending", points: "-" };
+  const realQualified = collectProgress(realProjection).groupQualified;
+  return realQualified.has(code)
+    ? { status: "hit", points: `+${SCORING.groupQualified}` }
+    : { status: "miss", points: "+0" };
 }
 
 function renderPredictionMatch(match, predictions, readOnly = false) {
