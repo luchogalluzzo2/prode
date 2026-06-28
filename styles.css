@@ -616,6 +616,7 @@ small {
   white-space: normal;
 }
 
+
 .nextPrediction {
   display: inline-block;
   min-width: 3.5rem;
@@ -626,6 +627,7 @@ small {
   text-align: center;
   white-space: nowrap;
 }
+
 
 .compactButton {
   align-self: start;

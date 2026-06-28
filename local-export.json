@@ -1,0 +1,7201 @@
+{
+  "profiles": [
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "2457eac9-1e32-4e1b-b147-b1d31ac75713",
+      "username": "martingalluzzo",
+      "created_at": "2026-05-16T17:33:38.00012+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "b080a922-a5de-4edd-a13d-d11b0deba986",
+      "username": "agustin788622",
+      "created_at": "2026-05-16T17:43:04.540539+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "22941b0c-5e61-442d-a41d-7c28f6452a59",
+      "username": "Nico",
+      "created_at": "2026-05-16T18:24:41.086411+00:00"
+    },
+    {
+      "role": "admin",
+      "active": true,
+      "user_id": "bec50cfe-d696-4457-9080-5005b3ebb17b",
+      "username": "administrator",
+      "created_at": "2026-05-31T22:34:14.440739+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "46c328d4-5601-4fa8-afa7-5c96bf6d7811",
+      "username": "lucho5",
+      "created_at": "2026-05-17T17:54:25.317523+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "f0ef4d86-9488-4ef5-9e49-3f85fdf59f02",
+      "username": "lucho45",
+      "created_at": "2026-05-23T20:37:25.819484+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "7301c5b9-f098-4ee0-8d60-bd68c90d6bf6",
+      "username": "lucho2",
+      "created_at": "2026-05-16T17:31:25.548647+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "c7f892e0-83ed-478a-ad14-b0a235f28bab",
+      "username": "admin",
+      "created_at": "2026-05-16T17:29:54.999061+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "eb03b3d4-c706-490b-a78b-1e4f891ca184",
+      "username": "luchogalluzzo",
+      "created_at": "2026-05-31T23:01:45.976078+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "61547b24-f850-406e-b6c4-b58fc044a8fc",
+      "username": "Feno",
+      "created_at": "2026-06-01T01:59:03.790086+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "b8055b07-3d4b-4ad8-8ebc-77ec8dd334db",
+      "username": "Pauladlc",
+      "created_at": "2026-06-03T12:11:46.215315+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "713699ef-098e-4c52-84b2-0f21d1a25eb0",
+      "username": "Tuti",
+      "created_at": "2026-06-04T23:01:55.924973+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "3b4b8796-ea0a-4e82-9dd7-87c18e8b4074",
+      "username": "FedeTurconi",
+      "created_at": "2026-06-05T16:25:16.040648+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "2ed42c13-2aea-49ed-836b-9fc0c060cd55",
+      "username": "MarcosGomez",
+      "created_at": "2026-06-09T18:03:07.452468+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "7c562631-1aca-44ba-9def-01c62db3e713",
+      "username": "juangomez",
+      "created_at": "2026-06-10T20:28:21.611484+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "81a1d843-25b0-46ff-921f-9ea1628d70e6",
+      "username": "alejandrogomez",
+      "created_at": "2026-06-10T21:02:12.080192+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "8eb61e8d-71b8-4ff3-ba33-7d661d607a95",
+      "username": "Joaco",
+      "created_at": "2026-06-10T22:51:34.038648+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "a28e3a8f-a2bd-42cf-8cf8-d0f35e5ef9f1",
+      "username": "Cari",
+      "created_at": "2026-06-11T00:05:21.041893+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "e21fee6c-b031-403a-97fb-fbe4f4a2300e",
+      "username": "Carolina",
+      "created_at": "2026-06-11T01:31:15.702723+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "24309433-48ce-45fe-8266-12efb2d57b02",
+      "username": "nico4",
+      "created_at": "2026-05-16T17:37:42.656334+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "f848fe7c-9c0d-474a-9712-e2ae1ef83729",
+      "username": "Facundorosa",
+      "created_at": "2026-06-11T12:33:14.519024+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "15b17a48-9abe-4fee-8671-3d0544db65a2",
+      "username": "aagusriva",
+      "created_at": "2026-05-17T19:02:44.440493+00:00"
+    },
+    {
+      "role": "player",
+      "active": false,
+      "user_id": "cd241b69-06f3-44b3-9a0b-790f403241ca",
+      "username": "walterg",
+      "created_at": "2026-06-11T20:28:30.691677+00:00"
+    },
+    {
+      "role": "player",
+      "active": true,
+      "user_id": "acac1c7c-475b-4638-b3c7-01c002a42b02",
+      "username": "Diego64",
+      "created_at": "2026-06-11T16:07:49.766606+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 1,
+          "home": 2
+        },
+        "m3": {
+          "away": 1,
+          "home": 2
+        },
+        "m4": {
+          "away": 2,
+          "home": 1
+        },
+        "m5": {
+          "away": 3,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 1
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 3,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 0
+        },
+        "m10": {
+          "away": 0,
+          "home": 7
+        },
+        "m11": {
+          "away": 1,
+          "home": 2
+        },
+        "m12": {
+          "away": 1,
+          "home": 1
+        },
+        "m13": {
+          "away": 0,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 8
+        },
+        "m15": {
+          "away": 1,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 2
+        },
+        "m17": {
+          "away": 0,
+          "home": 3
+        },
+        "m18": {
+          "away": 1,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 4
+        },
+        "m20": {
+          "away": 0,
+          "home": 1
+        },
+        "m21": {
+          "away": 0,
+          "home": 2
+        },
+        "m22": {
+          "away": 1,
+          "home": 3
+        },
+        "m23": {
+          "away": 1,
+          "home": 4
+        },
+        "m24": {
+          "away": 2,
+          "home": 1
+        },
+        "m25": {
+          "away": 0,
+          "home": 1
+        },
+        "m26": {
+          "away": 0,
+          "home": 2
+        },
+        "m27": {
+          "away": 1,
+          "home": 2
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 6
+        },
+        "m30": {
+          "away": 3,
+          "home": 1
+        },
+        "m31": {
+          "away": 1,
+          "home": 0
+        },
+        "m32": {
+          "away": 0,
+          "home": 1
+        },
+        "m33": {
+          "away": 1,
+          "home": 1
+        },
+        "m34": {
+          "away": 0,
+          "home": 1
+        },
+        "m35": {
+          "away": 1,
+          "home": 2
+        },
+        "m36": {
+          "away": 0,
+          "home": 4
+        },
+        "m37": {
+          "away": 0,
+          "home": 4
+        },
+        "m38": {
+          "away": 0,
+          "home": 2
+        },
+        "m39": {
+          "away": 0,
+          "home": 3
+        },
+        "m40": {
+          "away": 1,
+          "home": 1
+        },
+        "m41": {
+          "away": 0,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 3
+        },
+        "m43": {
+          "away": 0,
+          "home": 3
+        },
+        "m44": {
+          "away": 2,
+          "home": 0
+        },
+        "m45": {
+          "away": 0,
+          "home": 3
+        },
+        "m46": {
+          "away": 3,
+          "home": 0
+        },
+        "m47": {
+          "away": 1,
+          "home": 4
+        },
+        "m48": {
+          "away": 1,
+          "home": 3
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 1,
+          "home": 2
+        },
+        "m52": {
+          "away": 0,
+          "home": 0
+        },
+        "m53": {
+          "away": 3,
+          "home": 1
+        },
+        "m54": {
+          "away": 1,
+          "home": 1
+        },
+        "m55": {
+          "away": 3,
+          "home": 1
+        },
+        "m56": {
+          "away": 3,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 1
+        },
+        "m58": {
+          "away": 2,
+          "home": 1
+        },
+        "m59": {
+          "away": 2,
+          "home": 2
+        },
+        "m60": {
+          "away": 0,
+          "home": 1
+        },
+        "m61": {
+          "away": 1,
+          "home": 1
+        },
+        "m62": {
+          "away": 1,
+          "home": 1
+        },
+        "m63": {
+          "away": 0,
+          "home": 1
+        },
+        "m64": {
+          "away": 2,
+          "home": 0
+        },
+        "m65": {
+          "away": 2,
+          "home": 0
+        },
+        "m66": {
+          "away": 2,
+          "home": 1
+        },
+        "m67": {
+          "away": 5,
+          "home": 0
+        },
+        "m68": {
+          "away": 1,
+          "home": 1
+        },
+        "m69": {
+          "away": 1,
+          "home": 2
+        },
+        "m70": {
+          "away": 8,
+          "home": 0
+        },
+        "m71": {
+          "away": 1,
+          "home": 1
+        },
+        "m72": {
+          "away": 0,
+          "home": 0
+        },
+        "m73": {
+          "winner": "KOR"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "MAR"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "MEX"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "CRO"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "MAR"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "CRO"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "CRO"
+        },
+        "m99": {
+          "winner": "ENG"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "FRA"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "ENG"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Julian Alvarez",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez",
+        "topScorerTeam": "ARG",
+        "goldenBallTeam": "ARG",
+        "goldenGloveTeam": "ARG"
+      },
+      "user_id": "81a1d843-25b0-46ff-921f-9ea1628d70e6",
+      "saved_at": "2026-06-10T21:28:38.195+00:00",
+      "updated_at": "2026-06-10T21:02:35.522911+00:00"
+    },
+    {
+      "data": {},
+      "awards": {},
+      "user_id": "bec50cfe-d696-4457-9080-5005b3ebb17b",
+      "saved_at": "2026-05-31T22:39:47.971+00:00",
+      "updated_at": "2026-05-31T22:39:44.756306+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 0,
+          "home": 1
+        },
+        "m3": {
+          "away": 1,
+          "home": 1
+        },
+        "m4": {
+          "away": 2,
+          "home": 1
+        },
+        "m5": {
+          "away": 2,
+          "home": 0
+        },
+        "m6": {
+          "away": 3,
+          "home": 0
+        },
+        "m7": {
+          "away": 1,
+          "home": 1
+        },
+        "m8": {
+          "away": 2,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 0
+        },
+        "m10": {
+          "away": 0,
+          "home": 6
+        },
+        "m11": {
+          "away": 1,
+          "home": 2
+        },
+        "m12": {
+          "away": 0,
+          "home": 3
+        },
+        "m13": {
+          "away": 2,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 7
+        },
+        "m15": {
+          "away": 0,
+          "home": 1
+        },
+        "m16": {
+          "away": 0,
+          "home": 2
+        },
+        "m17": {
+          "away": 0,
+          "home": 2
+        },
+        "m18": {
+          "away": 3,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 0,
+          "home": 1
+        },
+        "m21": {
+          "away": 0,
+          "home": 2
+        },
+        "m22": {
+          "away": 1,
+          "home": 3
+        },
+        "m23": {
+          "away": 1,
+          "home": 4
+        },
+        "m24": {
+          "away": 1,
+          "home": 1
+        },
+        "m25": {
+          "away": 1,
+          "home": 2
+        },
+        "m26": {
+          "away": 1,
+          "home": 1
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 4
+        },
+        "m30": {
+          "away": 2,
+          "home": 0
+        },
+        "m31": {
+          "away": 1,
+          "home": 2
+        },
+        "m32": {
+          "away": 1,
+          "home": 2
+        },
+        "m33": {
+          "away": 2,
+          "home": 0
+        },
+        "m34": {
+          "away": 1,
+          "home": 3
+        },
+        "m35": {
+          "away": 1,
+          "home": 1
+        },
+        "m36": {
+          "away": 0,
+          "home": 5
+        },
+        "m37": {
+          "away": 1,
+          "home": 4
+        },
+        "m38": {
+          "away": 1,
+          "home": 3
+        },
+        "m39": {
+          "away": 0,
+          "home": 1
+        },
+        "m40": {
+          "away": 1,
+          "home": 1
+        },
+        "m41": {
+          "away": 1,
+          "home": 2
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 1,
+          "home": 1
+        },
+        "m44": {
+          "away": 1,
+          "home": 0
+        },
+        "m45": {
+          "away": 0,
+          "home": 2
+        },
+        "m46": {
+          "away": 2,
+          "home": 0
+        },
+        "m47": {
+          "away": 1,
+          "home": 2
+        },
+        "m48": {
+          "away": 0,
+          "home": 2
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 4
+        },
+        "m51": {
+          "away": 0,
+          "home": 1
+        },
+        "m52": {
+          "away": 1,
+          "home": 2
+        },
+        "m53": {
+          "away": 1,
+          "home": 1
+        },
+        "m54": {
+          "away": 3,
+          "home": 1
+        },
+        "m55": {
+          "away": 3,
+          "home": 0
+        },
+        "m56": {
+          "away": 3,
+          "home": 1
+        },
+        "m57": {
+          "away": 0,
+          "home": 2
+        },
+        "m58": {
+          "away": 3,
+          "home": 1
+        },
+        "m59": {
+          "away": 2,
+          "home": 2
+        },
+        "m60": {
+          "away": 0,
+          "home": 1
+        },
+        "m61": {
+          "away": 1,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 2
+        },
+        "m63": {
+          "away": 2,
+          "home": 1
+        },
+        "m64": {
+          "away": 2,
+          "home": 0
+        },
+        "m65": {
+          "away": 5,
+          "home": 0
+        },
+        "m66": {
+          "away": 3,
+          "home": 0
+        },
+        "m67": {
+          "away": 4,
+          "home": 0
+        },
+        "m68": {
+          "away": 0,
+          "home": 1
+        },
+        "m69": {
+          "away": 2,
+          "home": 2
+        },
+        "m70": {
+          "away": 5,
+          "home": 0
+        },
+        "m71": {
+          "away": 1,
+          "home": 1
+        },
+        "m72": {
+          "away": 2,
+          "home": 0
+        },
+        "m73": {
+          "away": 0,
+          "home": 2
+        },
+        "m74": {
+          "away": 1,
+          "home": 2
+        },
+        "m75": {
+          "away": 1,
+          "home": 2
+        },
+        "m76": {
+          "winner": "JPN"
+        },
+        "m77": {
+          "away": 0,
+          "home": 2
+        },
+        "m78": {
+          "away": 1,
+          "home": 0
+        },
+        "m79": {
+          "away": 0,
+          "home": 2
+        },
+        "m80": {
+          "away": 0,
+          "home": 3
+        },
+        "m81": {
+          "away": 0,
+          "home": 1
+        },
+        "m82": {
+          "away": 1,
+          "home": 0
+        },
+        "m83": {
+          "winner": "CRO"
+        },
+        "m84": {
+          "away": 0,
+          "home": 4
+        },
+        "m85": {
+          "away": 0,
+          "home": 1
+        },
+        "m86": {
+          "away": 1,
+          "home": 2
+        },
+        "m87": {
+          "away": 0,
+          "home": 1
+        },
+        "m88": {
+          "away": 0,
+          "home": 1
+        },
+        "m89": {
+          "away": 2,
+          "home": 1
+        },
+        "m90": {
+          "away": 2,
+          "home": 0
+        },
+        "m91": {
+          "away": 1,
+          "home": 0
+        },
+        "m92": {
+          "away": 2,
+          "home": 0
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "away": 0,
+          "home": 2
+        },
+        "m95": {
+          "away": 0,
+          "home": 2
+        },
+        "m96": {
+          "away": 1,
+          "home": 0
+        },
+        "m97": {
+          "away": 2,
+          "home": 1
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "away": 2,
+          "home": 1
+        },
+        "m100": {
+          "winner": "POR"
+        },
+        "m101": {
+          "winner": "ESP"
+        },
+        "m102": {
+          "winner": "POR"
+        },
+        "m103": {
+          "winner": "NED"
+        },
+        "m104": {
+          "away": 0,
+          "home": 2
+        }
+      },
+      "awards": {
+        "topScorer": "Harry Kane",
+        "goldenBall": "Lamine Yamal",
+        "goldenGlove": "Diogo Costa",
+        "goldenBallTeam": "ESP",
+        "goldenGloveTeam": "POR"
+      },
+      "user_id": "22941b0c-5e61-442d-a41d-7c28f6452a59",
+      "saved_at": "2026-06-11T12:36:31.837+00:00",
+      "updated_at": "2026-05-16T18:24:43.751605+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 0,
+          "home": 2
+        },
+        "m3": {
+          "away": 0,
+          "home": 1
+        },
+        "m4": {
+          "away": 1,
+          "home": 1
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 0,
+          "home": 0
+        },
+        "m7": {
+          "away": 0,
+          "home": 0
+        },
+        "m8": {
+          "away": 3,
+          "home": 0
+        },
+        "m9": {
+          "away": 4,
+          "home": 0
+        },
+        "m10": {
+          "away": 0,
+          "home": 3
+        },
+        "m11": {
+          "away": 0,
+          "home": 3
+        },
+        "m12": {
+          "away": 0,
+          "home": 1
+        },
+        "m13": {
+          "away": 2,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 4
+        },
+        "m15": {
+          "away": 0,
+          "home": 0
+        },
+        "m16": {
+          "away": 0,
+          "home": 1
+        },
+        "m17": {
+          "away": 1,
+          "home": 2
+        },
+        "m18": {
+          "away": 1,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 0,
+          "home": 1
+        },
+        "m21": {
+          "away": 0,
+          "home": 0
+        },
+        "m22": {
+          "away": 2,
+          "home": 2
+        },
+        "m23": {
+          "away": 1,
+          "home": 2
+        },
+        "m24": {
+          "away": 3,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 0
+        },
+        "m26": {
+          "away": 0,
+          "home": 1
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 4
+        },
+        "m30": {
+          "away": 2,
+          "home": 1
+        },
+        "m31": {
+          "away": 0,
+          "home": 0
+        },
+        "m32": {
+          "away": 1,
+          "home": 2
+        },
+        "m33": {
+          "away": 3,
+          "home": 0
+        },
+        "m34": {
+          "away": 1,
+          "home": 4
+        },
+        "m35": {
+          "away": 1,
+          "home": 1
+        },
+        "m36": {
+          "away": 0,
+          "home": 1
+        },
+        "m37": {
+          "away": 0,
+          "home": 4
+        },
+        "m38": {
+          "away": 1,
+          "home": 1
+        },
+        "m39": {
+          "away": 1,
+          "home": 2
+        },
+        "m40": {
+          "away": 1,
+          "home": 0
+        },
+        "m41": {
+          "away": 2,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 1,
+          "home": 1
+        },
+        "m44": {
+          "away": 3,
+          "home": 0
+        },
+        "m45": {
+          "away": 0,
+          "home": 2
+        },
+        "m46": {
+          "away": 3,
+          "home": 1
+        },
+        "m47": {
+          "away": 0,
+          "home": 2
+        },
+        "m48": {
+          "away": 1,
+          "home": 1
+        },
+        "m49": {
+          "away": 1,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 4
+        },
+        "m51": {
+          "away": 1,
+          "home": 0
+        },
+        "m52": {
+          "away": 0,
+          "home": 0
+        },
+        "m53": {
+          "away": 3,
+          "home": 0
+        },
+        "m54": {
+          "away": 1,
+          "home": 0
+        },
+        "m55": {
+          "away": 2,
+          "home": 1
+        },
+        "m56": {
+          "away": 1,
+          "home": 0
+        },
+        "m57": {
+          "away": 0,
+          "home": 1
+        },
+        "m58": {
+          "away": 2,
+          "home": 0
+        },
+        "m59": {
+          "away": 2,
+          "home": 2
+        },
+        "m60": {
+          "away": 1,
+          "home": 3
+        },
+        "m61": {
+          "away": 3,
+          "home": 2
+        },
+        "m62": {
+          "away": 0,
+          "home": 1
+        },
+        "m63": {
+          "away": 1,
+          "home": 1
+        },
+        "m64": {
+          "away": 1,
+          "home": 0
+        },
+        "m65": {
+          "away": 0,
+          "home": 0
+        },
+        "m66": {
+          "away": 1,
+          "home": 0
+        },
+        "m67": {
+          "away": 1,
+          "home": 0
+        },
+        "m68": {
+          "away": 0,
+          "home": 1
+        },
+        "m69": {
+          "away": 1,
+          "home": 1
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 2,
+          "home": 2
+        },
+        "m72": {
+          "away": 1,
+          "home": 0
+        },
+        "m73": {
+          "winner": "KOR"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "MAR"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "MEX"
+        },
+        "m80": {
+          "winner": "CRO"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "ENG"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "CAN"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "ECU"
+        },
+        "m92": {
+          "winner": "CRO"
+        },
+        "m93": {
+          "winner": "ENG"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ENG"
+        },
+        "m99": {
+          "winner": "CRO"
+        },
+        "m100": {
+          "winner": "POR"
+        },
+        "m101": {
+          "winner": "ENG"
+        },
+        "m102": {
+          "winner": "POR"
+        },
+        "m103": {
+          "winner": "FRA"
+        },
+        "m104": {
+          "winner": "ENG"
+        }
+      },
+      "awards": {
+        "topScorer": "Jude Bellingham",
+        "goldenBall": "Kylian Mbappe",
+        "goldenGlove": "David Raya",
+        "topScorerTeam": "ENG",
+        "goldenBallTeam": "FRA",
+        "goldenGloveTeam": "ESP"
+      },
+      "user_id": "b8055b07-3d4b-4ad8-8ebc-77ec8dd334db",
+      "saved_at": "2026-06-11T19:20:07.95+00:00",
+      "updated_at": "2026-06-09T21:04:23.911336+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 1,
+          "home": 2
+        },
+        "m2": {
+          "away": 1,
+          "home": 0
+        },
+        "m3": {
+          "away": 0,
+          "home": 2
+        },
+        "m4": {
+          "away": 1,
+          "home": 1
+        },
+        "m5": {
+          "away": 2,
+          "home": 0
+        },
+        "m6": {
+          "away": 3,
+          "home": 1
+        },
+        "m7": {
+          "away": 0,
+          "home": 1
+        },
+        "m8": {
+          "away": 3,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 1
+        },
+        "m10": {
+          "away": 0,
+          "home": 4
+        },
+        "m11": {
+          "away": 2,
+          "home": 2
+        },
+        "m12": {
+          "away": 0,
+          "home": 1
+        },
+        "m13": {
+          "away": 3,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 6
+        },
+        "m15": {
+          "away": 0,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 1
+        },
+        "m17": {
+          "away": 0,
+          "home": 1
+        },
+        "m18": {
+          "away": 2,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 1
+        },
+        "m20": {
+          "away": 0,
+          "home": 2
+        },
+        "m21": {
+          "away": 0,
+          "home": 2
+        },
+        "m22": {
+          "away": 0,
+          "home": 1
+        },
+        "m23": {
+          "away": 2,
+          "home": 4
+        },
+        "m24": {
+          "away": 1,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 1
+        },
+        "m26": {
+          "away": 0,
+          "home": 0
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 0,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 1
+        },
+        "m30": {
+          "away": 2,
+          "home": 0
+        },
+        "m31": {
+          "away": 1,
+          "home": 1
+        },
+        "m32": {
+          "away": 0,
+          "home": 1
+        },
+        "m33": {
+          "away": 1,
+          "home": 0
+        },
+        "m34": {
+          "away": 0,
+          "home": 1
+        },
+        "m35": {
+          "away": 1,
+          "home": 0
+        },
+        "m36": {
+          "away": 0,
+          "home": 3
+        },
+        "m37": {
+          "away": 1,
+          "home": 3
+        },
+        "m38": {
+          "away": 0,
+          "home": 2
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 2,
+          "home": 0
+        },
+        "m41": {
+          "away": 0,
+          "home": 0
+        },
+        "m42": {
+          "away": 0,
+          "home": 3
+        },
+        "m43": {
+          "away": 0,
+          "home": 1
+        },
+        "m44": {
+          "away": 1,
+          "home": 0
+        },
+        "m45": {
+          "away": 0,
+          "home": 1
+        },
+        "m46": {
+          "away": 3,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 4
+        },
+        "m48": {
+          "away": 0,
+          "home": 2
+        },
+        "m49": {
+          "away": 1,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 2,
+          "home": 3
+        },
+        "m52": {
+          "away": 0,
+          "home": 3
+        },
+        "m53": {
+          "away": 0,
+          "home": 0
+        },
+        "m54": {
+          "away": 1,
+          "home": 1
+        },
+        "m55": {
+          "away": 2,
+          "home": 0
+        },
+        "m56": {
+          "away": 1,
+          "home": 1
+        },
+        "m57": {
+          "away": 2,
+          "home": 2
+        },
+        "m58": {
+          "away": 1,
+          "home": 0
+        },
+        "m59": {
+          "away": 0,
+          "home": 2
+        },
+        "m60": {
+          "away": 2,
+          "home": 2
+        },
+        "m61": {
+          "away": 4,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 3
+        },
+        "m63": {
+          "away": 1,
+          "home": 2
+        },
+        "m64": {
+          "away": 3,
+          "home": 0
+        },
+        "m65": {
+          "away": 1,
+          "home": 0
+        },
+        "m66": {
+          "away": 2,
+          "home": 0
+        },
+        "m67": {
+          "away": 4,
+          "home": 0
+        },
+        "m68": {
+          "away": 1,
+          "home": 3
+        },
+        "m69": {
+          "away": 1,
+          "home": 1
+        },
+        "m70": {
+          "away": 4,
+          "home": 0
+        },
+        "m71": {
+          "away": 3,
+          "home": 1
+        },
+        "m72": {
+          "away": 0,
+          "home": 1
+        },
+        "m73": {
+          "winner": "CZE"
+        },
+        "m74": {
+          "winner": "PAR"
+        },
+        "m75": {
+          "winner": "MAR"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "NED"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "BIH"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "CRO"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "MAR"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "NED"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "BEL"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "NED"
+        },
+        "m100": {
+          "winner": "POR"
+        },
+        "m101": {
+          "winner": "FRA"
+        },
+        "m102": {
+          "winner": "POR"
+        },
+        "m103": {
+          "winner": "ESP"
+        },
+        "m104": {
+          "winner": "FRA"
+        }
+      },
+      "awards": {
+        "topScorer": "Harry Kane",
+        "goldenBall": "Kylian Mbappe",
+        "goldenGlove": "Diogo Costa",
+        "topScorerTeam": "ENG",
+        "goldenGloveTeam": "POR"
+      },
+      "user_id": "eb03b3d4-c706-490b-a78b-1e4f891ca184",
+      "saved_at": "2026-06-06T20:28:16.006+00:00",
+      "updated_at": "2026-05-31T23:02:36.044903+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 2,
+          "home": 1
+        },
+        "m2": {
+          "away": 0,
+          "home": 1
+        },
+        "m3": {
+          "away": 1,
+          "home": 1
+        },
+        "m4": {
+          "away": 2,
+          "home": 1
+        },
+        "m5": {
+          "away": 0,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 1
+        },
+        "m7": {
+          "away": 0,
+          "home": 2
+        },
+        "m8": {
+          "away": 2,
+          "home": 0
+        },
+        "m9": {
+          "away": 1,
+          "home": 1
+        },
+        "m10": {
+          "away": 0,
+          "home": 4
+        },
+        "m11": {
+          "away": 0,
+          "home": 2
+        },
+        "m12": {
+          "away": 1,
+          "home": 2
+        },
+        "m13": {
+          "away": 2,
+          "home": 0
+        },
+        "m14": {
+          "away": 0,
+          "home": 6
+        },
+        "m15": {
+          "away": 1,
+          "home": 0
+        },
+        "m16": {
+          "away": 0,
+          "home": 2
+        },
+        "m17": {
+          "away": 1,
+          "home": 1
+        },
+        "m18": {
+          "away": 3,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 1
+        },
+        "m20": {
+          "away": 0,
+          "home": 2
+        },
+        "m21": {
+          "away": 0,
+          "home": 2
+        },
+        "m22": {
+          "away": 3,
+          "home": 1
+        },
+        "m23": {
+          "away": 0,
+          "home": 4
+        },
+        "m24": {
+          "away": 2,
+          "home": 0
+        },
+        "m25": {
+          "away": 2,
+          "home": 0
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 5
+        },
+        "m30": {
+          "away": 3,
+          "home": 0
+        },
+        "m31": {
+          "away": 1,
+          "home": 0
+        },
+        "m32": {
+          "away": 2,
+          "home": 2
+        },
+        "m33": {
+          "away": 3,
+          "home": 0
+        },
+        "m34": {
+          "away": 1,
+          "home": 1
+        },
+        "m35": {
+          "away": 1,
+          "home": 2
+        },
+        "m36": {
+          "away": 0,
+          "home": 3
+        },
+        "m37": {
+          "away": 0,
+          "home": 3
+        },
+        "m38": {
+          "away": 0,
+          "home": 4
+        },
+        "m39": {
+          "away": 0,
+          "home": 3
+        },
+        "m40": {
+          "away": 2,
+          "home": 2
+        },
+        "m41": {
+          "away": 0,
+          "home": 2
+        },
+        "m42": {
+          "away": 0,
+          "home": 4
+        },
+        "m43": {
+          "away": 0,
+          "home": 2
+        },
+        "m44": {
+          "away": 2,
+          "home": 0
+        },
+        "m45": {
+          "away": 1,
+          "home": 1
+        },
+        "m46": {
+          "away": 3,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 4
+        },
+        "m48": {
+          "away": 0,
+          "home": 4
+        },
+        "m49": {
+          "away": 2,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 2
+        },
+        "m51": {
+          "away": 0,
+          "home": 2
+        },
+        "m52": {
+          "away": 0,
+          "home": 2
+        },
+        "m53": {
+          "away": 3,
+          "home": 1
+        },
+        "m54": {
+          "away": 1,
+          "home": 1
+        },
+        "m55": {
+          "away": 2,
+          "home": 0
+        },
+        "m56": {
+          "away": 1,
+          "home": 2
+        },
+        "m57": {
+          "away": 2,
+          "home": 3
+        },
+        "m58": {
+          "away": 3,
+          "home": 1
+        },
+        "m59": {
+          "away": 1,
+          "home": 0
+        },
+        "m60": {
+          "away": 1,
+          "home": 2
+        },
+        "m61": {
+          "away": 1,
+          "home": 2
+        },
+        "m62": {
+          "away": 0,
+          "home": 2
+        },
+        "m63": {
+          "away": 0,
+          "home": 1
+        },
+        "m64": {
+          "away": 3,
+          "home": 1
+        },
+        "m65": {
+          "away": 2,
+          "home": 0
+        },
+        "m66": {
+          "away": 3,
+          "home": 2
+        },
+        "m67": {
+          "away": 3,
+          "home": 0
+        },
+        "m68": {
+          "away": 1,
+          "home": 2
+        },
+        "m69": {
+          "away": 1,
+          "home": 1
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 1,
+          "home": 1
+        },
+        "m72": {
+          "away": 0,
+          "home": 0
+        },
+        "m73": {
+          "winner": "KOR"
+        },
+        "m74": {
+          "winner": "ECU"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "NOR"
+        },
+        "m78": {
+          "winner": "FRA"
+        },
+        "m79": {
+          "winner": "GER"
+        },
+        "m80": {
+          "winner": "CRO"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "ENG"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "NOR"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "FRA"
+        },
+        "m92": {
+          "winner": "GER"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "BEL"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "NOR"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "FRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "ESP"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "NOR"
+        },
+        "m104": {
+          "winner": "ESP"
+        }
+      },
+      "awards": {
+        "topScorer": "Mikel Oyarzabal",
+        "goldenBall": "Michael Olise",
+        "goldenGlove": "Unai Simon",
+        "topScorerTeam": "ESP",
+        "goldenBallTeam": "FRA",
+        "goldenGloveTeam": "ESP"
+      },
+      "user_id": "f848fe7c-9c0d-474a-9712-e2ae1ef83729",
+      "saved_at": "2026-06-11T12:58:09.141+00:00",
+      "updated_at": "2026-06-11T12:43:59.673568+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 1,
+          "home": 2
+        },
+        "m2": {
+          "away": 3,
+          "home": 1
+        },
+        "m3": {
+          "away": 1,
+          "home": 1
+        },
+        "m4": {
+          "away": 0,
+          "home": 0
+        },
+        "m5": {
+          "away": 3,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 1
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 2,
+          "home": 0
+        },
+        "m9": {
+          "away": 1,
+          "home": 0
+        },
+        "m10": {
+          "away": 1,
+          "home": 5
+        },
+        "m11": {
+          "away": 0,
+          "home": 1
+        },
+        "m12": {
+          "away": 0,
+          "home": 2
+        },
+        "m13": {
+          "away": 1,
+          "home": 0
+        },
+        "m14": {
+          "away": 0,
+          "home": 4
+        },
+        "m15": {
+          "away": 0,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 3
+        },
+        "m17": {
+          "away": 0,
+          "home": 3
+        },
+        "m18": {
+          "away": 3,
+          "home": 1
+        },
+        "m19": {
+          "away": 1,
+          "home": 2
+        },
+        "m20": {
+          "away": 0,
+          "home": 2
+        },
+        "m21": {
+          "away": 0,
+          "home": 0
+        },
+        "m22": {
+          "away": 1,
+          "home": 1
+        },
+        "m23": {
+          "away": 0,
+          "home": 3
+        },
+        "m24": {
+          "away": 2,
+          "home": 1
+        },
+        "m25": {
+          "away": 0,
+          "home": 2
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 2,
+          "home": 2
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 1,
+          "home": 4
+        },
+        "m30": {
+          "away": 1,
+          "home": 3
+        },
+        "m31": {
+          "away": 1,
+          "home": 2
+        },
+        "m32": {
+          "away": 2,
+          "home": 1
+        },
+        "m33": {
+          "away": 2,
+          "home": 1
+        },
+        "m34": {
+          "away": 1,
+          "home": 3
+        },
+        "m35": {
+          "away": 1,
+          "home": 2
+        },
+        "m36": {
+          "away": 0,
+          "home": 2
+        },
+        "m37": {
+          "away": 0,
+          "home": 2
+        },
+        "m38": {
+          "away": 0,
+          "home": 1
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 0,
+          "home": 0
+        },
+        "m41": {
+          "away": 2,
+          "home": 2
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 0,
+          "home": 2
+        },
+        "m44": {
+          "away": 3,
+          "home": 1
+        },
+        "m45": {
+          "away": 1,
+          "home": 3
+        },
+        "m46": {
+          "away": 3,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 1
+        },
+        "m48": {
+          "away": 0,
+          "home": 1
+        },
+        "m49": {
+          "away": 1,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 2
+        },
+        "m51": {
+          "away": 1,
+          "home": 3
+        },
+        "m52": {
+          "away": 1,
+          "home": 0
+        },
+        "m53": {
+          "away": 0,
+          "home": 0
+        },
+        "m54": {
+          "away": 1,
+          "home": 2
+        },
+        "m55": {
+          "away": 2,
+          "home": 1
+        },
+        "m56": {
+          "away": 2,
+          "home": 0
+        },
+        "m57": {
+          "away": 1,
+          "home": 1
+        },
+        "m58": {
+          "away": 3,
+          "home": 0
+        },
+        "m59": {
+          "away": 1,
+          "home": 3
+        },
+        "m60": {
+          "away": 0,
+          "home": 1
+        },
+        "m61": {
+          "away": 1,
+          "home": 0
+        },
+        "m62": {
+          "away": 2,
+          "home": 1
+        },
+        "m63": {
+          "away": 1,
+          "home": 0
+        },
+        "m64": {
+          "away": 3,
+          "home": 1
+        },
+        "m65": {
+          "away": 1,
+          "home": 2
+        },
+        "m66": {
+          "away": 0,
+          "home": 0
+        },
+        "m67": {
+          "away": 2,
+          "home": 0
+        },
+        "m68": {
+          "away": 0,
+          "home": 2
+        },
+        "m69": {
+          "away": 0,
+          "home": 1
+        },
+        "m70": {
+          "away": 2,
+          "home": 0
+        },
+        "m71": {
+          "away": 2,
+          "home": 0
+        },
+        "m72": {
+          "away": 2,
+          "home": 0
+        },
+        "m73": {
+          "winner": "MEX"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "NOR"
+        },
+        "m79": {
+          "winner": "CZE"
+        },
+        "m80": {
+          "winner": "CRO"
+        },
+        "m81": {
+          "winner": "TUR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "ENG"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "URU"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "AUS"
+        },
+        "m89": {
+          "winner": "GER"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "CZE"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "TUR"
+        },
+        "m95": {
+          "winner": "URU"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "GER"
+        },
+        "m98": {
+          "winner": "TUR"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "POR"
+        },
+        "m101": {
+          "winner": "GER"
+        },
+        "m102": {
+          "winner": "POR"
+        },
+        "m103": {
+          "winner": "BRA"
+        },
+        "m104": {
+          "winner": "POR"
+        }
+      },
+      "awards": {
+        "topScorer": "Erling Haaland",
+        "goldenBall": "Florian Wirtz",
+        "goldenGlove": "Manuel Neuer"
+      },
+      "user_id": "2457eac9-1e32-4e1b-b147-b1d31ac75713",
+      "saved_at": "2026-06-04T23:44:28.995+00:00",
+      "updated_at": "2026-05-28T01:32:13.812453+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 1,
+          "home": 3
+        },
+        "m2": {
+          "away": 1,
+          "home": 1
+        },
+        "m3": {
+          "away": 0,
+          "home": 1
+        },
+        "m4": {
+          "away": 2,
+          "home": 0
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 2
+        },
+        "m7": {
+          "away": 1,
+          "home": 3
+        },
+        "m8": {
+          "away": 2,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 0
+        },
+        "m10": {
+          "away": 1,
+          "home": 2
+        },
+        "m11": {
+          "away": 1,
+          "home": 2
+        },
+        "m12": {
+          "away": 0,
+          "home": 2
+        },
+        "m13": {
+          "away": 2,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 2
+        },
+        "m15": {
+          "away": 1,
+          "home": 0
+        },
+        "m16": {
+          "away": 0,
+          "home": 2
+        },
+        "m17": {
+          "away": 1,
+          "home": 2
+        },
+        "m18": {
+          "away": 2,
+          "home": 1
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 1,
+          "home": 2
+        },
+        "m21": {
+          "away": 1,
+          "home": 1
+        },
+        "m22": {
+          "away": 1,
+          "home": 2
+        },
+        "m23": {
+          "away": 0,
+          "home": 2
+        },
+        "m24": {
+          "away": 2,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 1
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 1,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 2
+        },
+        "m29": {
+          "away": 0,
+          "home": 2
+        },
+        "m30": {
+          "away": 1,
+          "home": 1
+        },
+        "m31": {
+          "away": 2,
+          "home": 1
+        },
+        "m32": {
+          "away": 1,
+          "home": 0
+        },
+        "m33": {
+          "away": 2,
+          "home": 1
+        },
+        "m34": {
+          "away": 0,
+          "home": 2
+        },
+        "m35": {
+          "away": 1,
+          "home": 1
+        },
+        "m36": {
+          "away": 1,
+          "home": 2
+        },
+        "m37": {
+          "away": 0,
+          "home": 2
+        },
+        "m38": {
+          "away": 1,
+          "home": 2
+        },
+        "m39": {
+          "away": 0,
+          "home": 1
+        },
+        "m40": {
+          "away": 0,
+          "home": 1
+        },
+        "m41": {
+          "away": 1,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 1,
+          "home": 2
+        },
+        "m44": {
+          "away": 1,
+          "home": 1
+        },
+        "m45": {
+          "away": 0,
+          "home": 2
+        },
+        "m46": {
+          "away": 2,
+          "home": 1
+        },
+        "m47": {
+          "away": 0,
+          "home": 2
+        },
+        "m48": {
+          "away": 0,
+          "home": 2
+        },
+        "m49": {
+          "away": 2,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 1
+        },
+        "m51": {
+          "away": 1,
+          "home": 2
+        },
+        "m52": {
+          "away": 1,
+          "home": 0
+        },
+        "m53": {
+          "away": 2,
+          "home": 0
+        },
+        "m54": {
+          "away": 1,
+          "home": 0
+        },
+        "m55": {
+          "away": 1,
+          "home": 0
+        },
+        "m56": {
+          "away": 2,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 0
+        },
+        "m58": {
+          "away": 2,
+          "home": 0
+        },
+        "m59": {
+          "away": 1,
+          "home": 1
+        },
+        "m60": {
+          "away": 1,
+          "home": 1
+        },
+        "m61": {
+          "away": 2,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 1
+        },
+        "m63": {
+          "away": 1,
+          "home": 1
+        },
+        "m64": {
+          "away": 1,
+          "home": 1
+        },
+        "m65": {
+          "away": 1,
+          "home": 1
+        },
+        "m66": {
+          "away": 2,
+          "home": 1
+        },
+        "m67": {
+          "away": 1,
+          "home": 1
+        },
+        "m68": {
+          "away": 0,
+          "home": 2
+        },
+        "m69": {
+          "away": 1,
+          "home": 0
+        },
+        "m70": {
+          "away": 2,
+          "home": 0
+        },
+        "m71": {
+          "away": 1,
+          "home": 1
+        },
+        "m72": {
+          "away": 0,
+          "home": 1
+        },
+        "m73": {
+          "winner": "CAN"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "MEX"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "CRO"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "NZL"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "CRO"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "CRO"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "FRA"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "BRA"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Lionel Messi",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez"
+      },
+      "user_id": "713699ef-098e-4c52-84b2-0f21d1a25eb0",
+      "saved_at": "2026-06-04T23:20:22.443+00:00",
+      "updated_at": "2026-06-04T23:03:49.254861+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 1,
+          "home": 2
+        },
+        "m2": {
+          "away": 1,
+          "home": 1
+        },
+        "m3": {
+          "away": 0,
+          "home": 2
+        },
+        "m4": {
+          "away": 2,
+          "home": 2
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 1
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 3,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 0
+        },
+        "m10": {
+          "away": 0,
+          "home": 4
+        },
+        "m11": {
+          "away": 1,
+          "home": 2
+        },
+        "m12": {
+          "away": 1,
+          "home": 1
+        },
+        "m13": {
+          "away": 3,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 4
+        },
+        "m15": {
+          "away": 1,
+          "home": 1
+        },
+        "m16": {
+          "away": 0,
+          "home": 3
+        },
+        "m17": {
+          "away": 0,
+          "home": 3
+        },
+        "m18": {
+          "away": 2,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 3
+        },
+        "m20": {
+          "away": 0,
+          "home": 2
+        },
+        "m21": {
+          "away": 1,
+          "home": 1
+        },
+        "m22": {
+          "away": 2,
+          "home": 3
+        },
+        "m23": {
+          "away": 0,
+          "home": 2
+        },
+        "m24": {
+          "away": 3,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 3
+        },
+        "m26": {
+          "away": 0,
+          "home": 3
+        },
+        "m27": {
+          "away": 1,
+          "home": 2
+        },
+        "m28": {
+          "away": 2,
+          "home": 0
+        },
+        "m29": {
+          "away": 0,
+          "home": 4
+        },
+        "m30": {
+          "away": 3,
+          "home": 1
+        },
+        "m31": {
+          "away": 3,
+          "home": 1
+        },
+        "m32": {
+          "away": 1,
+          "home": 3
+        },
+        "m33": {
+          "away": 2,
+          "home": 0
+        },
+        "m34": {
+          "away": 1,
+          "home": 3
+        },
+        "m35": {
+          "away": 1,
+          "home": 3
+        },
+        "m36": {
+          "away": 0,
+          "home": 2
+        },
+        "m37": {
+          "away": 1,
+          "home": 3
+        },
+        "m38": {
+          "away": 0,
+          "home": 2
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 2,
+          "home": 2
+        },
+        "m41": {
+          "away": 1,
+          "home": 2
+        },
+        "m42": {
+          "away": 0,
+          "home": 3
+        },
+        "m43": {
+          "away": 1,
+          "home": 2
+        },
+        "m44": {
+          "away": 1,
+          "home": 0
+        },
+        "m45": {
+          "away": 1,
+          "home": 2
+        },
+        "m46": {
+          "away": 2,
+          "home": 0
+        },
+        "m47": {
+          "away": 1,
+          "home": 3
+        },
+        "m48": {
+          "away": 0,
+          "home": 3
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 2
+        },
+        "m51": {
+          "away": 2,
+          "home": 3
+        },
+        "m52": {
+          "away": 1,
+          "home": 0
+        },
+        "m53": {
+          "away": 2,
+          "home": 2
+        },
+        "m54": {
+          "away": 3,
+          "home": 1
+        },
+        "m55": {
+          "away": 1,
+          "home": 1
+        },
+        "m56": {
+          "away": 3,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 1
+        },
+        "m58": {
+          "away": 4,
+          "home": 1
+        },
+        "m59": {
+          "away": 1,
+          "home": 0
+        },
+        "m60": {
+          "away": 1,
+          "home": 2
+        },
+        "m61": {
+          "away": 2,
+          "home": 1
+        },
+        "m62": {
+          "away": 1,
+          "home": 1
+        },
+        "m63": {
+          "away": 1,
+          "home": 2
+        },
+        "m64": {
+          "away": 3,
+          "home": 0
+        },
+        "m65": {
+          "away": 0,
+          "home": 0
+        },
+        "m66": {
+          "away": 3,
+          "home": 2
+        },
+        "m67": {
+          "away": 4,
+          "home": 0
+        },
+        "m68": {
+          "away": 0,
+          "home": 1
+        },
+        "m69": {
+          "away": 2,
+          "home": 0
+        },
+        "m70": {
+          "away": 5,
+          "home": 0
+        },
+        "m71": {
+          "away": 2,
+          "home": 2
+        },
+        "m72": {
+          "away": 1,
+          "home": 1
+        },
+        "m73": {
+          "winner": "CAN"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "MAR"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "KOR"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "POR"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SWE"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "COL"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "MAR"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "SWE"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "FRA"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "BRA"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Lautaro Martinez",
+        "goldenBall": "Michael Olise",
+        "goldenGlove": "Emiliano Martinez",
+        "topScorerTeam": "ARG",
+        "goldenBallTeam": "FRA",
+        "goldenGloveTeam": "ARG"
+      },
+      "user_id": "3b4b8796-ea0a-4e82-9dd7-87c18e8b4074",
+      "saved_at": "2026-06-10T22:41:02.786+00:00",
+      "updated_at": "2026-06-10T21:33:11.774008+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 1
+        },
+        "m2": {
+          "away": 2,
+          "home": 1
+        },
+        "m3": {
+          "away": 1,
+          "home": 1
+        },
+        "m4": {
+          "away": 1,
+          "home": 1
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 0
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 1,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 1
+        },
+        "m10": {
+          "away": 0,
+          "home": 3
+        },
+        "m11": {
+          "away": 1,
+          "home": 0
+        },
+        "m12": {
+          "away": 1,
+          "home": 2
+        },
+        "m13": {
+          "away": 1,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 3
+        },
+        "m15": {
+          "away": 2,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 1
+        },
+        "m17": {
+          "away": 0,
+          "home": 3
+        },
+        "m18": {
+          "away": 2,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 1
+        },
+        "m20": {
+          "away": 0,
+          "home": 2
+        },
+        "m21": {
+          "away": 0,
+          "home": 1
+        },
+        "m22": {
+          "away": 1,
+          "home": 2
+        },
+        "m23": {
+          "away": 0,
+          "home": 2
+        },
+        "m24": {
+          "away": 2,
+          "home": 1
+        },
+        "m25": {
+          "away": 0,
+          "home": 1
+        },
+        "m26": {
+          "away": 0,
+          "home": 0
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 3
+        },
+        "m30": {
+          "away": 1,
+          "home": 1
+        },
+        "m31": {
+          "away": 1,
+          "home": 0
+        },
+        "m32": {
+          "away": 0,
+          "home": 2
+        },
+        "m33": {
+          "away": 2,
+          "home": 1
+        },
+        "m34": {
+          "away": 0,
+          "home": 2
+        },
+        "m35": {
+          "away": 0,
+          "home": 1
+        },
+        "m36": {
+          "away": 0,
+          "home": 2
+        },
+        "m37": {
+          "away": 0,
+          "home": 2
+        },
+        "m38": {
+          "away": 0,
+          "home": 3
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 1,
+          "home": 1
+        },
+        "m41": {
+          "away": 0,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 5
+        },
+        "m43": {
+          "away": 0,
+          "home": 2
+        },
+        "m44": {
+          "away": 2,
+          "home": 0
+        },
+        "m45": {
+          "away": 0,
+          "home": 2
+        },
+        "m46": {
+          "away": 1,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 1
+        },
+        "m48": {
+          "away": 0,
+          "home": 1
+        },
+        "m49": {
+          "away": 2,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 2
+        },
+        "m51": {
+          "away": 1,
+          "home": 0
+        },
+        "m52": {
+          "away": 0,
+          "home": 2
+        },
+        "m53": {
+          "away": 1,
+          "home": 1
+        },
+        "m54": {
+          "away": 1,
+          "home": 0
+        },
+        "m55": {
+          "away": 2,
+          "home": 0
+        },
+        "m56": {
+          "away": 3,
+          "home": 0
+        },
+        "m57": {
+          "away": 0,
+          "home": 1
+        },
+        "m58": {
+          "away": 1,
+          "home": 0
+        },
+        "m59": {
+          "away": 1,
+          "home": 0
+        },
+        "m60": {
+          "away": 1,
+          "home": 2
+        },
+        "m61": {
+          "away": 2,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 2
+        },
+        "m63": {
+          "away": 0,
+          "home": 1
+        },
+        "m64": {
+          "away": 3,
+          "home": 1
+        },
+        "m65": {
+          "away": 1,
+          "home": 0
+        },
+        "m66": {
+          "away": 2,
+          "home": 0
+        },
+        "m67": {
+          "away": 3,
+          "home": 0
+        },
+        "m68": {
+          "away": 1,
+          "home": 2
+        },
+        "m69": {
+          "away": 1,
+          "home": 0
+        },
+        "m70": {
+          "away": 4,
+          "home": 1
+        },
+        "m71": {
+          "away": 2,
+          "home": 1
+        },
+        "m72": {
+          "away": 2,
+          "home": 1
+        },
+        "m73": {
+          "winner": "MEX"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "JPN"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "CZE"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "USA"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "COL"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "CAN"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "PAR"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "JPN"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "BEL"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "FRA"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "ESP"
+        },
+        "m104": {
+          "winner": "FRA"
+        }
+      },
+      "awards": {
+        "topScorer": "Kylian Mbappe",
+        "goldenBall": "Lamine Yamal",
+        "goldenGlove": "Emiliano Martinez"
+      },
+      "user_id": "b080a922-a5de-4edd-a13d-d11b0deba986",
+      "saved_at": "2026-06-01T01:43:46.769+00:00",
+      "updated_at": "2026-06-01T01:18:17.987612+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 1,
+          "home": 1
+        },
+        "m3": {
+          "away": 2,
+          "home": 2
+        },
+        "m4": {
+          "away": 2,
+          "home": 1
+        },
+        "m5": {
+          "away": 3,
+          "home": 2
+        },
+        "m6": {
+          "away": 2,
+          "home": 2
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 2,
+          "home": 1
+        },
+        "m9": {
+          "away": 3,
+          "home": 2
+        },
+        "m10": {
+          "away": 0,
+          "home": 2
+        },
+        "m11": {
+          "away": 1,
+          "home": 2
+        },
+        "m12": {
+          "away": 2,
+          "home": 2
+        },
+        "m13": {
+          "away": 2,
+          "home": 2
+        },
+        "m14": {
+          "away": 2,
+          "home": 3
+        },
+        "m15": {
+          "away": 2,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 1
+        },
+        "m17": {
+          "away": 1,
+          "home": 2
+        },
+        "m18": {
+          "away": 2,
+          "home": 1
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 1,
+          "home": 1
+        },
+        "m21": {
+          "away": 2,
+          "home": 2
+        },
+        "m22": {
+          "away": 2,
+          "home": 1
+        },
+        "m23": {
+          "away": 0,
+          "home": 2
+        },
+        "m24": {
+          "away": 2,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 2
+        },
+        "m26": {
+          "away": 0,
+          "home": 1
+        },
+        "m27": {
+          "away": 1,
+          "home": 2
+        },
+        "m28": {
+          "away": 0,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 3
+        },
+        "m30": {
+          "away": 2,
+          "home": 1
+        },
+        "m31": {
+          "away": 2,
+          "home": 1
+        },
+        "m32": {
+          "away": 2,
+          "home": 1
+        },
+        "m33": {
+          "away": 1,
+          "home": 2
+        },
+        "m34": {
+          "away": 2,
+          "home": 3
+        },
+        "m35": {
+          "away": 2,
+          "home": 3
+        },
+        "m36": {
+          "away": 0,
+          "home": 1
+        },
+        "m37": {
+          "away": 1,
+          "home": 2
+        },
+        "m38": {
+          "away": 2,
+          "home": 3
+        },
+        "m39": {
+          "away": 1,
+          "home": 1
+        },
+        "m40": {
+          "away": 1,
+          "home": 2
+        },
+        "m41": {
+          "away": 2,
+          "home": 1
+        },
+        "m42": {
+          "away": 2,
+          "home": 3
+        },
+        "m43": {
+          "away": 0,
+          "home": 1
+        },
+        "m44": {
+          "away": 1,
+          "home": 2
+        },
+        "m45": {
+          "away": 0,
+          "home": 3
+        },
+        "m46": {
+          "away": 2,
+          "home": 1
+        },
+        "m47": {
+          "away": 0,
+          "home": 2
+        },
+        "m48": {
+          "away": 2,
+          "home": 3
+        },
+        "m49": {
+          "away": 2,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 2
+        },
+        "m51": {
+          "away": 2,
+          "home": 1
+        },
+        "m52": {
+          "away": 1,
+          "home": 1
+        },
+        "m53": {
+          "away": 1,
+          "home": 0
+        },
+        "m54": {
+          "away": 1,
+          "home": 1
+        },
+        "m55": {
+          "away": 2,
+          "home": 1
+        },
+        "m56": {
+          "away": 3,
+          "home": 2
+        },
+        "m57": {
+          "away": 1,
+          "home": 2
+        },
+        "m58": {
+          "away": 3,
+          "home": 1
+        },
+        "m59": {
+          "away": 1,
+          "home": 1
+        },
+        "m60": {
+          "away": 0,
+          "home": 2
+        },
+        "m61": {
+          "away": 1,
+          "home": 1
+        },
+        "m62": {
+          "away": 2,
+          "home": 2
+        },
+        "m63": {
+          "away": 2,
+          "home": 2
+        },
+        "m64": {
+          "away": 1,
+          "home": 3
+        },
+        "m65": {
+          "away": 2,
+          "home": 2
+        },
+        "m66": {
+          "away": 3,
+          "home": 2
+        },
+        "m67": {
+          "away": 2,
+          "home": 1
+        },
+        "m68": {
+          "away": 0,
+          "home": 2
+        },
+        "m69": {
+          "away": 1,
+          "home": 2
+        },
+        "m70": {
+          "away": 2,
+          "home": 0
+        },
+        "m71": {
+          "away": 1,
+          "home": 1
+        },
+        "m72": {
+          "away": 1,
+          "home": 1
+        },
+        "m73": {
+          "winner": "SUI"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "MEX"
+        },
+        "m80": {
+          "winner": "CRO"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "NZL"
+        },
+        "m83": {
+          "winner": "ENG"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "CAN"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "AUS"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "MEX"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "NZL"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "ESP"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "BRA"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Lionel Messi",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez",
+        "topScorerTeam": "ARG",
+        "goldenBallTeam": "ARG",
+        "goldenGloveTeam": "ARG"
+      },
+      "user_id": "e21fee6c-b031-403a-97fb-fbe4f4a2300e",
+      "saved_at": "2026-06-11T02:19:48.449+00:00",
+      "updated_at": "2026-06-11T01:34:54.15461+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 0,
+          "home": 1
+        },
+        "m3": {
+          "away": 1,
+          "home": 2
+        },
+        "m4": {
+          "away": 1,
+          "home": 2
+        },
+        "m5": {
+          "away": 2,
+          "home": 0
+        },
+        "m6": {
+          "away": 0,
+          "home": 2
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 1,
+          "home": 0
+        },
+        "m9": {
+          "away": 1,
+          "home": 1
+        },
+        "m10": {
+          "away": 0,
+          "home": 3
+        },
+        "m11": {
+          "away": 1,
+          "home": 1
+        },
+        "m12": {
+          "away": 1,
+          "home": 0
+        },
+        "m13": {
+          "away": 2,
+          "home": 0
+        },
+        "m14": {
+          "away": 0,
+          "home": 3
+        },
+        "m15": {
+          "away": 0,
+          "home": 2
+        },
+        "m16": {
+          "away": 1,
+          "home": 1
+        },
+        "m17": {
+          "away": 1,
+          "home": 3
+        },
+        "m18": {
+          "away": 2,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 1,
+          "home": 1
+        },
+        "m21": {
+          "away": 0,
+          "home": 2
+        },
+        "m22": {
+          "away": 1,
+          "home": 1
+        },
+        "m23": {
+          "away": 1,
+          "home": 2
+        },
+        "m24": {
+          "away": 2,
+          "home": 0
+        },
+        "m25": {
+          "away": 1,
+          "home": 1
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 0,
+          "home": 2
+        },
+        "m28": {
+          "away": 1,
+          "home": 2
+        },
+        "m29": {
+          "away": 0,
+          "home": 4
+        },
+        "m30": {
+          "away": 2,
+          "home": 1
+        },
+        "m31": {
+          "away": 1,
+          "home": 1
+        },
+        "m32": {
+          "away": 0,
+          "home": 2
+        },
+        "m33": {
+          "away": 2,
+          "home": 0
+        },
+        "m34": {
+          "away": 0,
+          "home": 2
+        },
+        "m35": {
+          "away": 1,
+          "home": 3
+        },
+        "m36": {
+          "away": 1,
+          "home": 3
+        },
+        "m37": {
+          "away": 1,
+          "home": 3
+        },
+        "m38": {
+          "away": 0,
+          "home": 2
+        },
+        "m39": {
+          "away": 1,
+          "home": 2
+        },
+        "m40": {
+          "away": 2,
+          "home": 0
+        },
+        "m41": {
+          "away": 1,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 1,
+          "home": 2
+        },
+        "m44": {
+          "away": 2,
+          "home": 0
+        },
+        "m45": {
+          "away": 0,
+          "home": 2
+        },
+        "m46": {
+          "away": 2,
+          "home": 1
+        },
+        "m47": {
+          "away": 0,
+          "home": 2
+        },
+        "m48": {
+          "away": 1,
+          "home": 2
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 1,
+          "home": 1
+        },
+        "m52": {
+          "away": 2,
+          "home": 1
+        },
+        "m53": {
+          "away": 3,
+          "home": 0
+        },
+        "m54": {
+          "away": 2,
+          "home": 1
+        },
+        "m55": {
+          "away": 2,
+          "home": 0
+        },
+        "m56": {
+          "away": 2,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 2
+        },
+        "m58": {
+          "away": 2,
+          "home": 0
+        },
+        "m59": {
+          "away": 1,
+          "home": 1
+        },
+        "m60": {
+          "away": 1,
+          "home": 2
+        },
+        "m61": {
+          "away": 2,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 2
+        },
+        "m63": {
+          "away": 1,
+          "home": 2
+        },
+        "m64": {
+          "away": 2,
+          "home": 0
+        },
+        "m65": {
+          "away": 1,
+          "home": 1
+        },
+        "m66": {
+          "away": 2,
+          "home": 1
+        },
+        "m67": {
+          "away": 3,
+          "home": 1
+        },
+        "m68": {
+          "away": 1,
+          "home": 2
+        },
+        "m69": {
+          "away": 2,
+          "home": 1
+        },
+        "m70": {
+          "away": 2,
+          "home": 0
+        },
+        "m71": {
+          "away": 3,
+          "home": 1
+        },
+        "m72": {
+          "away": 1,
+          "home": 1
+        },
+        "m73": {
+          "winner": "KOR"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "MAR"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "MEX"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "ALG"
+        },
+        "m82": {
+          "winner": "SEN"
+        },
+        "m83": {
+          "winner": "COL"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "CAN"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "PAR"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "MAR"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "SEN"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "FRA"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "ESP"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Endrick",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez",
+        "topScorerTeam": "BRA",
+        "goldenBallTeam": "ARG",
+        "goldenGloveTeam": "ARG"
+      },
+      "user_id": "2ed42c13-2aea-49ed-836b-9fc0c060cd55",
+      "saved_at": "2026-06-10T14:23:45.612+00:00",
+      "updated_at": "2026-06-10T14:04:25.589086+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 1
+        },
+        "m2": {
+          "away": 2,
+          "home": 0
+        },
+        "m3": {
+          "away": 1,
+          "home": 1
+        },
+        "m4": {
+          "away": 2,
+          "home": 1
+        },
+        "m5": {
+          "away": 2,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 0
+        },
+        "m7": {
+          "away": 1,
+          "home": 2
+        },
+        "m8": {
+          "away": 1,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 1
+        },
+        "m10": {
+          "away": 0,
+          "home": 3
+        },
+        "m11": {
+          "away": 0,
+          "home": 2
+        },
+        "m12": {
+          "away": 1,
+          "home": 2
+        },
+        "m13": {
+          "away": 1,
+          "home": 0
+        },
+        "m14": {
+          "away": 0,
+          "home": 2
+        },
+        "m15": {
+          "away": 0,
+          "home": 1
+        },
+        "m16": {
+          "away": 0,
+          "home": 2
+        },
+        "m17": {
+          "away": 0,
+          "home": 2
+        },
+        "m18": {
+          "away": 1,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 0,
+          "home": 1
+        },
+        "m21": {
+          "away": 1,
+          "home": 1
+        },
+        "m22": {
+          "away": 0,
+          "home": 1
+        },
+        "m23": {
+          "away": 1,
+          "home": 3
+        },
+        "m24": {
+          "away": 2,
+          "home": 1
+        },
+        "m25": {
+          "away": 0,
+          "home": 3
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 2
+        },
+        "m29": {
+          "away": 1,
+          "home": 3
+        },
+        "m30": {
+          "away": 2,
+          "home": 1
+        },
+        "m31": {
+          "away": 2,
+          "home": 2
+        },
+        "m32": {
+          "away": 0,
+          "home": 2
+        },
+        "m33": {
+          "away": 2,
+          "home": 1
+        },
+        "m34": {
+          "away": 0,
+          "home": 2
+        },
+        "m35": {
+          "away": 0,
+          "home": 2
+        },
+        "m36": {
+          "away": 0,
+          "home": 3
+        },
+        "m37": {
+          "away": 0,
+          "home": 2
+        },
+        "m38": {
+          "away": 1,
+          "home": 2
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 1,
+          "home": 0
+        },
+        "m41": {
+          "away": 1,
+          "home": 1
+        },
+        "m42": {
+          "away": 1,
+          "home": 2
+        },
+        "m43": {
+          "away": 1,
+          "home": 2
+        },
+        "m44": {
+          "away": 2,
+          "home": 0
+        },
+        "m45": {
+          "away": 1,
+          "home": 2
+        },
+        "m46": {
+          "away": 2,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 2
+        },
+        "m48": {
+          "away": 0,
+          "home": 2
+        },
+        "m49": {
+          "away": 2,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 0,
+          "home": 1
+        },
+        "m52": {
+          "away": 1,
+          "home": 1
+        },
+        "m53": {
+          "away": 1,
+          "home": 2
+        },
+        "m54": {
+          "away": 2,
+          "home": 0
+        },
+        "m55": {
+          "away": 2,
+          "home": 0
+        },
+        "m56": {
+          "away": 2,
+          "home": 1
+        },
+        "m57": {
+          "away": 0,
+          "home": 2
+        },
+        "m58": {
+          "away": 3,
+          "home": 0
+        },
+        "m59": {
+          "away": 1,
+          "home": 1
+        },
+        "m60": {
+          "away": 1,
+          "home": 2
+        },
+        "m61": {
+          "away": 3,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 0
+        },
+        "m63": {
+          "away": 1,
+          "home": 1
+        },
+        "m64": {
+          "away": 2,
+          "home": 0
+        },
+        "m65": {
+          "away": 1,
+          "home": 0
+        },
+        "m66": {
+          "away": 1,
+          "home": 1
+        },
+        "m67": {
+          "away": 2,
+          "home": 0
+        },
+        "m68": {
+          "away": 0,
+          "home": 1
+        },
+        "m69": {
+          "away": 2,
+          "home": 1
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 2,
+          "home": 1
+        },
+        "m72": {
+          "away": 0,
+          "home": 0
+        },
+        "m73": {
+          "winner": "MEX"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "CZE"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "SWE"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "CRO"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "TUR"
+        },
+        "m89": {
+          "winner": "GER"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "BEL"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "NED"
+        },
+        "m98": {
+          "winner": "BEL"
+        },
+        "m99": {
+          "winner": "ENG"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "NED"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "ENG"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Lionel Messi",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez"
+      },
+      "user_id": "61547b24-f850-406e-b6c4-b58fc044a8fc",
+      "saved_at": "2026-06-10T19:26:17.304+00:00",
+      "updated_at": "2026-06-06T20:42:55.34423+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 1,
+          "home": 1
+        },
+        "m2": {
+          "away": 0,
+          "home": 1
+        },
+        "m3": {
+          "away": 0,
+          "home": 1
+        },
+        "m4": {
+          "away": 1,
+          "home": 1
+        },
+        "m5": {
+          "away": 2,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 0
+        },
+        "m7": {
+          "away": 1,
+          "home": 3
+        },
+        "m8": {
+          "away": 2,
+          "home": 0
+        },
+        "m9": {
+          "away": 1,
+          "home": 0
+        },
+        "m10": {
+          "away": 0,
+          "home": 4
+        },
+        "m11": {
+          "away": 0,
+          "home": 1
+        },
+        "m12": {
+          "away": 0,
+          "home": 2
+        },
+        "m13": {
+          "away": 1,
+          "home": 0
+        },
+        "m14": {
+          "away": 0,
+          "home": 4
+        },
+        "m15": {
+          "away": 0,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 2
+        },
+        "m17": {
+          "away": 0,
+          "home": 2
+        },
+        "m18": {
+          "away": 1,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 1
+        },
+        "m20": {
+          "away": 0,
+          "home": 1
+        },
+        "m21": {
+          "away": 0,
+          "home": 1
+        },
+        "m22": {
+          "away": 1,
+          "home": 2
+        },
+        "m23": {
+          "away": 0,
+          "home": 2
+        },
+        "m24": {
+          "away": 1,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 1
+        },
+        "m26": {
+          "away": 1,
+          "home": 1
+        },
+        "m27": {
+          "away": 0,
+          "home": 2
+        },
+        "m28": {
+          "away": 1,
+          "home": 2
+        },
+        "m29": {
+          "away": 0,
+          "home": 4
+        },
+        "m30": {
+          "away": 2,
+          "home": 0
+        },
+        "m31": {
+          "away": 1,
+          "home": 1
+        },
+        "m32": {
+          "away": 0,
+          "home": 2
+        },
+        "m33": {
+          "away": 1,
+          "home": 0
+        },
+        "m34": {
+          "away": 0,
+          "home": 3
+        },
+        "m35": {
+          "away": 1,
+          "home": 2
+        },
+        "m36": {
+          "away": 0,
+          "home": 2
+        },
+        "m37": {
+          "away": 0,
+          "home": 2
+        },
+        "m38": {
+          "away": 0,
+          "home": 2
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 1,
+          "home": 0
+        },
+        "m41": {
+          "away": 1,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 0,
+          "home": 2
+        },
+        "m44": {
+          "away": 1,
+          "home": 1
+        },
+        "m45": {
+          "away": 0,
+          "home": 2
+        },
+        "m46": {
+          "away": 1,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 3
+        },
+        "m48": {
+          "away": 0,
+          "home": 2
+        },
+        "m49": {
+          "away": 2,
+          "home": 0
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 0,
+          "home": 1
+        },
+        "m52": {
+          "away": 0,
+          "home": 2
+        },
+        "m53": {
+          "away": 2,
+          "home": 0
+        },
+        "m54": {
+          "away": 1,
+          "home": 0
+        },
+        "m55": {
+          "away": 3,
+          "home": 0
+        },
+        "m56": {
+          "away": 1,
+          "home": 0
+        },
+        "m57": {
+          "away": 0,
+          "home": 1
+        },
+        "m58": {
+          "away": 2,
+          "home": 0
+        },
+        "m59": {
+          "away": 0,
+          "home": 0
+        },
+        "m60": {
+          "away": 0,
+          "home": 2
+        },
+        "m61": {
+          "away": 1,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 1
+        },
+        "m63": {
+          "away": 0,
+          "home": 1
+        },
+        "m64": {
+          "away": 2,
+          "home": 0
+        },
+        "m65": {
+          "away": 1,
+          "home": 0
+        },
+        "m66": {
+          "away": 1,
+          "home": 0
+        },
+        "m67": {
+          "away": 4,
+          "home": 0
+        },
+        "m68": {
+          "away": 0,
+          "home": 1
+        },
+        "m69": {
+          "away": 0,
+          "home": 1
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 1,
+          "home": 1
+        },
+        "m72": {
+          "away": 1,
+          "home": 0
+        },
+        "m73": {
+          "winner": "CAN"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "NED"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "NOR"
+        },
+        "m79": {
+          "winner": "SWE"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "COL"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "GER"
+        },
+        "m90": {
+          "winner": "NED"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "NED"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "ENG"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "ESP"
+        },
+        "m102": {
+          "winner": "ENG"
+        },
+        "m103": {
+          "winner": "ARG"
+        },
+        "m104": {
+          "winner": "ENG"
+        }
+      },
+      "awards": {
+        "topScorer": "Harry Kane",
+        "goldenBall": "Harry Kane",
+        "goldenGlove": "Manuel Neuer",
+        "topScorerTeam": "ENG",
+        "goldenBallTeam": "ENG",
+        "goldenGloveTeam": "GER"
+      },
+      "user_id": "8eb61e8d-71b8-4ff3-ba33-7d661d607a95",
+      "saved_at": "2026-06-10T23:17:20.236+00:00",
+      "updated_at": "2026-06-10T22:52:02.842094+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 0,
+          "home": 2
+        },
+        "m3": {
+          "away": 1,
+          "home": 0
+        },
+        "m4": {
+          "away": 2,
+          "home": 2
+        },
+        "m5": {
+          "away": 3,
+          "home": 1
+        },
+        "m6": {
+          "away": 2,
+          "home": 1
+        },
+        "m7": {
+          "away": 2,
+          "home": 2
+        },
+        "m8": {
+          "away": 3,
+          "home": 0
+        },
+        "m9": {
+          "away": 1,
+          "home": 2
+        },
+        "m10": {
+          "away": 0,
+          "home": 4
+        },
+        "m11": {
+          "away": 2,
+          "home": 2
+        },
+        "m12": {
+          "away": 2,
+          "home": 2
+        },
+        "m13": {
+          "away": 1,
+          "home": 0
+        },
+        "m14": {
+          "away": 0,
+          "home": 5
+        },
+        "m15": {
+          "away": 0,
+          "home": 1
+        },
+        "m16": {
+          "away": 1,
+          "home": 2
+        },
+        "m17": {
+          "away": 2,
+          "home": 3
+        },
+        "m18": {
+          "away": 2,
+          "home": 0
+        },
+        "m19": {
+          "away": 0,
+          "home": 2
+        },
+        "m20": {
+          "away": 1,
+          "home": 2
+        },
+        "m21": {
+          "away": 0,
+          "home": 2
+        },
+        "m22": {
+          "away": 2,
+          "home": 2
+        },
+        "m23": {
+          "away": 0,
+          "home": 4
+        },
+        "m24": {
+          "away": 3,
+          "home": 1
+        },
+        "m25": {
+          "away": 1,
+          "home": 3
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 5
+        },
+        "m30": {
+          "away": 2,
+          "home": 1
+        },
+        "m31": {
+          "away": 2,
+          "home": 1
+        },
+        "m32": {
+          "away": 0,
+          "home": 3
+        },
+        "m33": {
+          "away": 2,
+          "home": 1
+        },
+        "m34": {
+          "away": 2,
+          "home": 2
+        },
+        "m35": {
+          "away": 1,
+          "home": 3
+        },
+        "m36": {
+          "away": 0,
+          "home": 3
+        },
+        "m37": {
+          "away": 0,
+          "home": 3
+        },
+        "m38": {
+          "away": 0,
+          "home": 3
+        },
+        "m39": {
+          "away": 0,
+          "home": 3
+        },
+        "m40": {
+          "away": 3,
+          "home": 0
+        },
+        "m41": {
+          "away": 2,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 6
+        },
+        "m43": {
+          "away": 1,
+          "home": 3
+        },
+        "m44": {
+          "away": 2,
+          "home": 0
+        },
+        "m45": {
+          "away": 2,
+          "home": 3
+        },
+        "m46": {
+          "away": 3,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 3
+        },
+        "m48": {
+          "away": 0,
+          "home": 3
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 0,
+          "home": 2
+        },
+        "m52": {
+          "away": 0,
+          "home": 2
+        },
+        "m53": {
+          "away": 1,
+          "home": 1
+        },
+        "m54": {
+          "away": 2,
+          "home": 1
+        },
+        "m55": {
+          "away": 4,
+          "home": 0
+        },
+        "m56": {
+          "away": 3,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 2
+        },
+        "m58": {
+          "away": 3,
+          "home": 1
+        },
+        "m59": {
+          "away": 2,
+          "home": 1
+        },
+        "m60": {
+          "away": 0,
+          "home": 2
+        },
+        "m61": {
+          "away": 2,
+          "home": 2
+        },
+        "m62": {
+          "away": 1,
+          "home": 3
+        },
+        "m63": {
+          "away": 1,
+          "home": 2
+        },
+        "m64": {
+          "away": 3,
+          "home": 0
+        },
+        "m65": {
+          "away": 2,
+          "home": 0
+        },
+        "m66": {
+          "away": 2,
+          "home": 0
+        },
+        "m67": {
+          "away": 4,
+          "home": 0
+        },
+        "m68": {
+          "away": 2,
+          "home": 2
+        },
+        "m69": {
+          "away": 1,
+          "home": 2
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 2,
+          "home": 1
+        },
+        "m72": {
+          "away": 1,
+          "home": 1
+        }
+      },
+      "awards": {
+        "topScorer": "Ousmane Dembele",
+        "goldenBall": "Cristiano Ronaldo",
+        "goldenGlove": "Diogo Costa",
+        "topScorerTeam": "FRA",
+        "goldenBallTeam": "POR",
+        "goldenGloveTeam": "POR"
+      },
+      "user_id": "cd241b69-06f3-44b3-9a0b-790f403241ca",
+      "saved_at": "2026-06-11T20:46:47.904+00:00",
+      "updated_at": "2026-06-11T20:28:41.971455+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 2,
+          "home": 1
+        },
+        "m3": {
+          "away": 2,
+          "home": 1
+        },
+        "m4": {
+          "away": 1,
+          "home": 1
+        },
+        "m5": {
+          "away": 2,
+          "home": 1
+        },
+        "m6": {
+          "away": 2,
+          "home": 0
+        },
+        "m7": {
+          "away": 2,
+          "home": 2
+        },
+        "m8": {
+          "away": 3,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 2
+        },
+        "m10": {
+          "away": 0,
+          "home": 4
+        },
+        "m11": {
+          "away": 1,
+          "home": 1
+        },
+        "m12": {
+          "away": 2,
+          "home": 2
+        },
+        "m13": {
+          "away": 3,
+          "home": 1
+        },
+        "m14": {
+          "away": 1,
+          "home": 2
+        },
+        "m15": {
+          "away": 0,
+          "home": 2
+        },
+        "m16": {
+          "away": 2,
+          "home": 2
+        },
+        "m17": {
+          "away": 1,
+          "home": 1
+        },
+        "m18": {
+          "away": 2,
+          "home": 0
+        },
+        "m19": {
+          "away": 1,
+          "home": 2
+        },
+        "m20": {
+          "away": 0,
+          "home": 2
+        },
+        "m21": {
+          "away": 1,
+          "home": 4
+        },
+        "m22": {
+          "away": 1,
+          "home": 1
+        },
+        "m23": {
+          "away": 2,
+          "home": 2
+        },
+        "m24": {
+          "away": 2,
+          "home": 0
+        },
+        "m25": {
+          "away": 0,
+          "home": 2
+        },
+        "m26": {
+          "away": 1,
+          "home": 2
+        },
+        "m27": {
+          "away": 0,
+          "home": 1
+        },
+        "m28": {
+          "away": 0,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 3
+        },
+        "m30": {
+          "away": 3,
+          "home": 1
+        },
+        "m31": {
+          "away": 1,
+          "home": 2
+        },
+        "m32": {
+          "away": 1,
+          "home": 3
+        },
+        "m33": {
+          "away": 1,
+          "home": 2
+        },
+        "m34": {
+          "away": 1,
+          "home": 2
+        },
+        "m35": {
+          "away": 0,
+          "home": 1
+        },
+        "m36": {
+          "away": 1,
+          "home": 3
+        },
+        "m37": {
+          "away": 0,
+          "home": 2
+        },
+        "m38": {
+          "away": 0,
+          "home": 3
+        },
+        "m39": {
+          "away": 0,
+          "home": 1
+        },
+        "m40": {
+          "away": 3,
+          "home": 0
+        },
+        "m41": {
+          "away": 2,
+          "home": 1
+        },
+        "m42": {
+          "away": 0,
+          "home": 3
+        },
+        "m43": {
+          "away": 0,
+          "home": 2
+        },
+        "m44": {
+          "away": 3,
+          "home": 0
+        },
+        "m45": {
+          "away": 2,
+          "home": 1
+        },
+        "m46": {
+          "away": 2,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 3
+        },
+        "m48": {
+          "away": 1,
+          "home": 2
+        },
+        "m49": {
+          "away": 2,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 4
+        },
+        "m51": {
+          "away": 0,
+          "home": 2
+        },
+        "m52": {
+          "away": 0,
+          "home": 1
+        },
+        "m53": {
+          "away": 2,
+          "home": 2
+        },
+        "m54": {
+          "away": 2,
+          "home": 1
+        },
+        "m55": {
+          "away": 4,
+          "home": 0
+        },
+        "m56": {
+          "away": 1,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 2
+        },
+        "m58": {
+          "away": 1,
+          "home": 2
+        },
+        "m59": {
+          "away": 0,
+          "home": 2
+        },
+        "m60": {
+          "away": 0,
+          "home": 2
+        },
+        "m61": {
+          "away": 2,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 3
+        },
+        "m63": {
+          "away": 0,
+          "home": 1
+        },
+        "m64": {
+          "away": 3,
+          "home": 1
+        },
+        "m65": {
+          "away": 0,
+          "home": 1
+        },
+        "m66": {
+          "away": 0,
+          "home": 1
+        },
+        "m67": {
+          "away": 2,
+          "home": 0
+        },
+        "m68": {
+          "away": 2,
+          "home": 1
+        },
+        "m69": {
+          "away": 1,
+          "home": 2
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 0,
+          "home": 1
+        },
+        "m72": {
+          "away": 1,
+          "home": 4
+        },
+        "m73": {
+          "winner": "MEX"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "TUN"
+        },
+        "m76": {
+          "winner": "MAR"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "CIV"
+        },
+        "m80": {
+          "winner": "GHA"
+        },
+        "m81": {
+          "winner": "TUR"
+        },
+        "m82": {
+          "winner": "EGY"
+        },
+        "m83": {
+          "winner": "ENG"
+        },
+        "m84": {
+          "winner": "ALG"
+        },
+        "m85": {
+          "winner": "SUI"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "COL"
+        },
+        "m88": {
+          "winner": "PAR"
+        },
+        "m89": {
+          "winner": "GER"
+        },
+        "m90": {
+          "winner": "TUN"
+        },
+        "m91": {
+          "winner": "MAR"
+        },
+        "m92": {
+          "winner": "GHA"
+        },
+        "m93": {
+          "winner": "ALG"
+        },
+        "m94": {
+          "winner": "TUR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "COL"
+        },
+        "m97": {
+          "winner": "GER"
+        },
+        "m98": {
+          "winner": "TUR"
+        },
+        "m99": {
+          "winner": "MAR"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "TUR"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "MAR"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Lionel Messi",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez",
+        "topScorerTeam": "ARG",
+        "goldenBallTeam": "ARG",
+        "goldenGloveTeam": "ARG"
+      },
+      "user_id": "acac1c7c-475b-4638-b3c7-01c002a42b02",
+      "saved_at": "2026-06-11T16:34:05.071+00:00",
+      "updated_at": "2026-06-11T16:08:23.961783+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 1
+        },
+        "m2": {
+          "away": 0,
+          "home": 2
+        },
+        "m3": {
+          "away": 0,
+          "home": 1
+        },
+        "m4": {
+          "away": 2,
+          "home": 0
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 2
+        },
+        "m7": {
+          "away": 2,
+          "home": 2
+        },
+        "m8": {
+          "away": 2,
+          "home": 0
+        },
+        "m9": {
+          "away": 2,
+          "home": 2
+        },
+        "m10": {
+          "away": 0,
+          "home": 2
+        },
+        "m11": {
+          "away": 1,
+          "home": 2
+        },
+        "m12": {
+          "away": 2,
+          "home": 1
+        },
+        "m13": {
+          "away": 2,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 5
+        },
+        "m15": {
+          "away": 2,
+          "home": 2
+        },
+        "m16": {
+          "away": 1,
+          "home": 2
+        },
+        "m17": {
+          "away": 2,
+          "home": 1
+        },
+        "m18": {
+          "away": 3,
+          "home": 1
+        },
+        "m19": {
+          "away": 0,
+          "home": 3
+        },
+        "m20": {
+          "away": 0,
+          "home": 1
+        },
+        "m21": {
+          "away": 2,
+          "home": 2
+        },
+        "m22": {
+          "away": 3,
+          "home": 2
+        },
+        "m23": {
+          "away": 0,
+          "home": 3
+        },
+        "m24": {
+          "away": 3,
+          "home": 1
+        },
+        "m25": {
+          "away": 2,
+          "home": 2
+        },
+        "m26": {
+          "away": 0,
+          "home": 1
+        },
+        "m27": {
+          "away": 0,
+          "home": 3
+        },
+        "m28": {
+          "away": 1,
+          "home": 0
+        },
+        "m29": {
+          "away": 0,
+          "home": 3
+        },
+        "m30": {
+          "away": 2,
+          "home": 0
+        },
+        "m31": {
+          "away": 1,
+          "home": 0
+        },
+        "m32": {
+          "away": 2,
+          "home": 0
+        },
+        "m33": {
+          "away": 2,
+          "home": 1
+        },
+        "m34": {
+          "away": 2,
+          "home": 1
+        },
+        "m35": {
+          "away": 0,
+          "home": 3
+        },
+        "m36": {
+          "away": 0,
+          "home": 1
+        },
+        "m37": {
+          "away": 0,
+          "home": 3
+        },
+        "m38": {
+          "away": 0,
+          "home": 3
+        },
+        "m39": {
+          "away": 0,
+          "home": 2
+        },
+        "m40": {
+          "away": 2,
+          "home": 1
+        },
+        "m41": {
+          "away": 1,
+          "home": 2
+        },
+        "m42": {
+          "away": 0,
+          "home": 2
+        },
+        "m43": {
+          "away": 1,
+          "home": 2
+        },
+        "m44": {
+          "away": 2,
+          "home": 1
+        },
+        "m45": {
+          "away": 1,
+          "home": 3
+        },
+        "m46": {
+          "away": 3,
+          "home": 1
+        },
+        "m47": {
+          "away": 0,
+          "home": 2
+        },
+        "m48": {
+          "away": 2,
+          "home": 4
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 3
+        },
+        "m51": {
+          "away": 3,
+          "home": 2
+        },
+        "m52": {
+          "away": 2,
+          "home": 2
+        },
+        "m53": {
+          "away": 2,
+          "home": 0
+        },
+        "m54": {
+          "away": 0,
+          "home": 1
+        },
+        "m55": {
+          "away": 2,
+          "home": 1
+        },
+        "m56": {
+          "away": 2,
+          "home": 1
+        },
+        "m57": {
+          "away": 0,
+          "home": 2
+        },
+        "m58": {
+          "away": 3,
+          "home": 1
+        },
+        "m59": {
+          "away": 1,
+          "home": 1
+        },
+        "m60": {
+          "away": 1,
+          "home": 2
+        },
+        "m61": {
+          "away": 4,
+          "home": 2
+        },
+        "m62": {
+          "away": 1,
+          "home": 2
+        },
+        "m63": {
+          "away": 1,
+          "home": 1
+        },
+        "m64": {
+          "away": 3,
+          "home": 0
+        },
+        "m65": {
+          "away": 2,
+          "home": 1
+        },
+        "m66": {
+          "away": 3,
+          "home": 1
+        },
+        "m67": {
+          "away": 2,
+          "home": 0
+        },
+        "m68": {
+          "away": 1,
+          "home": 3
+        },
+        "m69": {
+          "away": 2,
+          "home": 2
+        },
+        "m70": {
+          "away": 5,
+          "home": 0
+        },
+        "m71": {
+          "away": 2,
+          "home": 1
+        },
+        "m72": {
+          "away": 2,
+          "home": 2
+        },
+        "m73": {
+          "winner": "SUI"
+        },
+        "m74": {
+          "winner": "CIV"
+        },
+        "m75": {
+          "winner": "MAR"
+        },
+        "m76": {
+          "winner": "BRA"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "GER"
+        },
+        "m79": {
+          "winner": "SEN"
+        },
+        "m80": {
+          "winner": "CRO"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "COL"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "CAN"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "AUS"
+        },
+        "m89": {
+          "winner": "FRA"
+        },
+        "m90": {
+          "winner": "MAR"
+        },
+        "m91": {
+          "winner": "BRA"
+        },
+        "m92": {
+          "winner": "CRO"
+        },
+        "m93": {
+          "winner": "ESP"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "FRA"
+        },
+        "m98": {
+          "winner": "ESP"
+        },
+        "m99": {
+          "winner": "BRA"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "ESP"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "BRA"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Julian Alvarez",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez",
+        "topScorerTeam": "ARG",
+        "goldenBallTeam": "ARG",
+        "goldenGloveTeam": "ARG"
+      },
+      "user_id": "7c562631-1aca-44ba-9def-01c62db3e713",
+      "saved_at": "2026-06-11T20:41:57.161+00:00",
+      "updated_at": "2026-06-10T20:28:41.771057+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 1
+        },
+        "m2": {
+          "away": 1,
+          "home": 1
+        },
+        "m3": {
+          "away": 0,
+          "home": 1
+        },
+        "m4": {
+          "away": 2,
+          "home": 1
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 1,
+          "home": 1
+        },
+        "m7": {
+          "away": 0,
+          "home": 3
+        },
+        "m8": {
+          "away": 1,
+          "home": 2
+        },
+        "m9": {
+          "away": 1,
+          "home": 0
+        },
+        "m10": {
+          "away": 0,
+          "home": 2
+        },
+        "m11": {
+          "away": 2,
+          "home": 2
+        },
+        "m12": {
+          "away": 1,
+          "home": 2
+        },
+        "m13": {
+          "away": 2,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 3
+        },
+        "m15": {
+          "away": 2,
+          "home": 1
+        },
+        "m16": {
+          "away": 0,
+          "home": 1
+        },
+        "m17": {
+          "away": 0,
+          "home": 2
+        },
+        "m18": {
+          "away": 0,
+          "home": 0
+        },
+        "m19": {
+          "away": 1,
+          "home": 1
+        },
+        "m20": {
+          "away": 0,
+          "home": 0
+        },
+        "m21": {
+          "away": 1,
+          "home": 0
+        },
+        "m22": {
+          "away": 1,
+          "home": 3
+        },
+        "m23": {
+          "away": 0,
+          "home": 3
+        },
+        "m24": {
+          "away": 2,
+          "home": 1
+        },
+        "m25": {
+          "away": 0,
+          "home": 2
+        },
+        "m26": {
+          "away": 0,
+          "home": 0
+        },
+        "m27": {
+          "away": 2,
+          "home": 1
+        },
+        "m28": {
+          "away": 1,
+          "home": 1
+        },
+        "m29": {
+          "away": 1,
+          "home": 2
+        },
+        "m30": {
+          "away": 1,
+          "home": 1
+        },
+        "m31": {
+          "away": 3,
+          "home": 0
+        },
+        "m32": {
+          "away": 0,
+          "home": 1
+        },
+        "m33": {
+          "away": 3,
+          "home": 1
+        },
+        "m34": {
+          "away": 0,
+          "home": 0
+        },
+        "m35": {
+          "away": 0,
+          "home": 4
+        },
+        "m36": {
+          "away": 0,
+          "home": 1
+        },
+        "m37": {
+          "away": 1,
+          "home": 1
+        },
+        "m38": {
+          "away": 0,
+          "home": 3
+        },
+        "m39": {
+          "away": 0,
+          "home": 0
+        },
+        "m40": {
+          "away": 0,
+          "home": 3
+        },
+        "m41": {
+          "away": 2,
+          "home": 3
+        },
+        "m42": {
+          "away": 1,
+          "home": 4
+        },
+        "m43": {
+          "away": 1,
+          "home": 2
+        },
+        "m44": {
+          "away": 1,
+          "home": 1
+        },
+        "m45": {
+          "away": 1,
+          "home": 2
+        },
+        "m46": {
+          "away": 1,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 1
+        },
+        "m48": {
+          "away": 1,
+          "home": 1
+        },
+        "m49": {
+          "away": 3,
+          "home": 1
+        },
+        "m50": {
+          "away": 0,
+          "home": 0
+        },
+        "m51": {
+          "away": 2,
+          "home": 0
+        },
+        "m52": {
+          "away": 3,
+          "home": 2
+        },
+        "m53": {
+          "away": 2,
+          "home": 1
+        },
+        "m54": {
+          "away": 0,
+          "home": 0
+        },
+        "m55": {
+          "away": 0,
+          "home": 0
+        },
+        "m56": {
+          "away": 3,
+          "home": 1
+        },
+        "m57": {
+          "away": 1,
+          "home": 2
+        },
+        "m58": {
+          "away": 1,
+          "home": 1
+        },
+        "m59": {
+          "away": 2,
+          "home": 1
+        },
+        "m60": {
+          "away": 0,
+          "home": 3
+        },
+        "m61": {
+          "away": 1,
+          "home": 1
+        },
+        "m62": {
+          "away": 2,
+          "home": 1
+        },
+        "m63": {
+          "away": 2,
+          "home": 2
+        },
+        "m64": {
+          "away": 2,
+          "home": 1
+        },
+        "m65": {
+          "away": 1,
+          "home": 1
+        },
+        "m66": {
+          "away": 2,
+          "home": 1
+        },
+        "m67": {
+          "away": 1,
+          "home": 1
+        },
+        "m68": {
+          "away": 1,
+          "home": 2
+        },
+        "m69": {
+          "away": 2,
+          "home": 1
+        },
+        "m70": {
+          "away": 3,
+          "home": 0
+        },
+        "m71": {
+          "away": 3,
+          "home": 3
+        },
+        "m72": {
+          "away": 0,
+          "home": 0
+        },
+        "m73": {
+          "winner": "CZE"
+        },
+        "m74": {
+          "winner": "GER"
+        },
+        "m75": {
+          "winner": "JPN"
+        },
+        "m76": {
+          "winner": "NED"
+        },
+        "m77": {
+          "winner": "FRA"
+        },
+        "m78": {
+          "winner": "ECU"
+        },
+        "m79": {
+          "winner": "MEX"
+        },
+        "m80": {
+          "winner": "ENG"
+        },
+        "m81": {
+          "winner": "PAR"
+        },
+        "m82": {
+          "winner": "BEL"
+        },
+        "m83": {
+          "winner": "COL"
+        },
+        "m84": {
+          "winner": "ESP"
+        },
+        "m85": {
+          "winner": "QAT"
+        },
+        "m86": {
+          "winner": "ARG"
+        },
+        "m87": {
+          "winner": "POR"
+        },
+        "m88": {
+          "winner": "USA"
+        },
+        "m89": {
+          "winner": "GER"
+        },
+        "m90": {
+          "winner": "JPN"
+        },
+        "m91": {
+          "winner": "NED"
+        },
+        "m92": {
+          "winner": "ENG"
+        },
+        "m93": {
+          "winner": "COL"
+        },
+        "m94": {
+          "winner": "PAR"
+        },
+        "m95": {
+          "winner": "ARG"
+        },
+        "m96": {
+          "winner": "POR"
+        },
+        "m97": {
+          "winner": "GER"
+        },
+        "m98": {
+          "winner": "COL"
+        },
+        "m99": {
+          "winner": "NED"
+        },
+        "m100": {
+          "winner": "ARG"
+        },
+        "m101": {
+          "winner": "COL"
+        },
+        "m102": {
+          "winner": "ARG"
+        },
+        "m103": {
+          "winner": "NED"
+        },
+        "m104": {
+          "winner": "ARG"
+        }
+      },
+      "awards": {
+        "topScorer": "Cristiano Ronaldo",
+        "goldenBall": "Lionel Messi",
+        "goldenGlove": "Emiliano Martinez"
+      },
+      "user_id": "a28e3a8f-a2bd-42cf-8cf8-d0f35e5ef9f1",
+      "saved_at": "2026-06-11T00:21:52.036+00:00",
+      "updated_at": "2026-06-11T00:06:31.149076+00:00"
+    },
+    {
+      "data": {
+        "m1": {
+          "away": 1,
+          "home": 1
+        },
+        "m2": {
+          "away": 0,
+          "home": 2
+        }
+      },
+      "awards": {},
+      "user_id": "15b17a48-9abe-4fee-8671-3d0544db65a2",
+      "saved_at": "2026-06-11T01:15:38.355+00:00",
+      "updated_at": "2026-06-11T01:15:25.27231+00:00"
+    }
+  ],
+  "app_settings": [
+    {
+      "id": "public",
+      "data": {
+        "predictionsLocked": true,
+        "viewPredictionsEnabled": true
+      },
+      "updated_at": "2026-06-28T04:01:52.062+00:00"
+    }
+  ],
+  "real_results": [
+    {
+      "id": "official",
+      "data": {
+        "m1": {
+          "away": 0,
+          "home": 2
+        },
+        "m2": {
+          "away": 1,
+          "home": 2
+        },
+        "m3": {
+          "away": 1,
+          "home": 1
+        },
+        "m4": {
+          "away": 1,
+          "home": 4
+        },
+        "m5": {
+          "away": 1,
+          "home": 0
+        },
+        "m6": {
+          "away": 0,
+          "home": 2
+        },
+        "m7": {
+          "away": 1,
+          "home": 1
+        },
+        "m8": {
+          "away": 1,
+          "home": 1
+        },
+        "m9": {
+          "away": 0,
+          "home": 1
+        },
+        "m10": {
+          "away": 1,
+          "home": 7
+        },
+        "m11": {
+          "away": 2,
+          "home": 2
+        },
+        "m12": {
+          "away": 1,
+          "home": 5
+        },
+        "m13": {
+          "away": 1,
+          "home": 1
+        },
+        "m14": {
+          "away": 0,
+          "home": 0
+        },
+        "m15": {
+          "away": 2,
+          "home": 2
+        },
+        "m16": {
+          "away": 1,
+          "home": 1
+        },
+        "m17": {
+          "away": 1,
+          "home": 3
+        },
+        "m18": {
+          "away": 4,
+          "home": 1
+        },
+        "m19": {
+          "away": 0,
+          "home": 3
+        },
+        "m20": {
+          "away": 1,
+          "home": 3
+        },
+        "m21": {
+          "away": 0,
+          "home": 1
+        },
+        "m22": {
+          "away": 2,
+          "home": 4
+        },
+        "m23": {
+          "away": 1,
+          "home": 1
+        },
+        "m24": {
+          "away": 3,
+          "home": 1
+        },
+        "m25": {
+          "away": 1,
+          "home": 1
+        },
+        "m26": {
+          "away": 1,
+          "home": 4
+        },
+        "m27": {
+          "away": 0,
+          "home": 6
+        },
+        "m28": {
+          "away": 0,
+          "home": 1
+        },
+        "m29": {
+          "away": 0,
+          "home": 3
+        },
+        "m30": {
+          "away": 1,
+          "home": 0
+        },
+        "m31": {
+          "away": 1,
+          "home": 0
+        },
+        "m32": {
+          "away": 0,
+          "home": 2
+        },
+        "m33": {
+          "away": 4,
+          "home": 0
+        },
+        "m34": {
+          "away": 1,
+          "home": 2
+        },
+        "m35": {
+          "away": 1,
+          "home": 5
+        },
+        "m36": {
+          "away": 0,
+          "home": 0
+        },
+        "m37": {
+          "away": 2,
+          "home": 2
+        },
+        "m38": {
+          "away": 0,
+          "home": 4
+        },
+        "m39": {
+          "away": 0,
+          "home": 0
+        },
+        "m40": {
+          "away": 3,
+          "home": 1
+        },
+        "m41": {
+          "away": 2,
+          "home": 3
+        },
+        "m42": {
+          "away": 0,
+          "home": 3
+        },
+        "m43": {
+          "away": 0,
+          "home": 2
+        },
+        "m44": {
+          "away": 2,
+          "home": 1
+        },
+        "m45": {
+          "away": 0,
+          "home": 0
+        },
+        "m46": {
+          "away": 1,
+          "home": 0
+        },
+        "m47": {
+          "away": 0,
+          "home": 5
+        },
+        "m48": {
+          "away": 0,
+          "home": 1
+        },
+        "m49": {
+          "away": 3,
+          "home": 0
+        },
+        "m50": {
+          "away": 2,
+          "home": 4
+        },
+        "m51": {
+          "away": 1,
+          "home": 2
+        },
+        "m52": {
+          "away": 1,
+          "home": 3
+        },
+        "m53": {
+          "away": 3,
+          "home": 0
+        },
+        "m54": {
+          "away": 0,
+          "home": 1
+        },
+        "m55": {
+          "away": 2,
+          "home": 0
+        },
+        "m56": {
+          "away": 1,
+          "home": 2
+        },
+        "m57": {
+          "away": 1,
+          "home": 1
+        },
+        "m58": {
+          "away": 3,
+          "home": 1
+        },
+        "m59": {
+          "away": 2,
+          "home": 3
+        },
+        "m60": {
+          "away": 0,
+          "home": 0
+        },
+        "m61": {
+          "away": 4,
+          "home": 1
+        },
+        "m62": {
+          "away": 0,
+          "home": 5
+        },
+        "m63": {
+          "away": 1,
+          "home": 1
+        },
+        "m64": {
+          "away": 5,
+          "home": 1
+        },
+        "m65": {
+          "away": 0,
+          "home": 0
+        },
+        "m66": {
+          "away": 1,
+          "home": 0
+        },
+        "m67": {
+          "away": 2,
+          "home": 0
+        },
+        "m68": {
+          "away": 1,
+          "home": 2
+        },
+        "m69": {
+          "away": 3,
+          "home": 3
+        },
+        "m70": {
+          "away": 3,
+          "home": 1
+        },
+        "m71": {
+          "away": 0,
+          "home": 0
+        },
+        "m72": {
+          "away": 1,
+          "home": 3
+        },
+        "awards": {
+          "topScorer": "",
+          "topScorerTeam": ""
+        }
+      },
+      "updated_at": "2026-06-28T04:01:51.809+00:00"
+    }
+  ]
+}
