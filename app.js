@@ -933,6 +933,10 @@ function renderLeaderboard(rows, currentUser) {
         <div>
           <h2>Ranking</h2>
           <p>${state.appSettings.viewPredictionsEnabled ? "Ya se pueden ver los prodes guardados de otros participantes." : "Calculado contra resultados reales cargados por admin."}</p>
+          <div class="rankingHint">
+            <strong>Proximo partido:</strong>
+            <span>muestra que equipo de ese cruce elegiste que pase a la proxima fase. Si aparece "-", no tenes a ninguno; si aparece "Ambos", tenes a los dos.</span>
+          </div>
         </div>
         <button class="ghost compactButton" id="toggleRankingAwards">${rankingAwardsVisible ? "Ocultar premios de jugadores" : "Mostrar premios de jugadores"}</button>
       </div>
