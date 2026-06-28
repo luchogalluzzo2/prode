@@ -604,6 +604,27 @@ small {
   text-align: center;
 }
 
+.rankingHint {
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  max-width: 58rem;
+  margin-top: 0.55rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(101, 0, 232, 0.18);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  background: #f7f3ff;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.rankingHint strong {
+  color: var(--ink);
+  white-space: nowrap;
+}
+
 .nextMatchHeading {
   min-width: 10rem;
 }
