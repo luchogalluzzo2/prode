@@ -24,7 +24,7 @@ let storageMode = "local";
 let supabase = null;
 let currentProfile = null;
 let syncTimer = null;
-let rankingAwardsVisible = true;
+let rankingAwardsVisible = false;
 const collapsedGroups = new Set();
 
 const FEATURED_ASSETS = {
@@ -74,9 +74,65 @@ async function initApp() {
     }
   } else {
     state = loadState();
-    seedLocalDemoUsers();
+    const loadedExport = await loadLocalExportState();
+    if (!loadedExport) seedLocalDemoUsers();
   }
   render();
+}
+
+async function loadLocalExportState() {
+  if (!["localhost", "127.0.0.1"].includes(window.location.hostname)) return false;
+  try {
+    const response = await fetch("./src/local-export.json", { cache: "no-store" });
+    if (!response.ok) return false;
+    const data = await response.json();
+    const importedState = stateFromSupabaseExport(data, state.currentUser);
+    state = importedState;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return true;
+  } catch (error) {
+    console.warn("No se pudo cargar el export local", error);
+    return false;
+  }
+}
+
+function stateFromSupabaseExport(data, preferredUser) {
+  const users = { ...structuredClone(emptyState).users };
+  const profiles = data.profiles || [];
+  profiles.forEach(profile => {
+    users[profile.username] = {
+      id: profile.user_id,
+      username: profile.username,
+      password: "demo2026",
+      role: profile.role,
+      active: profile.active !== false,
+      predictions: {},
+      awards: {},
+      savedAt: null
+    };
+  });
+
+  (data.predictions || []).forEach(row => {
+    const owner = Object.values(users).find(user => user.id === row.user_id);
+    if (!owner) return;
+    owner.predictions = row.data || {};
+    owner.awards = row.awards || {};
+    owner.savedAt = row.saved_at;
+  });
+
+  const adminUser = Object.values(users).find(user => isAdminUser(user));
+  const firstActiveUser = Object.values(users).find(user => isActivePlayer(user));
+  const currentUser = users[preferredUser]?.username || adminUser?.username || firstActiveUser?.username || null;
+
+  return {
+    currentUser,
+    users: normalizeUsers(users),
+    realResults: data.real_results?.[0]?.data || {},
+    appSettings: {
+      ...emptyState.appSettings,
+      ...(data.app_settings?.[0]?.data || {})
+    }
+  };
 }
 
 function seedLocalDemoUsers() {
@@ -325,8 +381,10 @@ function render() {
 
       <section id="view-prode" class="view ${activeTab === "prode" ? "active" : ""}">
         ${predictionsLocked ? renderLockedNotice() : renderAutosave(user)}
+        ${renderReadonlyQualificationSummary(user.predictions)}
         ${renderGroupNavigation()}
-        ${renderGroups(user.predictions, projection, predictionsLocked)}
+        ${renderGroups(user.predictions, projection, predictionsLocked, true)}
+        ${renderReadonlyThirdPlaces(user.predictions)}
         ${renderAwards(user, predictionsLocked)}
       </section>
       <section id="view-bracket" class="view ${activeTab === "bracket" ? "active" : ""}">
@@ -879,16 +937,16 @@ function renderLeaderboard(rows, currentUser) {
         <button class="ghost compactButton" id="toggleRankingAwards">${rankingAwardsVisible ? "Ocultar premios de jugadores" : "Mostrar premios de jugadores"}</button>
       </div>
       <table class="standings big">
-        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th><th class="nextMatchHeading">Proximo partido${nextMatch ? `<small>${nextMatchLabel(nextMatch)}</small>` : "<small>Todos finalizados</small>"}</th>${awardHeaders}${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
+        <thead><tr><th>#</th><th>Usuario</th><th>Puntos</th><th class="nextMatchHeading">Proximo partido${nextMatch ? `<small>${nextMatchLabel(nextMatch)}</small>` : "<small>Todos finalizados</small>"}</th><th>Campeon</th><th>Subcampeon</th><th>Tercero</th>${awardHeaders}${canViewPredictions ? "<th>Prode</th>" : ""}${canManagePlayers ? "<th>Admin</th>" : ""}</tr></thead>
         <tbody>${rows.map((row, index) => `
           <tr>
             <td>${index + 1}</td>
             <td>${row.username}</td>
             <td>${row.points}</td>
+            <td>${renderNextMatchPrediction(row.predictions, nextMatch, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.champion, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.runnerUp, showPodium)}</td>
             <td>${renderPodiumCell(row.podium.thirdPlace, showPodium)}</td>
-            <td>${renderNextMatchPrediction(row.predictions, nextMatch, showPodium)}</td>
             ${rankingAwardsVisible ? `
               <td>${renderLeaderboardAward(row.awards, "topScorer", showPodium)}</td>
               <td>${renderLeaderboardAward(row.awards, "goldenBall", showPodium)}</td>
@@ -967,11 +1025,21 @@ function renderNextMatchPrediction(predictions, match, visible) {
       ? `<strong class="nextPrediction">${score.home} - ${score.away}</strong>`
       : `<span class="mutedTeam">Sin pronostico</span>`;
   }
-  const projection = buildProjection(predictions);
-  const home = resolveSlot(match.homeSlot, projection);
-  const away = resolveSlot(match.awaySlot, projection);
-  const winner = selectedWinner(match, predictions, home, away);
-  return winner ? teamBadge(winner) : `<span class="mutedTeam">Sin pronostico</span>`;
+  return renderKnockoutStakePrediction(predictions, match);
+}
+
+function renderKnockoutStakePrediction(predictions, match) {
+  const realProjection = buildProjection(state.realResults);
+  const home = resolveSlot(match.homeSlot, realProjection);
+  const away = resolveSlot(match.awaySlot, realProjection);
+  const stage = stageTarget(match.stage);
+  if (!home || !away || !stage) return `<span class="mutedTeam">Por definir</span>`;
+
+  const userProgress = collectProgress(buildProjection(predictions));
+  const advancing = [home, away].filter(code => userProgress[stage]?.has(code));
+  if (advancing.length === 2) return `<strong class="nextPrediction">Ambos</strong>`;
+  if (advancing.length === 1) return teamBadge(advancing[0]);
+  return `<span class="mutedTeam">-</span>`;
 }
 
 function canViewOtherPredictions(currentUser) {
