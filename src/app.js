@@ -1534,9 +1534,28 @@ function selectedWinner(match, predictions, home, away) {
 }
 
 function assignThirdPlaces(qualifiedGroups, tables) {
+  const officialAssignment = officialThirdPlaceAssignment(qualifiedGroups);
+  if (officialAssignment) {
+    return Object.fromEntries(Object.entries(officialAssignment).map(([slot, group]) => [slot, tables[group][2].code]));
+  }
   const slots = KNOCKOUT.filter(match => /^3/.test(match.awaySlot));
   const assignment = findThirdPlaceAssignment(slots, qualifiedGroups);
   return Object.fromEntries(Object.entries(assignment).map(([slot, group]) => [slot, tables[group][2].code]));
+}
+
+function officialThirdPlaceAssignment(qualifiedGroups) {
+  const key = [...qualifiedGroups].sort().join("");
+  if (key !== "BDEFIJKL") return null;
+  return {
+    "3ABCDF": "D",
+    "3CDFGH": "F",
+    "3CEFHI": "E",
+    "3EHIJK": "K",
+    "3BEFIJ": "B",
+    "3AEHIJ": "I",
+    "3EFGIJ": "J",
+    "3DEIJL": "L"
+  };
 }
 
 function findThirdPlaceAssignment(slots, groups) {
